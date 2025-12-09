@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <meta name="description" content="Portofolio Budi (Nara) - Fullstack Web Developer & UI/UX Designer.">
+    <meta name="author" content="Budi Nara">
+
+    <meta property="og:title" content="Budi Nara - Fullstack Developer Portfolio">
+    <meta property="og:description" content="Mahasiswa IT & Laravel Developer. Lihat project dan pengalaman saya di sini.">
+    <meta property="og:image" content="https://i.imgur.com/link_gambar_preview_website_kamu.png"> 
+    <meta property="og:url" content="https://trackerthings.rf.gd/portfolio">
+        
+    <title>Portofolio Budi (Nara)</title>
+    
+    <link rel="icon" href="https://api.dicebear.com/9.x/notionists/svg?seed=Nara&backgroundColor=e5e7eb" type="image/svg+xml">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: { bg: '#0a0a0a', card: 'rgba(20, 20, 20, 0.6)', text: '#f5f5f7' }
+                    },
+                    animation: {
+                        'scroll': 'scroll 20s linear infinite',
+                    },
+                    keyframes: {
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --toggle-bg: rgba(0, 0, 0, 0.05);
+            --thumb-bg: rgba(255, 255, 255, 0.9);
+            --thumb-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        html.dark :root {
+            --toggle-bg: rgba(255, 255, 255, 0.15);
+            --thumb-bg: rgba(60, 60, 60, 0.9);
+            --thumb-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        html.dark body { background-color: #0a0a0a; color: #f5f5f7; }
+
+        /* Liquid Switch */
+        .switch-wrapper { display: flex; gap: 10px; align-items: center; }
+        .switch-container { position: relative; display: flex; align-items: center; justify-content: space-between; width: 80px; height: 40px; background: var(--toggle-bg); border-radius: 20px; padding: 4px; cursor: pointer; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
+        .switch-label { font-size: 12px; font-weight: 700; z-index: 2; flex: 1; text-align: center; pointer-events: none; transition: opacity 0.3s; opacity: 0.5; }
+        .switch-label.active-label { opacity: 1; }
+        .switch-thumb { position: absolute; left: 4px; top: 4px; width: 32px; height: 32px; background: var(--thumb-bg); border-radius: 50%; z-index: 1; box-shadow: var(--thumb-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s ease, left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .switch-thumb::after { content: ''; position: absolute; top: 2px; left: 5px; right: 5px; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%); border-radius: 10px; opacity: 0.7; }
+        .switch-container.active .switch-thumb { transform: translateX(40px); }
+        .switch-container:active .switch-thumb { width: 45px; border-radius: 16px; }
+        .switch-container.active:active .switch-thumb { transform: translateX(27px); }
+
+        /* Animations */
+        .marquee-container { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        
+        .music-bar { width: 3px; background-color: #ec4899; border-radius: 99px; animation: bounce 1s infinite ease-in-out; }
+        .music-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
+        .music-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+        .music-bar:nth-child(3) { height: 8px; animation-delay: 0.5s; }
+        .music-bar:nth-child(4) { height: 14px; animation-delay: 0.2s; }
+        @keyframes bounce { 0%, 100% { height: 6px; } 50% { height: 100%; } }
+
+        .blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.8; animation: move 10s infinite alternate; }
+        .blob-1 { top: 5%; left: 5%; width: 400px; height: 400px; background: #d8b4fe; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { bottom: 10%; right: 0%; width: 500px; height: 500px; background: #93c5fd; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-duration: 15s; }
+        .blob-3 { top: 40%; left: 30%; width: 300px; height: 300px; background: #f9a8d4; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation-duration: 12s; }
+        @keyframes move { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(30px, 40px) rotate(10deg); } }
+
+        .glass-card { background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05); transition: background 0.5s ease, border 0.5s ease; }
+        html.dark .glass-card { background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.9); transition: background 0.5s ease; }
+        html.dark .glass-nav { background: rgba(20, 20, 20, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .text-gradient { background: linear-gradient(to right, #4f46e5, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        #project-modal { transition: opacity 0.3s ease; }
+        #project-modal.hidden { opacity: 0; pointer-events: none; }
+        #project-modal:not(.hidden) { opacity: 1; pointer-events: auto; }
+        
+        html.dark input, html.dark textarea { background-color: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); color: #fff; }
+        html.dark input::placeholder { color: #888; }
+
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+    </style>
+</head>
+<body class="antialiased min-h-[100dvh] relative selection:bg-pink-300 selection:text-white dark:text-gray-200 pb-20 md:pb-0">
+
+    <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <div class="fixed bottom-6 left-6 z-50 glass-card px-4 py-3 rounded-full hidden md:flex items-center gap-3 animate-bounce shadow-2xl border border-white/40 dark:border-white/10" style="animation-duration: 3s;">
+        <div class="w-8 h-8 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900">
+            <i class="fas fa-music text-xs"></i>
+        </div>
+        <div class="flex flex-col">
+            <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Now Playing</span>
+            <span class="text-xs font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                Silly Dance - NCT WISH
+                <div class="flex items-end h-3 gap-[2px]">
+                    <div class="music-bar"></div>
+                    <div class="music-bar"></div>
+                    <div class="music-bar"></div>
+                    <div class="music-bar"></div>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white shadow-lg hover:bg-slate-700 dark:hover:bg-gray-200 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))] transition-all duration-300">
+        <div class="max-w-6xl mx-auto glass-nav rounded-full px-6 py-3 flex justify-between items-center shadow-sm relative z-50">
+            <span class="font-bold text-xl tracking-wider text-slate-800 dark:text-white">NARA.</span>
+            
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-600 dark:text-gray-300 items-center">
+                <a href="#home" class="hover:text-pink-500 transition" data-key="nav_home">Home</a>
+                <a href="#about" class="hover:text-pink-500 transition" data-key="nav_about">Tentang</a>
+                <a href="#projects" class="hover:text-pink-500 transition" data-key="nav_projects">Project</a>
+                <a href="#contact" class="hover:text-pink-500 transition" data-key="nav_contact">Kontak</a>
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+                <div class="switch-wrapper">
+                    <div class="switch-container" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                        <div class="switch-thumb"></div>
+                        <span class="switch-label text-orange-500">☀️</span>
+                        <span class="switch-label text-blue-300">🌙</span>
+                    </div>
+                    <div class="switch-container" id="langToggle" onclick="toggleLanguage()" title="Switch Language">
+                        <div class="switch-thumb"></div>
+                        <span class="switch-label text-slate-600 dark:text-gray-300">ID</span>
+                        <span class="switch-label text-slate-600 dark:text-gray-300">EN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:hidden flex items-center gap-4">
+                 <button onclick="toggleTheme()" class="text-slate-600 dark:text-white text-xl"><i class="fas fa-adjust"></i></button>
+                <div class="text-slate-600 dark:text-white cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition" id="mobile-menu-btn"><i class="fas fa-bars text-xl"></i></div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 glass-card rounded-2xl p-6 flex-col space-y-4 shadow-xl md:hidden transform transition-all duration-300 origin-top z-40">
+            <a href="#home" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_home">Home</a>
+            <a href="#about" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_about">Tentang</a>
+            <a href="#projects" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_projects">Project</a>
+            <a href="#contact" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_contact">Kontak</a>
+            <hr class="border-gray-200 dark:border-gray-700">
+            <button onclick="toggleLanguage()" class="text-left text-slate-600 dark:text-gray-200 font-medium">🌐 Ganti Bahasa (ID/EN)</button>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 relative z-10">
+        <section id="home" class="min-h-[100dvh] flex flex-col-reverse md:flex-row items-center justify-center gap-10 pt-24 md:pt-0">
+            <div class="flex-1 text-center md:text-left space-y-5">
+                <div class="inline-block px-4 py-2 rounded-full bg-white/60 dark:bg-white/10 border border-white dark:border-white/20 text-sm text-slate-600 dark:text-gray-300 font-medium shadow-sm transition-colors">
+                    <span id="greeting-badge">👋 Halo, selamat datang!</span>
+                </div>
+                <h1 class="text-4xl md:text-7xl font-bold leading-tight text-slate-800 dark:text-white">
+                    <span data-key="hero_iam">Aku</span> <span class="text-gradient">Budi Nur Rahman.</span>
+                </h1>
+                <h2 class="text-lg md:text-2xl text-slate-500 dark:text-gray-400 font-light">
+                    <span data-key="hero_callme">Atau panggil aja Budi atau</span> <span class="font-semibold text-slate-800 dark:text-white border-b-2 border-pink-400">Nara</span>.
+                </h2>
+                <p class="text-slate-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 leading-relaxed text-base md:text-lg min-h-[80px]">
+                    <span data-key="hero_desc">Mahasiswa IT yang mengubah kopi menjadi kode.</span><br>
+                    <span data-key="hero_focus">Fokus di:</span> <span id="typing-text" class="font-bold text-pink-500 border-r-2 border-pink-500 pr-1"></span>
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
+                    <a href="#projects" class="px-8 py-3 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-semibold hover:bg-slate-700 dark:hover:bg-gray-200 transition shadow-lg shadow-slate-300 dark:shadow-none" data-key="btn_projects">Lihat Karyaku</a>
+                    <a href="#" onclick="alert('Demo Mode')" class="px-8 py-3 rounded-full border-2 border-slate-300 dark:border-gray-600 text-slate-600 dark:text-gray-300 font-semibold hover:border-slate-800 dark:hover:border-white hover:text-slate-800 dark:hover:text-white transition flex items-center gap-2"><i class="fas fa-download"></i> <span data-key="btn_cv">Download CV</span></a>
+                </div>
+            </div>
+            <div class="flex-1 flex justify-center relative">
+                <div class="relative w-64 h-72 md:w-80 md:h-96 glass-card rounded-[2rem] p-3 transform rotate-3 hover:rotate-0 transition duration-500 shadow-2xl">
+                    <div class="w-full h-full rounded-[1.5rem] overflow-hidden bg-gray-100 relative">
+                        <img src="https://api.dicebear.com/9.x/notionists/svg?seed=Nara&backgroundColor=e5e7eb" alt="Nara" class="object-cover w-full h-full">
+                    </div>
+                    <div class="absolute -bottom-6 -right-4 glass-card px-5 py-3 rounded-xl shadow-lg animate-bounce duration-[3000ms] flex items-center gap-2">
+                        <span class="text-2xl">🚀</span>
+                        <div class="text-left leading-tight">
+                            <p class="text-[10px] text-slate-400 dark:text-gray-400 font-bold uppercase">Status</p>
+                            <p class="font-bold text-slate-700 dark:text-white text-sm">Open to Work</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-12 md:py-20 reveal">
+            <div class="glass-card rounded-3xl p-8 md:p-12">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4" data-key="about_title">Tentang Aku</h3>
+                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed mb-6" data-key="about_p1">Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.</p>
+                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed" data-key="about_p2">Selain teknis, aku punya pengalaman <b>Leadership</b> saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.</p>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Tech Stack & Tools</h4>
+                            <div class="marquee-container w-full overflow-hidden relative">
+                                <div class="flex gap-8 text-4xl text-slate-600 dark:text-gray-300 animate-scroll whitespace-nowrap py-2 w-max">
+                                    <i class="fab fa-laravel text-red-600"></i> <i class="fab fa-php text-purple-600"></i> <i class="fab fa-js text-yellow-400"></i> <i class="fab fa-html5 text-orange-500"></i> <i class="fab fa-figma text-purple-400"></i> <i class="fab fa-css3-alt text-blue-500"></i> <i class="fas fa-database text-slate-500"></i> <i class="fab fa-git-alt text-red-500"></i>
+                                    <i class="fab fa-laravel text-red-600"></i> <i class="fab fa-php text-purple-600"></i> <i class="fab fa-js text-yellow-400"></i> <i class="fab fa-html5 text-orange-500"></i> <i class="fab fa-figma text-purple-400"></i> <i class="fab fa-css3-alt text-blue-500"></i> <i class="fas fa-database text-slate-500"></i> <i class="fab fa-git-alt text-red-500"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="github-stats" class="mt-8 glass-card p-5 rounded-2xl flex gap-4 items-center justify-between hidden reveal hover:scale-[1.02] transition duration-300 border border-slate-200/50 dark:border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 text-2xl"><i class="fab fa-github"></i></div>
+                                <div>
+                                    <span id="gh-repos" class="block text-xl font-bold text-slate-800 dark:text-white animate-pulse bg-slate-200 dark:bg-slate-700 text-transparent rounded w-8 h-6 mb-1">0</span>
+                                    <span class="text-xs text-slate-500 dark:text-gray-400 font-medium uppercase tracking-wide">Repositories</span>
+                                </div>
+                            </div>
+                            <div class="w-px h-10 bg-slate-300 dark:bg-gray-700"></div>
+                            <div class="text-center">
+                                <span id="gh-followers" class="block text-xl font-bold text-slate-800 dark:text-white animate-pulse bg-slate-200 dark:bg-slate-700 text-transparent rounded w-8 h-6 mx-auto mb-1">0</span>
+                                <span class="text-xs text-slate-500 dark:text-gray-400 font-medium uppercase tracking-wide">Followers</span>
+                            </div>
+                            <a id="gh-link" href="#" target="_blank" class="text-xs bg-slate-800 dark:bg-white dark:text-slate-900 text-white px-5 py-2.5 rounded-full hover:bg-slate-700 dark:hover:bg-gray-200 transition font-bold shadow-lg">Follow</a>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 border-l-2 border-slate-200 dark:border-gray-700 space-y-10">
+                         <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-800 shadow-sm group-hover:scale-125 transition"></span>
+                            <h4 class="font-bold text-lg text-slate-800 dark:text-white">INVOFEST 2025</h4>
+                            <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded uppercase tracking-wide">Competition</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-2 leading-relaxed" data-key="timeline_1">Merancang "KotaKita", solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.</p>
+                        </div>
+                        <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-orange-500 border-4 border-white dark:border-slate-800 shadow-sm group-hover:scale-125 transition"></span>
+                            <h4 class="font-bold text-lg text-slate-800 dark:text-white">Fullstack Dev @ Icon Plus</h4>
+                            <span class="text-[10px] text-orange-700 font-bold bg-orange-100 px-2 py-0.5 rounded uppercase tracking-wide">Internship</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-2 leading-relaxed" data-key="timeline_2">Membangun aplikasi internal IT Support dari nol menggunakan Laravel 11. Menangani Database Design hingga Deployment.</p>
+                        </div>
+                        <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-800 shadow-sm group-hover:scale-125 transition"></span>
+                            <h4 class="font-bold text-lg text-slate-800 dark:text-white">Building TrackerThings</h4>
+                            <span class="text-[10px] text-indigo-700 font-bold bg-indigo-100 px-2 py-0.5 rounded uppercase tracking-wide">Personal Project</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-2 leading-relaxed" data-key="timeline_3">Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL untuk logika backend yang kompleks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-12 md:py-20 reveal">
+            <div class="flex justify-between items-end mb-8 px-2">
+                <div>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white">Featured Projects</h3>
+                    <p class="text-slate-500 dark:text-gray-400 mt-2" data-key="proj_subtitle">Klik kartu untuk detail &rarr;</p>
+                </div>
+            </div>
+            <div class="flex overflow-x-auto gap-8 pb-12 pt-12 px-6 hide-scroll snap-x snap-mandatory -mx-6 md:mx-0">
+                <div onclick="openModal('iconplus')" class="cursor-pointer snap-center shrink-0 w-80 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-orange-400 group">
+                    <div class="h-48 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center relative"><i class="fas fa-network-wired text-6xl text-orange-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-800 dark:text-white">IT Support App</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">App manajemen tiket support IT (PKL).</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600 font-bold">Laravel 11</span></div>
+                    </div>
+                </div>
+                <div onclick="openModal('tracker')" class="cursor-pointer snap-center shrink-0 w-80 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-indigo-500 group">
+                    <div class="h-48 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center relative"><i class="fas fa-calendar-check text-6xl text-indigo-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-800 dark:text-white">TrackerThings</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Manajemen akademik, jadwal & deadline.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-3 py-1 text-xs rounded-full bg-indigo-50 text-indigo-600 font-semibold">PHP Native</span></div>
+                    </div>
+                </div>
+                <div onclick="openModal('kotakita')" class="cursor-pointer snap-center shrink-0 w-80 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-emerald-500 group">
+                    <div class="h-48 bg-gradient-to-br from-emerald-100 to-teal-50 flex items-center justify-center relative"><i class="fas fa-map-location-dot text-6xl text-emerald-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-800 dark:text-white">KotaKita</h4>
+                        <p class="text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Platform Smart City & Pelaporan Publik.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-3 py-1 text-xs rounded-full bg-emerald-50 text-emerald-600 font-semibold">UI/UX</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="max-w-3xl mx-auto py-12 md:py-20 reveal">
+            <div class="glass-card rounded-3xl p-8 relative overflow-hidden">
+                <h3 class="text-2xl font-bold text-center mb-2 text-slate-800 dark:text-white" data-key="contact_title">Kirimi Aku Pesan ✉️</h3>
+                <p class="text-center text-slate-500 dark:text-gray-300 mb-8 text-sm" data-key="contact_sub">Tertarik kolaborasi? Yuk diskusi bareng!</p>
+                <form id="contact-form" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input type="text" name="name" required placeholder="Nama Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700">
+                        <input type="email" name="email" required placeholder="Email Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700">
+                    </div>
+                    <textarea name="message" required placeholder="Tulis pesan..." rows="4" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700"></textarea>
+                    <button type="submit" id="submit-btn" class="w-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-700 dark:hover:bg-gray-200 transition transform active:scale-95 flex justify-center items-center gap-2">
+                        <span data-key="btn_send">Kirim Pesan</span>
+                        <i class="fas fa-spinner fa-spin hidden" id="loading-icon"></i>
+                    </button>
+                </form>
+                <div id="form-status" class="hidden mt-4 text-center p-4 rounded-xl text-sm font-bold animate-pulse"></div>
+            </div>
+        </section>
+
+        <footer id="footer" class="glass-card rounded-t-[3rem] p-10 mt-10 text-center relative overflow-hidden reveal">
+            <div class="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"></div>
+            <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-6">Let's Connect!</h2>
+            <div class="flex justify-center gap-6">
+                <a href="https://www.instagram.com/nurrahmannn._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow-md text-pink-500 hover:scale-110 transition text-2xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/riuusix" class="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow-md text-slate-800 hover:scale-110 transition text-2xl"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/budi-nur-rahman-103311341/" class="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow-md text-blue-600 hover:scale-110 transition text-2xl"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="text-slate-400 text-sm mt-12">&copy; 2025 Nara. Built with Liquid Glass Style.</p>
+        </footer>
+    </main>
+
+    <div id="project-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-0 md:p-1 border border-slate-200 dark:border-slate-700">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition shadow-sm"><i class="fas fa-times dark:text-white"></i></button>
+            <div class="p-6 space-y-6">
+                <h3 id="modal-title" class="text-2xl font-bold text-slate-800 dark:text-white pr-8">Project Title</h3>
+                <div class="w-full h-64 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-inner"><i class="fas fa-image text-4xl text-slate-300"></i><img id="modal-img" src="" class="w-full h-full object-cover hidden"></div>
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-sm uppercase tracking-wider">Deskripsi Project</h4>
+                    <p id="modal-desc" class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed text-justify">...</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-sm uppercase tracking-wider mb-3">Tech Stack</h4>
+                    <div id="modal-tags" class="flex gap-2 flex-wrap"></div>
+                </div>
+                <div id="modal-link-container" class="pt-2 hidden">
+                    <a id="modal-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-700 dark:hover:bg-gray-200 transition">
+                        <i class="fas fa-external-link-alt"></i> Lihat Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            id: {
+                nav_home: "Home", nav_about: "Tentang", nav_projects: "Project", nav_contact: "Kontak",
+                hero_iam: "Aku", hero_callme: "Panggil aja Budi atau",
+                hero_desc: "Mahasiswa IT yang mengubah kopi menjadi kode.", hero_focus: "Fokus di:",
+                btn_projects: "Lihat Karyaku", btn_cv: "Download CV",
+                about_title: "Tentang Aku",
+                about_p1: "Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.",
+                about_p2: "Selain teknis, aku punya pengalaman Leadership saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.",
+                timeline_1: "Merancang \"KotaKita\", solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.",
+                timeline_2: "Membangun aplikasi internal IT Support dari nol menggunakan Laravel 11. Menangani Database Design hingga Deployment.",
+                timeline_3: "Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL untuk logika backend yang kompleks.",
+                proj_subtitle: "Klik kartu untuk detail &rarr;",
+                contact_title: "Kirimi Aku Pesan ✉️", contact_sub: "Tertarik kolaborasi? Yuk diskusi bareng!",
+                btn_send: "Kirim Pesan"
+            },
+            en: {
+                nav_home: "Home", nav_about: "About", nav_projects: "Projects", nav_contact: "Contact",
+                hero_iam: "I am", hero_callme: "Call me Budi or",
+                hero_desc: "IT Student turning coffee into code.", hero_focus: "Focusing on:",
+                btn_projects: "View My Work", btn_cv: "Download CV",
+                about_title: "About Me",
+                about_p1: "My coding journey started in Vocational High School (RPL). Now I'm an IT student at National University.",
+                about_p2: "Beyond tech, I have Leadership experience leading developer teams during internships and active in student organizations.",
+                timeline_1: "Designing \"KotaKita\", a Smart City Mobile App solution. Focused on User Research & High-Fidelity Prototyping in Figma.",
+                timeline_2: "Built an internal IT Support app from scratch using Laravel 11. Handled Database Design to Deployment.",
+                timeline_3: "Initiated the development of student academic management tool. Implemented PHP Native & MySQL for complex backend logic.",
+                proj_subtitle: "Click card for details &rarr;",
+                contact_title: "Send Me a Message ✉️", contact_sub: "Interested in collaboration? Let's discuss!",
+                btn_send: "Send Message"
+            }
+        };
+
+        let currentLang = 'id';
+        function toggleTheme() {
+            const toggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) { html.classList.add('dark'); localStorage.setItem('theme', 'dark'); } else { html.classList.remove('dark'); localStorage.setItem('theme', 'light'); }
+        }
+        function toggleLanguage() {
+            const toggle = document.getElementById('langToggle');
+            toggle.classList.toggle('active');
+            currentLang = currentLang === 'id' ? 'en' : 'id';
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    el.style.opacity = 0;
+                    setTimeout(() => { el.innerText = translations[currentLang][key]; el.style.opacity = 1; }, 200);
+                }
+            });
+            updateGreeting();
+        }
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav div');
+            if (window.scrollY > 50) { nav.classList.add('shadow-lg', 'bg-white/80', 'dark:bg-slate-900/80'); } else { nav.classList.remove('shadow-lg', 'bg-white/80', 'dark:bg-slate-900/80'); }
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (window.scrollY > 300) { backToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none'); } else { backToTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none'); }
+        });
+        function updateGreeting() {
+            const greetingBadge = document.getElementById('greeting-badge');
+            const hour = new Date().getHours();
+            let greeting = "";
+            if (currentLang === 'id') {
+                if (hour >= 5 && hour < 12) greeting = "☀️ Selamat Pagi!"; else if (hour >= 12 && hour < 15) greeting = "☀️ Selamat Siang!"; else if (hour >= 15 && hour < 18) greeting = "🌤️ Selamat Sore!"; else greeting = "🌙 Selamat Malam!";
+            } else {
+                if (hour >= 5 && hour < 12) greeting = "☀️ Good Morning!"; else if (hour >= 12 && hour < 18) greeting = "☀️ Good Afternoon!"; else greeting = "🌙 Good Evening!";
+            }
+            if(greetingBadge) greetingBadge.innerText = `👋 ${greeting}`;
+        }
+        document.addEventListener('DOMContentLoaded', updateGreeting);
+        const textElement = document.getElementById('typing-text');
+        const phrases = ["Fullstack Developer", "UI/UX Enthusiast", "Laravel Warrior", "Problem Solver"];
+        let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) { textElement.textContent = currentPhrase.substring(0, charIndex - 1); charIndex--; } else { textElement.textContent = currentPhrase.substring(0, charIndex + 1); charIndex++; }
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentPhrase.length) { typeSpeed = 2000; isDeleting = true; } else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500; }
+            setTimeout(typeEffect, typeSpeed);
+        }
+        if(textElement) typeEffect();
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.15 });
+        revealElements.forEach(el => revealObserver.observe(el));
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn){ menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); mobileMenu.classList.toggle('flex'); }); }
+        
+        /* --- MODAL WITH LINK --- */
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTags = document.getElementById('modal-tags');
+        const modalImg = document.getElementById('modal-img');
+        const modalLinkContainer = document.getElementById('modal-link-container');
+        const modalLink = document.getElementById('modal-link');
+
+        // Added 'link' property to projects
+        const projectsData = { 
+            'iconplus': { 
+                title: 'IT Support App (Icon Plus)', 
+                desc: 'Aplikasi manajemen tiket support IT yang saya bangun saat PKL. Fitur mencakup sistem ticketing, role management (Admin/User), dan reporting otomatis.', 
+                tags: ['Laravel 11', 'PHP', 'Bootstrap', 'MySQL'], 
+                img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
+                link: '#' // Ganti dengan link project asli jika ada
+            }, 
+            'tracker': { 
+                title: 'TrackerThings', 
+                desc: 'Aplikasi manajemen akademik khusus mahasiswa. Membantu mengatur jadwal kuliah, mengingatkan deadline tugas, dan mencatat nilai ujian.', 
+                tags: ['PHP Native', 'MySQL', 'Responsive UI', 'JavaScript'], 
+                img: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800',
+                link: 'https://trackerthings.rf.gd'
+            }, 
+            'kotakita': { 
+                title: 'KotaKita (UI/UX Case Study)', 
+                desc: 'Platform konsep Smart City untuk INVOFEST 2025. Menggabungkan fitur pelaporan fasilitas publik rusak dan pencarian ruang terbuka hijau.', 
+                tags: ['Figma', 'User Research', 'Prototyping'], 
+                img: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800',
+                link: '' // Kosongkan jika tidak ada link
+            } 
+        };
+
+        function openModal(projectId) {
+            const data = projectsData[projectId];
+            if(!data) return;
+            modalTitle.innerText = data.title;
+            modalDesc.innerText = data.desc;
+            modalImg.src = data.img;
+            modalImg.classList.remove('hidden');
+            modalTags.innerHTML = '';
+            data.tags.forEach(tag => { const span = document.createElement('span'); span.className = 'px-3 py-1 text-xs rounded-full bg-slate-100 text-slate-600 font-semibold'; span.innerText = tag; modalTags.appendChild(span); });
+            
+            // Link Logic
+            if(data.link && data.link !== '') {
+                modalLink.href = data.link;
+                modalLinkContainer.classList.remove('hidden');
+            } else {
+                modalLinkContainer.classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden');
+        }
+        function closeModal() { modal.classList.add('hidden'); }
+        
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) { contactForm.addEventListener('submit', function(e) { e.preventDefault(); alert('Pesan terkirim (Simulasi). Hubungkan Formspree Anda!'); }); }
+
+        /* --- GITHUB --- */
+        const githubUsername = 'riuusix'; 
+        const githubWidget = document.getElementById('github-stats');
+        const githubLink = document.getElementById('gh-link');
+        if(githubWidget) {
+            githubLink.href = `https://github.com/${githubUsername}`;
+            fetch(`https://api.github.com/users/${githubUsername}`)
+                .then(response => { if (!response.ok) throw new Error('Network response was not ok'); return response.json(); })
+                .then(data => {
+                    document.getElementById('gh-repos').innerText = data.public_repos;
+                    document.getElementById('gh-followers').innerText = data.followers;
+                    githubWidget.classList.remove('hidden');
+                    const repoEl = document.getElementById('gh-repos');
+                    const followerEl = document.getElementById('gh-followers');
+                    repoEl.classList.remove('animate-pulse', 'bg-slate-200', 'dark:bg-slate-700', 'text-transparent');
+                    followerEl.classList.remove('animate-pulse', 'bg-slate-200', 'dark:bg-slate-700', 'text-transparent');
+                    repoEl.innerText = data.public_repos;
+                    followerEl.innerText = data.followers;
+                })
+                .catch(err => console.log("Gagal ambil data GitHub:", err));
+        }
+    </script>
+</body>
+</html>
