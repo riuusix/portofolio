@@ -34,7 +34,6 @@
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
                         },
-                        // Animasi Pelangi Berputar
                         iridescent: {
                             '0%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' },
@@ -62,7 +61,7 @@
 
         html.dark :root {
             --toggle-bg: rgba(255, 255, 255, 0.15);
-            --thumb-bg: rgba(255, 255, 255, 0.2); /* Lebih transparan di dark mode */
+            --thumb-bg: rgba(255, 255, 255, 0.2); 
             --thumb-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2);
         }
 
@@ -77,7 +76,7 @@
 
         html.dark body { background-color: #0a0a0a; color: #f5f5f7; }
 
-        /* --- NEW LIQUID SWITCH (Holographic Bubble) --- */
+        /* Liquid Switch */
         .switch-wrapper { display: flex; gap: 8px; align-items: center; }
         
         .switch-container { 
@@ -107,30 +106,21 @@
         }
         .switch-label.active-label { opacity: 1; }
         
-        /* The Bubble Thumb */
         .switch-thumb { 
             position: absolute; 
             left: 4px; 
             top: 4px; 
             width: 30px; 
             height: 30px; 
-            background: var(--thumb-bg);
+            background: var(--thumb-bg); 
             border-radius: 50%; 
             z-index: 1; 
-            
-            /* Glass Effect Default */
             backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px);
             box-shadow: var(--thumb-shadow);
-            
-            /* Physics */
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                        width 0.3s ease, 
-                        border-radius 0.3s ease,
-                        background 0.3s ease; 
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s ease, border-radius 0.3s ease, background 0.3s ease; 
         }
         
-        /* Highlight/Glare (Kilatan Cahaya Atas) */
         .switch-thumb::after { 
             content: ''; 
             position: absolute; 
@@ -140,34 +130,19 @@
             opacity: 0.7; 
         }
 
-        /* --- EFFECT SAAT DI-HOLD (Rainbow Bubble) --- */
         .switch-container:active .switch-thumb { 
-            width: 45px; /* Melebar */
-            border-radius: 20px; /* Bentuk Pill */
-            
-            /* EFEK PELANGI DI DALAM */
-            background: linear-gradient(135deg, 
-                rgba(255,182,255,0.4), 
-                rgba(173,216,230,0.4), 
-                rgba(144,238,144,0.4), 
-                rgba(255,255,224,0.4)
-            );
+            width: 45px; 
+            border-radius: 20px; 
+            background: linear-gradient(135deg, rgba(255,182,255,0.4), rgba(173,216,230,0.4), rgba(144,238,144,0.4), rgba(255,255,224,0.4));
             background-size: 200% 200%;
             animation: iridescent 2s linear infinite;
-
-            /* EFEK REFLEKSI AIR (Inset Shadows) */
-            box-shadow: 
-                0 4px 15px rgba(0,0,0,0.1), /* Shadow luar */
-                inset 0 0 0 1px rgba(255,255,255,0.6), /* Border tipis */
-                inset 0 2px 10px rgba(255,255,255,0.8), /* Cahaya dalam atas */
-                inset 0 -2px 10px rgba(0,0,0,0.05); /* Bayangan dalam bawah */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.6), inset 0 2px 10px rgba(255,255,255,0.8), inset 0 -2px 10px rgba(0,0,0,0.05); 
         }
 
-        /* Active Position (Geser Kanan) */
         .switch-container.active .switch-thumb { transform: translateX(36px); }
-        .switch-container.active:active .switch-thumb { transform: translateX(26px); } /* Kompensasi lebar */
+        .switch-container.active:active .switch-thumb { transform: translateX(26px); }
 
-        /* --- ANIMATIONS --- */
+        /* Animations */
         .marquee-container { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
         
         .music-bar { width: 3px; background-color: #ec4899; border-radius: 99px; animation: equalizer 1s infinite ease-in-out; }
@@ -202,6 +177,22 @@
         html.dark input::placeholder { color: #888; }
 
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+        
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: top;
+        }
+        #mobile-menu.menu-closed {
+            opacity: 0;
+            transform: scale(0.95) translateY(-20px);
+            pointer-events: none;
+        }
+        #mobile-menu.menu-open {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="antialiased min-h-[100dvh] relative selection:bg-pink-300 selection:text-white dark:text-gray-200 pb-20 md:pb-0">
@@ -260,11 +251,11 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 glass-card rounded-2xl p-6 flex-col space-y-4 shadow-xl md:hidden transform transition-all duration-300 origin-top z-40">
-            <a href="#home" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_home">Home</a>
-            <a href="#about" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_about">Tentang</a>
-            <a href="#projects" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_projects">Project</a>
-            <a href="#contact" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_contact">Kontak</a>
+        <div id="mobile-menu" class="hidden absolute top-24 left-4 right-4 glass-card rounded-2xl p-6 flex-col space-y-4 shadow-xl md:hidden z-40 menu-closed">
+            <a href="#home" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_home" onclick="toggleMenu()">Home</a>
+            <a href="#about" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_about" onclick="toggleMenu()">Tentang</a>
+            <a href="#projects" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_projects" onclick="toggleMenu()">Project</a>
+            <a href="#contact" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_contact" onclick="toggleMenu()">Kontak</a>
         </div>
     </nav>
 
@@ -542,9 +533,33 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.15 });
         revealElements.forEach(el => revealObserver.observe(el));
+        
+        // MOBILE MENU TOGGLE LOGIC
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        if(menuBtn){ menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); mobileMenu.classList.toggle('flex'); }); }
+        
+        function toggleMenu() {
+            const isClosed = mobileMenu.classList.contains('menu-closed');
+            if (isClosed) {
+                mobileMenu.classList.remove('hidden');
+                // Small delay to allow display:block to apply before transition
+                setTimeout(() => {
+                    mobileMenu.classList.remove('menu-closed');
+                    mobileMenu.classList.add('menu-open');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('menu-open');
+                mobileMenu.classList.add('menu-closed');
+                // Wait for transition to finish before hiding
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300); // Matches CSS duration
+            }
+        }
+
+        if(menuBtn){ 
+            menuBtn.addEventListener('click', toggleMenu); 
+        }
         
         const modal = document.getElementById('project-modal');
         const modalTitle = document.getElementById('modal-title');
