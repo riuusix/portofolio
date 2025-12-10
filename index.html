@@ -2,7 +2,7 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <meta name="description" content="Portofolio Budi (Nara) - Fullstack Web Developer & UI/UX Designer.">
     <meta name="author" content="Budi Nara">
@@ -27,12 +27,22 @@
                     },
                     animation: {
                         'scroll': 'scroll 20s linear infinite',
+                        'iridescent': 'iridescent 3s linear infinite',
                     },
                     keyframes: {
                         scroll: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
+                        },
+                        // Animasi Pelangi Berputar
+                        iridescent: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
                         }
+                    },
+                    screens: {
+                        'xs': '375px', 
                     }
                 }
             }
@@ -46,14 +56,14 @@
         
         :root {
             --toggle-bg: rgba(0, 0, 0, 0.05);
-            --thumb-bg: rgba(255, 255, 255, 0.9);
-            --thumb-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --thumb-bg: rgba(255, 255, 255, 0.8);
+            --thumb-shadow: 0 2px 5px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.8);
         }
 
         html.dark :root {
             --toggle-bg: rgba(255, 255, 255, 0.15);
-            --thumb-bg: rgba(60, 60, 60, 0.9);
-            --thumb-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            --thumb-bg: rgba(255, 255, 255, 0.2); /* Lebih transparan di dark mode */
+            --thumb-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2);
         }
 
         body {
@@ -67,36 +77,114 @@
 
         html.dark body { background-color: #0a0a0a; color: #f5f5f7; }
 
-        /* Liquid Switch */
-        .switch-wrapper { display: flex; gap: 10px; align-items: center; }
-        .switch-container { position: relative; display: flex; align-items: center; justify-content: space-between; width: 80px; height: 40px; background: var(--toggle-bg); border-radius: 20px; padding: 4px; cursor: pointer; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
-        .switch-label { font-size: 12px; font-weight: 700; z-index: 2; flex: 1; text-align: center; pointer-events: none; transition: opacity 0.3s; opacity: 0.5; }
-        .switch-label.active-label { opacity: 1; }
-        .switch-thumb { position: absolute; left: 4px; top: 4px; width: 32px; height: 32px; background: var(--thumb-bg); border-radius: 50%; z-index: 1; box-shadow: var(--thumb-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s ease, left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .switch-thumb::after { content: ''; position: absolute; top: 2px; left: 5px; right: 5px; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%); border-radius: 10px; opacity: 0.7; }
-        .switch-container.active .switch-thumb { transform: translateX(40px); }
-        .switch-container:active .switch-thumb { width: 45px; border-radius: 16px; }
-        .switch-container.active:active .switch-thumb { transform: translateX(27px); }
+        /* --- NEW LIQUID SWITCH (Holographic Bubble) --- */
+        .switch-wrapper { display: flex; gap: 8px; align-items: center; }
+        
+        .switch-container { 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            width: 74px; 
+            height: 38px; 
+            background: var(--toggle-bg); 
+            border-radius: 99px; 
+            padding: 4px; 
+            cursor: pointer; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); 
+        }
 
-        /* Animations */
+        .switch-label { 
+            font-size: 10px; 
+            font-weight: 700; 
+            z-index: 2; 
+            flex: 1; 
+            text-align: center; 
+            pointer-events: none; 
+            transition: opacity 0.3s; 
+            opacity: 0.5; 
+        }
+        .switch-label.active-label { opacity: 1; }
+        
+        /* The Bubble Thumb */
+        .switch-thumb { 
+            position: absolute; 
+            left: 4px; 
+            top: 4px; 
+            width: 30px; 
+            height: 30px; 
+            background: var(--thumb-bg);
+            border-radius: 50%; 
+            z-index: 1; 
+            
+            /* Glass Effect Default */
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: var(--thumb-shadow);
+            
+            /* Physics */
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        width 0.3s ease, 
+                        border-radius 0.3s ease,
+                        background 0.3s ease; 
+        }
+        
+        /* Highlight/Glare (Kilatan Cahaya Atas) */
+        .switch-thumb::after { 
+            content: ''; 
+            position: absolute; 
+            top: 3px; left: 6px; right: 6px; height: 12px; 
+            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%); 
+            border-radius: 20px; 
+            opacity: 0.7; 
+        }
+
+        /* --- EFFECT SAAT DI-HOLD (Rainbow Bubble) --- */
+        .switch-container:active .switch-thumb { 
+            width: 45px; /* Melebar */
+            border-radius: 20px; /* Bentuk Pill */
+            
+            /* EFEK PELANGI DI DALAM */
+            background: linear-gradient(135deg, 
+                rgba(255,182,255,0.4), 
+                rgba(173,216,230,0.4), 
+                rgba(144,238,144,0.4), 
+                rgba(255,255,224,0.4)
+            );
+            background-size: 200% 200%;
+            animation: iridescent 2s linear infinite;
+
+            /* EFEK REFLEKSI AIR (Inset Shadows) */
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.1), /* Shadow luar */
+                inset 0 0 0 1px rgba(255,255,255,0.6), /* Border tipis */
+                inset 0 2px 10px rgba(255,255,255,0.8), /* Cahaya dalam atas */
+                inset 0 -2px 10px rgba(0,0,0,0.05); /* Bayangan dalam bawah */
+        }
+
+        /* Active Position (Geser Kanan) */
+        .switch-container.active .switch-thumb { transform: translateX(36px); }
+        .switch-container.active:active .switch-thumb { transform: translateX(26px); } /* Kompensasi lebar */
+
+        /* --- ANIMATIONS --- */
         .marquee-container { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
         
-        .music-bar { width: 3px; background-color: #ec4899; border-radius: 99px; animation: bounce 1s infinite ease-in-out; }
+        .music-bar { width: 3px; background-color: #ec4899; border-radius: 99px; animation: equalizer 1s infinite ease-in-out; }
         .music-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
         .music-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
         .music-bar:nth-child(3) { height: 8px; animation-delay: 0.5s; }
         .music-bar:nth-child(4) { height: 14px; animation-delay: 0.2s; }
-        @keyframes bounce { 0%, 100% { height: 6px; } 50% { height: 100%; } }
+        @keyframes equalizer { 0%, 100% { height: 6px; } 50% { height: 100%; } }
 
         .blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.8; animation: move 10s infinite alternate; }
-        .blob-1 { top: 5%; left: 5%; width: 400px; height: 400px; background: #d8b4fe; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-        .blob-2 { bottom: 10%; right: 0%; width: 500px; height: 500px; background: #93c5fd; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-duration: 15s; }
-        .blob-3 { top: 40%; left: 30%; width: 300px; height: 300px; background: #f9a8d4; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation-duration: 12s; }
+        .blob-1 { top: 5%; left: 5%; width: 300px; height: 300px; background: #d8b4fe; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .blob-2 { bottom: 10%; right: 0%; width: 300px; height: 300px; background: #93c5fd; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-duration: 15s; }
+        .blob-3 { top: 40%; left: 30%; width: 250px; height: 250px; background: #f9a8d4; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation-duration: 12s; }
         @keyframes move { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(30px, 40px) rotate(10deg); } }
 
         .glass-card { background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05); transition: background 0.5s ease, border 0.5s ease; }
         html.dark .glass-card { background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
-        
         .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.9); transition: background 0.5s ease; }
         html.dark .glass-nav { background: rgba(20, 20, 20, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 
@@ -125,99 +213,92 @@
     </div>
     <div class="noise-overlay"></div>
 
-    <div class="fixed bottom-6 left-6 z-50 glass-card px-4 py-3 rounded-full hidden md:flex items-center gap-3 animate-bounce shadow-2xl border border-white/40 dark:border-white/10" style="animation-duration: 3s;">
+    <div class="fixed bottom-6 left-4 z-50 glass-card px-3 py-2 md:px-4 md:py-3 rounded-full flex items-center gap-3 animate-bounce shadow-2xl border border-white/40 dark:border-white/10 scale-90 md:scale-100 origin-bottom-left" style="animation-duration: 3s;">
         <div class="w-8 h-8 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900">
             <i class="fas fa-music text-xs"></i>
         </div>
         <div class="flex flex-col">
-            <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Now Playing</span>
-            <span class="text-xs font-bold text-slate-800 dark:text-white flex items-center gap-2">
+            <span class="text-[8px] md:text-[9px] uppercase font-bold text-slate-400 tracking-wider">Now Playing</span>
+            <span class="text-[10px] md:text-xs font-bold text-slate-800 dark:text-white flex items-center gap-2">
                 Silly Dance - NCT WISH
                 <div class="flex items-end h-3 gap-[2px]">
-                    <div class="music-bar"></div>
-                    <div class="music-bar"></div>
-                    <div class="music-bar"></div>
-                    <div class="music-bar"></div>
+                    <div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div>
                 </div>
             </span>
         </div>
     </div>
 
-    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white shadow-lg hover:bg-slate-700 dark:hover:bg-gray-200 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none">
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-4 z-50 p-3 md:p-4 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white shadow-lg hover:bg-slate-700 dark:hover:bg-gray-200 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none scale-90 md:scale-100 origin-bottom-right">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <nav class="fixed top-0 left-0 w-full z-50 px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))] transition-all duration-300">
-        <div class="max-w-6xl mx-auto glass-nav rounded-full px-6 py-3 flex justify-between items-center shadow-sm relative z-50">
-            <span class="font-bold text-xl tracking-wider text-slate-800 dark:text-white">NARA.</span>
+        <div class="max-w-6xl mx-auto glass-nav rounded-full px-4 md:px-6 py-3 flex justify-between items-center shadow-sm relative z-50">
+            <span class="font-bold text-lg md:text-xl tracking-wider text-slate-800 dark:text-white">NARA.</span>
             
-            <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-600 dark:text-gray-300 items-center">
-                <a href="#home" class="hover:text-pink-500 transition" data-key="nav_home">Home</a>
-                <a href="#about" class="hover:text-pink-500 transition" data-key="nav_about">Tentang</a>
-                <a href="#projects" class="hover:text-pink-500 transition" data-key="nav_projects">Project</a>
-                <a href="#contact" class="hover:text-pink-500 transition" data-key="nav_contact">Kontak</a>
-                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
-                <div class="switch-wrapper">
-                    <div class="switch-container" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark Mode">
-                        <div class="switch-thumb"></div>
-                        <span class="switch-label text-orange-500">☀️</span>
-                        <span class="switch-label text-blue-300">🌙</span>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-600 dark:text-gray-300 items-center mr-2">
+                    <a href="#home" class="hover:text-pink-500 transition" data-key="nav_home">Home</a>
+                    <a href="#about" class="hover:text-pink-500 transition" data-key="nav_about">Tentang</a>
+                    <a href="#projects" class="hover:text-pink-500 transition" data-key="nav_projects">Project</a>
+                    <a href="#contact" class="hover:text-pink-500 transition" data-key="nav_contact">Kontak</a>
+                    <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+                </div>
+
+                <div class="switch-wrapper scale-90 md:scale-100">
+                    <div class="switch-container" id="themeToggle" onclick="toggleTheme()">
+                        <div class="switch-thumb"></div><span class="switch-label text-orange-500">☀️</span><span class="switch-label text-blue-300">🌙</span>
                     </div>
-                    <div class="switch-container" id="langToggle" onclick="toggleLanguage()" title="Switch Language">
-                        <div class="switch-thumb"></div>
-                        <span class="switch-label text-slate-600 dark:text-gray-300">ID</span>
-                        <span class="switch-label text-slate-600 dark:text-gray-300">EN</span>
+                    <div class="switch-container" id="langToggle" onclick="toggleLanguage()">
+                        <div class="switch-thumb"></div><span class="switch-label text-slate-600">ID</span><span class="switch-label text-slate-600">EN</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="md:hidden flex items-center gap-4">
-                 <button onclick="toggleTheme()" class="text-slate-600 dark:text-white text-xl"><i class="fas fa-adjust"></i></button>
-                <div class="text-slate-600 dark:text-white cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition" id="mobile-menu-btn"><i class="fas fa-bars text-xl"></i></div>
+                <div class="md:hidden flex items-center ml-2">
+                    <div class="text-slate-600 dark:text-white cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition" id="mobile-menu-btn"><i class="fas fa-bars text-lg"></i></div>
+                </div>
             </div>
         </div>
 
         <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 glass-card rounded-2xl p-6 flex-col space-y-4 shadow-xl md:hidden transform transition-all duration-300 origin-top z-40">
-            <a href="#home" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_home">Home</a>
-            <a href="#about" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_about">Tentang</a>
-            <a href="#projects" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_projects">Project</a>
-            <a href="#contact" class="block text-slate-600 dark:text-gray-200 font-medium hover:text-pink-500" data-key="nav_contact">Kontak</a>
-            <hr class="border-gray-200 dark:border-gray-700">
-            <button onclick="toggleLanguage()" class="text-left text-slate-600 dark:text-gray-200 font-medium">🌐 Ganti Bahasa (ID/EN)</button>
+            <a href="#home" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_home">Home</a>
+            <a href="#about" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_about">Tentang</a>
+            <a href="#projects" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_projects">Project</a>
+            <a href="#contact" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_contact">Kontak</a>
         </div>
     </nav>
 
-    <main class="max-w-5xl mx-auto px-6 relative z-10">
-        <section id="home" class="min-h-[100dvh] flex flex-col-reverse md:flex-row items-center justify-center gap-10 pt-24 md:pt-0">
-            <div class="flex-1 text-center md:text-left space-y-5">
-                <div class="inline-block px-4 py-2 rounded-full bg-white/60 dark:bg-white/10 border border-white dark:border-white/20 text-sm text-slate-600 dark:text-gray-300 font-medium shadow-sm transition-colors">
+    <main class="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
+        <section id="home" class="min-h-[100dvh] flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-10 pt-24 md:pt-0">
+            <div class="flex-1 text-center md:text-left space-y-4 md:space-y-5">
+                <div class="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/60 dark:bg-white/10 border border-white dark:border-white/20 text-xs md:text-sm text-slate-600 dark:text-gray-300 font-medium shadow-sm">
                     <span id="greeting-badge">👋 Halo, selamat datang!</span>
                 </div>
-                <h1 class="text-4xl md:text-7xl font-bold leading-tight text-slate-800 dark:text-white">
+                <h1 class="text-4xl xs:text-5xl md:text-7xl font-bold leading-tight text-slate-800 dark:text-white">
                     <span data-key="hero_iam">Aku</span> <span class="text-gradient">Budi Nur Rahman.</span>
                 </h1>
-                <h2 class="text-lg md:text-2xl text-slate-500 dark:text-gray-400 font-light">
-                    <span data-key="hero_callme">Atau panggil aja Budi atau</span> <span class="font-semibold text-slate-800 dark:text-white border-b-2 border-pink-400">Nara</span>.
+                <h2 class="text-base xs:text-lg md:text-2xl text-slate-500 dark:text-gray-400 font-light">
+                    <span data-key="hero_callme">Atau panggil aja</span> <span class="font-semibold text-slate-800 dark:text-white border-b-2 border-pink-400">Nara</span>.
                 </h2>
-                <p class="text-slate-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 leading-relaxed text-base md:text-lg min-h-[80px]">
+                <p class="text-slate-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-lg min-h-[60px] md:min-h-[80px]">
                     <span data-key="hero_desc">Mahasiswa IT yang mengubah kopi menjadi kode.</span><br>
                     <span data-key="hero_focus">Fokus di:</span> <span id="typing-text" class="font-bold text-pink-500 border-r-2 border-pink-500 pr-1"></span>
                 </p>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
-                    <a href="#projects" class="px-8 py-3 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-semibold hover:bg-slate-700 dark:hover:bg-gray-200 transition shadow-lg shadow-slate-300 dark:shadow-none" data-key="btn_projects">Lihat Karyaku</a>
-                    <a href="#" onclick="alert('Demo Mode')" class="px-8 py-3 rounded-full border-2 border-slate-300 dark:border-gray-600 text-slate-600 dark:text-gray-300 font-semibold hover:border-slate-800 dark:hover:border-white hover:text-slate-800 dark:hover:text-white transition flex items-center gap-2"><i class="fas fa-download"></i> <span data-key="btn_cv">Download CV</span></a>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start pt-2">
+                    <a href="#projects" class="px-6 py-2.5 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-semibold text-sm md:text-base hover:bg-slate-700 transition shadow-lg" data-key="btn_projects">Lihat Karyaku</a>
+                    <a href="#" onclick="alert('CV akan segera tersedia!')" class="px-6 py-2.5 rounded-full border-2 border-slate-300 dark:border-gray-600 text-slate-600 dark:text-gray-300 font-semibold text-sm md:text-base hover:border-slate-800 dark:hover:border-white transition flex items-center gap-2"><i class="fas fa-download"></i> <span data-key="btn_cv">Download CV</span></a>
                 </div>
             </div>
             <div class="flex-1 flex justify-center relative">
-                <div class="relative w-64 h-72 md:w-80 md:h-96 glass-card rounded-[2rem] p-3 transform rotate-3 hover:rotate-0 transition duration-500 shadow-2xl">
+                <div class="relative w-60 h-64 xs:w-72 xs:h-80 md:w-80 md:h-96 glass-card rounded-[2rem] p-3 transform rotate-3 hover:rotate-0 transition duration-500 shadow-2xl">
                     <div class="w-full h-full rounded-[1.5rem] overflow-hidden bg-gray-100 relative">
-                        <img src="https://api.dicebear.com/9.x/notionists/svg?seed=Nara&backgroundColor=e5e7eb" alt="Nara" class="object-cover w-full h-full">
+                        <img src="img/aku.jpeg" alt="Nara" class="object-cover w-full h-full">
                     </div>
-                    <div class="absolute -bottom-6 -right-4 glass-card px-5 py-3 rounded-xl shadow-lg animate-bounce duration-[3000ms] flex items-center gap-2">
-                        <span class="text-2xl">🚀</span>
+                    <div class="absolute -bottom-6 -right-4 glass-card px-4 py-2 rounded-xl shadow-lg animate-bounce duration-[3000ms] flex items-center gap-2">
+                        <span class="text-xl">🚀</span>
                         <div class="text-left leading-tight">
-                            <p class="text-[10px] text-slate-400 dark:text-gray-400 font-bold uppercase">Status</p>
-                            <p class="font-bold text-slate-700 dark:text-white text-sm">Open to Work</p>
+                            <p class="text-[9px] text-slate-400 dark:text-gray-400 font-bold uppercase">Status</p>
+                            <p class="font-bold text-slate-700 dark:text-white text-xs">Open to Work</p>
                         </div>
                     </div>
                 </div>
@@ -225,110 +306,110 @@
         </section>
 
         <section id="about" class="py-12 md:py-20 reveal">
-            <div class="glass-card rounded-3xl p-8 md:p-12">
-                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div class="glass-card rounded-3xl p-6 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div>
                         <h3 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4" data-key="about_title">Tentang Aku</h3>
-                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed mb-6" data-key="about_p1">Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.</p>
-                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed" data-key="about_p2">Selain teknis, aku punya pengalaman <b>Leadership</b> saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.</p>
+                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm md:text-base" data-key="about_p1">Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.</p>
+                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-sm md:text-base" data-key="about_p2">Selain teknis, aku punya pengalaman <b>Leadership</b> saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.</p>
                         
                         <div class="mt-8">
-                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Tech Stack & Tools</h4>
+                            <h4 class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Tech Stack & Tools</h4>
                             <div class="marquee-container w-full overflow-hidden relative">
-                                <div class="flex gap-8 text-4xl text-slate-600 dark:text-gray-300 animate-scroll whitespace-nowrap py-2 w-max">
+                                <div class="flex gap-6 md:gap-8 text-3xl md:text-4xl text-slate-600 dark:text-gray-300 animate-scroll whitespace-nowrap py-2 w-max">
                                     <i class="fab fa-laravel text-red-600"></i> <i class="fab fa-php text-purple-600"></i> <i class="fab fa-js text-yellow-400"></i> <i class="fab fa-html5 text-orange-500"></i> <i class="fab fa-figma text-purple-400"></i> <i class="fab fa-css3-alt text-blue-500"></i> <i class="fas fa-database text-slate-500"></i> <i class="fab fa-git-alt text-red-500"></i>
                                     <i class="fab fa-laravel text-red-600"></i> <i class="fab fa-php text-purple-600"></i> <i class="fab fa-js text-yellow-400"></i> <i class="fab fa-html5 text-orange-500"></i> <i class="fab fa-figma text-purple-400"></i> <i class="fab fa-css3-alt text-blue-500"></i> <i class="fas fa-database text-slate-500"></i> <i class="fab fa-git-alt text-red-500"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="github-stats" class="mt-8 glass-card p-5 rounded-2xl flex gap-4 items-center justify-between hidden reveal hover:scale-[1.02] transition duration-300 border border-slate-200/50 dark:border-white/10">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 text-2xl"><i class="fab fa-github"></i></div>
+                        <div id="github-stats" class="mt-8 glass-card p-4 rounded-2xl flex gap-4 items-center justify-between hidden reveal hover:scale-[1.02] transition duration-300 border border-slate-200/50 dark:border-white/10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 text-xl"><i class="fab fa-github"></i></div>
                                 <div>
-                                    <span id="gh-repos" class="block text-xl font-bold text-slate-800 dark:text-white animate-pulse bg-slate-200 dark:bg-slate-700 text-transparent rounded w-8 h-6 mb-1">0</span>
-                                    <span class="text-xs text-slate-500 dark:text-gray-400 font-medium uppercase tracking-wide">Repositories</span>
+                                    <span id="gh-repos" class="block text-lg font-bold text-slate-800 dark:text-white">0</span>
+                                    <span class="text-[10px] md:text-xs text-slate-500 dark:text-gray-400 font-medium uppercase">Repos</span>
                                 </div>
                             </div>
-                            <div class="w-px h-10 bg-slate-300 dark:bg-gray-700"></div>
+                            <div class="w-px h-8 bg-slate-300 dark:bg-gray-700"></div>
                             <div class="text-center">
-                                <span id="gh-followers" class="block text-xl font-bold text-slate-800 dark:text-white animate-pulse bg-slate-200 dark:bg-slate-700 text-transparent rounded w-8 h-6 mx-auto mb-1">0</span>
-                                <span class="text-xs text-slate-500 dark:text-gray-400 font-medium uppercase tracking-wide">Followers</span>
+                                <span id="gh-followers" class="block text-lg font-bold text-slate-800 dark:text-white">0</span>
+                                <span class="text-[10px] md:text-xs text-slate-500 dark:text-gray-400 font-medium uppercase">Followers</span>
                             </div>
-                            <a id="gh-link" href="#" target="_blank" class="text-xs bg-slate-800 dark:bg-white dark:text-slate-900 text-white px-5 py-2.5 rounded-full hover:bg-slate-700 dark:hover:bg-gray-200 transition font-bold shadow-lg">Follow</a>
+                            <a id="gh-link" href="#" target="_blank" class="text-[10px] md:text-xs bg-slate-800 dark:bg-white dark:text-slate-900 text-white px-4 py-2 rounded-full hover:bg-slate-700 transition font-bold">Follow</a>
                         </div>
                     </div>
 
-                    <div class="relative pl-8 border-l-2 border-slate-200 dark:border-gray-700 space-y-10">
+                    <div class="relative pl-6 md:pl-8 ml-2 md:ml-0 border-l-2 border-slate-200 dark:border-gray-700 space-y-8 md:space-y-10">
                          <div class="relative group">
-                            <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-800 shadow-sm group-hover:scale-125 transition"></span>
-                            <h4 class="font-bold text-lg text-slate-800 dark:text-white">INVOFEST 2025</h4>
-                            <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded uppercase tracking-wide">Competition</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-2 leading-relaxed" data-key="timeline_1">Merancang "KotaKita", solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.</p>
+                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">INVOFEST 2025</h4>
+                            <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded uppercase">Competition</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_1">Merancang "KotaKita", solusi Smart City berbasis Mobile App. Fokus pada User Research & Figma.</p>
                         </div>
                         <div class="relative group">
-                            <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-orange-500 border-4 border-white dark:border-slate-800 shadow-sm group-hover:scale-125 transition"></span>
-                            <h4 class="font-bold text-lg text-slate-800 dark:text-white">Fullstack Dev @ Icon Plus</h4>
-                            <span class="text-[10px] text-orange-700 font-bold bg-orange-100 px-2 py-0.5 rounded uppercase tracking-wide">Internship</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-2 leading-relaxed" data-key="timeline_2">Membangun aplikasi internal IT Support dari nol menggunakan Laravel 11. Menangani Database Design hingga Deployment.</p>
+                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-orange-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">Fullstack Dev @ Icon Plus</h4>
+                            <span class="text-[10px] text-orange-700 font-bold bg-orange-100 px-2 py-0.5 rounded uppercase">Internship</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_2">Membangun aplikasi internal IT Support dari nol menggunakan Laravel 11. Menangani Database hingga Deployment.</p>
                         </div>
                         <div class="relative group">
-                            <span class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-800 shadow-sm group-hover:scale-125 transition"></span>
-                            <h4 class="font-bold text-lg text-slate-800 dark:text-white">Building TrackerThings</h4>
-                            <span class="text-[10px] text-indigo-700 font-bold bg-indigo-100 px-2 py-0.5 rounded uppercase tracking-wide">Personal Project</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-2 leading-relaxed" data-key="timeline_3">Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL untuk logika backend yang kompleks.</p>
+                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">Building TrackerThings</h4>
+                            <span class="text-[10px] text-indigo-700 font-bold bg-indigo-100 px-2 py-0.5 rounded uppercase">Project</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_3">Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-12 md:py-20 reveal">
-            <div class="flex justify-between items-end mb-8 px-2">
+        <section id="projects" class="py-10 reveal">
+            <div class="flex justify-between items-end mb-6 md:mb-8 px-2">
                 <div>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white">Featured Projects</h3>
-                    <p class="text-slate-500 dark:text-gray-400 mt-2" data-key="proj_subtitle">Klik kartu untuk detail &rarr;</p>
+                    <h3 class="text-2xl md:text-4xl font-bold text-slate-800 dark:text-white">Featured Projects</h3>
+                    <p class="text-slate-500 dark:text-gray-400 mt-1 text-sm md:text-base" data-key="proj_subtitle">Klik kartu untuk detail &rarr;</p>
                 </div>
             </div>
-            <div class="flex overflow-x-auto gap-8 pb-12 pt-12 px-6 hide-scroll snap-x snap-mandatory -mx-6 md:mx-0">
-                <div onclick="openModal('iconplus')" class="cursor-pointer snap-center shrink-0 w-80 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-orange-400 group">
-                    <div class="h-48 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center relative"><i class="fas fa-network-wired text-6xl text-orange-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold text-slate-800 dark:text-white">IT Support App</h4>
-                        <p class="text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">App manajemen tiket support IT (PKL).</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600 font-bold">Laravel 11</span></div>
+            <div class="flex overflow-x-auto gap-6 pb-12 pt-8 px-4 hide-scroll snap-x snap-mandatory -mx-4 md:mx-0">
+                <div onclick="openModal('iconplus')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-orange-400 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center relative"><i class="fas fa-network-wired text-5xl md:text-6xl text-orange-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">IT Support App</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">App manajemen tiket support IT (PKL).</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-red-100 text-red-600 font-bold">Laravel 11</span></div>
                     </div>
                 </div>
-                <div onclick="openModal('tracker')" class="cursor-pointer snap-center shrink-0 w-80 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-indigo-500 group">
-                    <div class="h-48 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center relative"><i class="fas fa-calendar-check text-6xl text-indigo-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold text-slate-800 dark:text-white">TrackerThings</h4>
-                        <p class="text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Manajemen akademik, jadwal & deadline.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-3 py-1 text-xs rounded-full bg-indigo-50 text-indigo-600 font-semibold">PHP Native</span></div>
+                <div onclick="openModal('tracker')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-indigo-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center relative"><i class="fas fa-calendar-check text-5xl md:text-6xl text-indigo-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">TrackerThings</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Manajemen akademik & deadline.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-indigo-50 text-indigo-600 font-semibold">PHP Native</span></div>
                     </div>
                 </div>
-                <div onclick="openModal('kotakita')" class="cursor-pointer snap-center shrink-0 w-80 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-emerald-500 group">
-                    <div class="h-48 bg-gradient-to-br from-emerald-100 to-teal-50 flex items-center justify-center relative"><i class="fas fa-map-location-dot text-6xl text-emerald-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold text-slate-800 dark:text-white">KotaKita</h4>
-                        <p class="text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Platform Smart City & Pelaporan Publik.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-3 py-1 text-xs rounded-full bg-emerald-50 text-emerald-600 font-semibold">UI/UX</span></div>
+                <div onclick="openModal('kotakita')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-emerald-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-emerald-100 to-teal-50 flex items-center justify-center relative"><i class="fas fa-map-location-dot text-5xl md:text-6xl text-emerald-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">KotaKita</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Platform Smart City & Laporan.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-emerald-50 text-emerald-600 font-semibold">UI/UX</span></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="max-w-3xl mx-auto py-12 md:py-20 reveal">
-            <div class="glass-card rounded-3xl p-8 relative overflow-hidden">
-                <h3 class="text-2xl font-bold text-center mb-2 text-slate-800 dark:text-white" data-key="contact_title">Kirimi Aku Pesan ✉️</h3>
-                <p class="text-center text-slate-500 dark:text-gray-300 mb-8 text-sm" data-key="contact_sub">Tertarik kolaborasi? Yuk diskusi bareng!</p>
+            <div class="glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden">
+                <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-slate-800 dark:text-white" data-key="contact_title">Kirimi Aku Pesan ✉️</h3>
+                <p class="text-center text-slate-500 dark:text-gray-300 mb-6 text-sm" data-key="contact_sub">Tertarik kolaborasi? Yuk diskusi bareng!</p>
                 <form id="contact-form" class="space-y-4">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <input type="text" name="name" required placeholder="Nama Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700">
-                        <input type="email" name="email" required placeholder="Email Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="name" required placeholder="Nama Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700 text-sm">
+                        <input type="email" name="email" required placeholder="Email Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700 text-sm">
                     </div>
-                    <textarea name="message" required placeholder="Tulis pesan..." rows="4" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700"></textarea>
-                    <button type="submit" id="submit-btn" class="w-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-700 dark:hover:bg-gray-200 transition transform active:scale-95 flex justify-center items-center gap-2">
+                    <textarea name="message" required placeholder="Tulis pesan..." rows="4" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700 text-sm"></textarea>
+                    <button type="submit" id="submit-btn" class="w-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-700 dark:hover:bg-gray-200 transition transform active:scale-95 flex justify-center items-center gap-2 text-sm md:text-base">
                         <span data-key="btn_send">Kirim Pesan</span>
                         <i class="fas fa-spinner fa-spin hidden" id="loading-icon"></i>
                     </button>
@@ -337,15 +418,15 @@
             </div>
         </section>
 
-        <footer id="footer" class="glass-card rounded-t-[3rem] p-10 mt-10 text-center relative overflow-hidden reveal">
+        <footer id="footer" class="glass-card rounded-t-[2rem] md:rounded-t-[3rem] p-8 md:p-10 mt-10 text-center relative overflow-hidden reveal">
             <div class="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"></div>
-            <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-6">Let's Connect!</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-6">Let's Connect!</h2>
             <div class="flex justify-center gap-6">
-                <a href="https://www.instagram.com/nurrahmannn._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow-md text-pink-500 hover:scale-110 transition text-2xl"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/riuusix" class="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow-md text-slate-800 hover:scale-110 transition text-2xl"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/budi-nur-rahman-103311341/" class="w-14 h-14 flex items-center justify-center rounded-full bg-white shadow-md text-blue-600 hover:scale-110 transition text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/nurrahmannn._" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-pink-500 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/riuusix" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-slate-800 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/budi-nur-rahman-103311341/" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-blue-600 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p class="text-slate-400 text-sm mt-12">&copy; 2025 Nara. Built with Liquid Glass Style.</p>
+            <p class="text-slate-400 text-xs md:text-sm mt-8 md:mt-12">&copy; 2025 Nara. Built with Liquid Glass Style.</p>
         </footer>
     </main>
 
@@ -354,18 +435,18 @@
         <div class="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-0 md:p-1 border border-slate-200 dark:border-slate-700">
             <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition shadow-sm"><i class="fas fa-times dark:text-white"></i></button>
             <div class="p-6 space-y-6">
-                <h3 id="modal-title" class="text-2xl font-bold text-slate-800 dark:text-white pr-8">Project Title</h3>
-                <div class="w-full h-64 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-inner"><i class="fas fa-image text-4xl text-slate-300"></i><img id="modal-img" src="" class="w-full h-full object-cover hidden"></div>
+                <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white pr-8">Project Title</h3>
+                <div class="w-full h-48 md:h-64 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-inner"><i class="fas fa-image text-4xl text-slate-300"></i><img id="modal-img" src="" class="w-full h-full object-cover hidden"></div>
                 <div class="space-y-2">
-                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-sm uppercase tracking-wider">Deskripsi Project</h4>
-                    <p id="modal-desc" class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed text-justify">...</p>
+                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-xs md:text-sm uppercase tracking-wider">Deskripsi Project</h4>
+                    <p id="modal-desc" class="text-slate-600 dark:text-gray-400 text-xs md:text-sm leading-relaxed text-justify">...</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-sm uppercase tracking-wider mb-3">Tech Stack</h4>
+                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-xs md:text-sm uppercase tracking-wider mb-2">Tech Stack</h4>
                     <div id="modal-tags" class="flex gap-2 flex-wrap"></div>
                 </div>
                 <div id="modal-link-container" class="pt-2 hidden">
-                    <a id="modal-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-700 dark:hover:bg-gray-200 transition">
+                    <a id="modal-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-700 dark:hover:bg-gray-200 transition text-sm">
                         <i class="fas fa-external-link-alt"></i> Lihat Project
                     </a>
                 </div>
@@ -465,7 +546,6 @@
         const mobileMenu = document.getElementById('mobile-menu');
         if(menuBtn){ menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); mobileMenu.classList.toggle('flex'); }); }
         
-        /* --- MODAL WITH LINK --- */
         const modal = document.getElementById('project-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');
@@ -474,28 +554,27 @@
         const modalLinkContainer = document.getElementById('modal-link-container');
         const modalLink = document.getElementById('modal-link');
 
-        // Added 'link' property to projects
         const projectsData = { 
             'iconplus': { 
                 title: 'IT Support App (Icon Plus)', 
                 desc: 'Aplikasi manajemen tiket support IT yang saya bangun saat PKL. Fitur mencakup sistem ticketing, role management (Admin/User), dan reporting otomatis.', 
                 tags: ['Laravel 11', 'PHP', 'Bootstrap', 'MySQL'], 
-                img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
-                link: '#' // Ganti dengan link project asli jika ada
+                img: 'img/project-iconplus.png',
+                link: '#' 
             }, 
             'tracker': { 
                 title: 'TrackerThings', 
                 desc: 'Aplikasi manajemen akademik khusus mahasiswa. Membantu mengatur jadwal kuliah, mengingatkan deadline tugas, dan mencatat nilai ujian.', 
                 tags: ['PHP Native', 'MySQL', 'Responsive UI', 'JavaScript'], 
-                img: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800',
+                img: 'img/project-tracker.jpg',
                 link: 'https://trackerthings.rf.gd'
             }, 
             'kotakita': { 
                 title: 'KotaKita (UI/UX Case Study)', 
                 desc: 'Platform konsep Smart City untuk INVOFEST 2025. Menggabungkan fitur pelaporan fasilitas publik rusak dan pencarian ruang terbuka hijau.', 
                 tags: ['Figma', 'User Research', 'Prototyping'], 
-                img: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800',
-                link: '' // Kosongkan jika tidak ada link
+                img: 'img/project-kotakita.png',
+                link: '' 
             } 
         };
 
@@ -509,7 +588,6 @@
             modalTags.innerHTML = '';
             data.tags.forEach(tag => { const span = document.createElement('span'); span.className = 'px-3 py-1 text-xs rounded-full bg-slate-100 text-slate-600 font-semibold'; span.innerText = tag; modalTags.appendChild(span); });
             
-            // Link Logic
             if(data.link && data.link !== '') {
                 modalLink.href = data.link;
                 modalLinkContainer.classList.remove('hidden');
@@ -522,9 +600,50 @@
         function closeModal() { modal.classList.add('hidden'); }
         
         const contactForm = document.getElementById('contact-form');
-        if (contactForm) { contactForm.addEventListener('submit', function(e) { e.preventDefault(); alert('Pesan terkirim (Simulasi). Hubungkan Formspree Anda!'); }); }
+        const submitBtn = document.getElementById('submit-btn');
+        const loadingIcon = document.getElementById('loading-icon');
+        const btnText = submitBtn ? submitBtn.querySelector('span') : null;
+        const formStatus = document.getElementById('form-status');
 
-        /* --- GITHUB --- */
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                if(btnText) btnText.innerText = "Mengirim...";
+                if(loadingIcon) loadingIcon.classList.remove('hidden');
+                formStatus.classList.add('hidden');
+
+                const formData = new FormData(contactForm);
+                const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeoylydd'; 
+
+                try {
+                    const response = await fetch(FORMSPREE_ENDPOINT, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        formStatus.className = "mt-4 text-center p-3 rounded-xl text-xs md:text-sm font-bold bg-emerald-100 text-emerald-700 border border-emerald-200";
+                        formStatus.innerText = "✅ Pesan berhasil terkirim! Aku akan balas secepatnya.";
+                        contactForm.reset(); 
+                    } else {
+                        const data = await response.json();
+                        throw new Error(data.error || "Ada masalah teknis.");
+                    }
+                } catch (error) {
+                    formStatus.className = "mt-4 text-center p-3 rounded-xl text-xs md:text-sm font-bold bg-red-100 text-red-700 border border-red-200";
+                    formStatus.innerText = "❌ Gagal mengirim: " + error.message;
+                } finally {
+                    formStatus.classList.remove('hidden');
+                    submitBtn.disabled = false;
+                    if(btnText) btnText.innerText = "Kirim Pesan";
+                    if(loadingIcon) loadingIcon.classList.add('hidden');
+                    setTimeout(() => { formStatus.classList.add('hidden'); }, 5000);
+                }
+            });
+        }
+
         const githubUsername = 'riuusix'; 
         const githubWidget = document.getElementById('github-stats');
         const githubLink = document.getElementById('gh-link');
@@ -536,12 +655,6 @@
                     document.getElementById('gh-repos').innerText = data.public_repos;
                     document.getElementById('gh-followers').innerText = data.followers;
                     githubWidget.classList.remove('hidden');
-                    const repoEl = document.getElementById('gh-repos');
-                    const followerEl = document.getElementById('gh-followers');
-                    repoEl.classList.remove('animate-pulse', 'bg-slate-200', 'dark:bg-slate-700', 'text-transparent');
-                    followerEl.classList.remove('animate-pulse', 'bg-slate-200', 'dark:bg-slate-700', 'text-transparent');
-                    repoEl.innerText = data.public_repos;
-                    followerEl.innerText = data.followers;
                 })
                 .catch(err => console.log("Gagal ambil data GitHub:", err));
         }
