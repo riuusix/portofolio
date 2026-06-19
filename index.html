@@ -193,6 +193,34 @@
             transform: scale(1) translateY(0);
             pointer-events: auto;
         }
+        /* =========================================
+        APPLE SMOOTH MODAL ANIMATION (60Hz VIBE)
+        ========================================= */
+        #project-modal {
+            visibility: hidden; /* Ini yang menghilangkan bayangan/ghosting total */
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+            will-change: opacity, visibility;
+        }
+
+        #project-modal #modal-card {
+            transform: scale(0.92) translateY(15px);
+            opacity: 0;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            will-change: transform, opacity;
+        }
+
+        /* KETIKA MODAL AKTIF / TERBUKA */
+        #project-modal.modal-visible {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #project-modal.modal-visible #modal-card {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="antialiased min-h-[100dvh] relative selection:bg-pink-300 selection:text-white dark:text-gray-200 pb-20 md:pb-0">
@@ -277,7 +305,7 @@
                 </p>
                 <div class="flex flex-wrap gap-3 justify-center md:justify-start pt-2">
                     <a href="#projects" class="px-6 py-2.5 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-semibold text-sm md:text-base hover:bg-slate-700 transition shadow-lg" data-key="btn_projects">Lihat Karyaku</a>
-                    <a href="#" onclick="alert('CV akan segera tersedia!')" class="px-6 py-2.5 rounded-full border-2 border-slate-300 dark:border-gray-600 text-slate-600 dark:text-gray-300 font-semibold text-sm md:text-base hover:border-slate-800 dark:hover:border-white transition flex items-center gap-2"><i class="fas fa-download"></i> <span data-key="btn_cv">Download CV</span></a>
+                    <a href="pdf/CV_Budi Nur Rahman.pdf" target="_blank" class="px-6 py-2.5 rounded-full border-2 border-slate-300 dark:border-gray-600 text-slate-600 dark:text-gray-300 font-semibold text-sm md:text-base hover:border-slate-800 dark:hover:border-white transition flex items-center gap-2"><i class="fas fa-download"></i> <span data-key="btn_cv">Download CV</span></a>
                 </div>
             </div>
             <div class="flex-1 flex justify-center relative">
@@ -413,17 +441,19 @@
             <div class="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"></div>
             <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-6">Let's Connect!</h2>
             <div class="flex justify-center gap-6">
-                <a href="https://www.instagram.com/nurrahmannn._" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-pink-500 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/bieurs_" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-pink-500 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-instagram"></i></a>
                 <a href="https://github.com/riuusix" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-slate-800 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/budi-nur-rahman-103311341/" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-blue-600 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.linkedin.com/in/budinurrahman/" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-blue-600 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p class="text-slate-400 text-xs md:text-sm mt-8 md:mt-12">&copy; 2025 Nara. Built with Liquid Glass Style.</p>
+            <p class="text-slate-400 text-xs md:text-sm mt-8 md:mt-12">&copy; 2025 Nara. All rights reserved.</p>
         </footer>
     </main>
 
-    <div id="project-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+<div id="project-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+        
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
-        <div class="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-0 md:p-1 border border-slate-200 dark:border-slate-700">
+        
+        <div id="modal-card" class="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-0 md:p-1 border border-slate-200 dark:border-slate-700">
             <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition shadow-sm"><i class="fas fa-times dark:text-white"></i></button>
             <div class="p-6 space-y-6">
                 <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white pr-8">Project Title</h3>
@@ -436,6 +466,7 @@
                     <h4 class="font-bold text-slate-700 dark:text-gray-200 text-xs md:text-sm uppercase tracking-wider mb-2">Tech Stack</h4>
                     <div id="modal-tags" class="flex gap-2 flex-wrap"></div>
                 </div>
+                
                 <div id="modal-link-container" class="pt-2 hidden">
                     <a id="modal-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-700 dark:hover:bg-gray-200 transition text-sm">
                         <i class="fas fa-external-link-alt"></i> Lihat Project
@@ -456,7 +487,7 @@
                 about_p1: "Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.",
                 about_p2: "Selain teknis, aku punya pengalaman Leadership saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.",
                 timeline_1: "Merancang \"KotaKita\", solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.",
-                timeline_2: "Membangun aplikasi internal IT Support dari nol menggunakan Laravel 11. Menangani Database Design hingga Deployment.",
+                timeline_2: "Membangun platform internal IT Support & Talent Mapping lintas supervisor (SPV) menggunakan Laravel 11. Berfungsi sebagai 'LinkedIn Perusahaan' untuk mengelola resource divisi, melacak penugasan Project Manager (PM), serta memetakan tanggung jawab support aplikasi setiap karyawan.",
                 timeline_3: "Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL untuk logika backend yang kompleks.",
                 proj_subtitle: "Klik kartu untuk detail &rarr;",
                 contact_title: "Kirimi Aku Pesan ✉️", contact_sub: "Tertarik kolaborasi? Yuk diskusi bareng!",
@@ -471,7 +502,7 @@
                 about_p1: "My coding journey started in Vocational High School (RPL). Now I'm an IT student at National University.",
                 about_p2: "Beyond tech, I have Leadership experience leading developer teams during internships and active in student organizations.",
                 timeline_1: "Designing \"KotaKita\", a Smart City Mobile App solution. Focused on User Research & High-Fidelity Prototyping in Figma.",
-                timeline_2: "Built an internal IT Support app from scratch using Laravel 11. Handled Database Design to Deployment.",
+                timeline_2: "Built an internal IT Support & Talent Mapping platform across supervisors (SPV) using Laravel 11. Acts as a corporate 'Internal LinkedIn' to manage divisional resources, track Project Manager (PM) assignments, and map each employee's application support responsibilities.",
                 timeline_3: "Initiated the development of student academic management tool. Implemented PHP Native & MySQL for complex backend logic.",
                 proj_subtitle: "Click card for details &rarr;",
                 contact_title: "Send Me a Message ✉️", contact_sub: "Interested in collaboration? Let's discuss!",
@@ -571,17 +602,16 @@
 
         const projectsData = { 
             'iconplus': { 
-                title: 'IT Support App (Icon Plus)', 
-                desc: 'Aplikasi manajemen tiket support IT yang saya bangun saat PKL. Fitur mencakup sistem ticketing, role management (Admin/User), dan reporting otomatis.', 
-                tags: ['Laravel 11', 'PHP', 'Bootstrap', 'MySQL'], 
-                img: 'img/project-iconplus.png',
-                link: '#' 
-            }, 
+            title: 'Internal IT Support & Talent Mapping (Icon Plus)', 
+            desc: 'Aplikasi ini dirancang sebagai ekosistem profesional internal (seperti LinkedIn) dalam satu divisi perusahaan. Platform ini mempermudah pencarian talent yang siap masuk ke project baru, transparansi struktur tim (siapa anggotanya & siapa PM-nya), serta monitoring profil karyawan lintas supervisor (SPV) untuk mengetahui aplikasi apa saja yang sedang mereka support.', 
+            tags: ['Laravel 11', 'PHP', 'Tailwind', 'MySQL', 'Corporate Network'], 
+            isSchema: true // Kita kasih penanda kalau ini pakai skema, bukan gambar gambar biasa
+            },
             'tracker': { 
                 title: 'TrackerThings', 
                 desc: 'Aplikasi manajemen akademik khusus mahasiswa. Membantu mengatur jadwal kuliah, mengingatkan deadline tugas, dan mencatat nilai ujian.', 
                 tags: ['PHP Native', 'MySQL', 'Responsive UI', 'JavaScript'], 
-                img: 'img/project-tracker.jpg',
+                img: '/img/project-tracker.png',
                 link: 'https://trackerthings.rf.gd'
             }, 
             'kotakita': { 
@@ -589,20 +619,68 @@
                 desc: 'Platform konsep Smart City untuk INVOFEST 2025. Menggabungkan fitur pelaporan fasilitas publik rusak dan pencarian ruang terbuka hijau.', 
                 tags: ['Figma', 'User Research', 'Prototyping'], 
                 img: 'img/project-kotakita.png',
-                link: '' 
+                link: 'https://www.figma.com/proto/Ch6ytISsLRValqUy4gJm2r/UI-UX-Infovest-2025_KotaKita_Budi-Nur-Rahman?node-id=68-98&t=IkPEjxylyxXDyod0-1' 
             } 
         };
 
-        function openModal(projectId) {
+function openModal(projectId) {
             const data = projectsData[projectId];
             if(!data) return;
+            
             modalTitle.innerText = data.title;
             modalDesc.innerText = data.desc;
-            modalImg.src = data.img;
-            modalImg.classList.remove('hidden');
-            modalTags.innerHTML = '';
-            data.tags.forEach(tag => { const span = document.createElement('span'); span.className = 'px-3 py-1 text-xs rounded-full bg-slate-100 text-slate-600 font-semibold'; span.innerText = tag; modalTags.appendChild(span); });
+
+            // --- 1. LOGIKA SKEMA VS GAMBAR ---
+            const imgContainer = modalImg.parentElement;
+            const defaultIcon = imgContainer.querySelector('.fa-image');
             
+            const existingSchema = document.getElementById('schema-container');
+            if (existingSchema) existingSchema.remove();
+
+            if (data.isSchema) {
+                modalImg.classList.add('hidden');
+                if (defaultIcon) defaultIcon.classList.add('hidden');
+
+                const schemaDiv = document.createElement('div');
+                schemaDiv.id = 'schema-container';
+                schemaDiv.className = 'absolute inset-0 w-full h-full p-4 grid grid-cols-2 gap-3 bg-slate-50 dark:bg-slate-900 overflow-y-auto text-left text-xs z-10';
+                schemaDiv.innerHTML = `
+                    <div class="p-3 rounded-xl border border-slate-200 dark:border-gray-700 bg-white/80 dark:bg-slate-800 shadow-sm flex flex-col justify-center">
+                        <span class="text-orange-500 font-bold block mb-1"><i class="fas fa-sitemap mr-1"></i> Div Directory</span>
+                        <p class="text-[10px] text-slate-500 dark:text-gray-400 leading-tight">Pantau profil & resource divisi lintas SPV.</p>
+                    </div>
+                    <div class="p-3 rounded-xl border border-slate-200 dark:border-gray-700 bg-white/80 dark:bg-slate-800 shadow-sm flex flex-col justify-center">
+                        <span class="text-blue-500 font-bold block mb-1"><i class="fas fa-search-user mr-1"></i> Talent Scout</span>
+                        <p class="text-[10px] text-slate-500 dark:text-gray-400 leading-tight">Cari karyawan available untuk project baru.</p>
+                    </div>
+                    <div class="p-3 rounded-xl border border-slate-200 dark:border-gray-700 bg-white/80 dark:bg-slate-800 shadow-sm flex flex-col justify-center">
+                        <span class="text-purple-500 font-bold block mb-1"><i class="fas fa-user-tie mr-1"></i> Governance</span>
+                        <p class="text-[10px] text-slate-500 dark:text-gray-400 leading-tight">Transparansi PM & daftar anggota tim aktif.</p>
+                    </div>
+                    <div class="p-3 rounded-xl border border-slate-200 dark:border-gray-700 bg-white/80 dark:bg-slate-800 shadow-sm flex flex-col justify-center">
+                        <span class="text-emerald-500 font-bold block mb-1"><i class="fas fa-cubes mr-1"></i> App Mapping</span>
+                        <p class="text-[10px] text-slate-500 dark:text-gray-400 leading-tight">Lacak aplikasi produk apa yang di-support.</p>
+                    </div>
+                `;
+                imgContainer.style.position = 'relative';
+                imgContainer.appendChild(schemaDiv);
+
+            } else {
+                modalImg.src = data.img;
+                modalImg.classList.remove('hidden');
+                if (defaultIcon) defaultIcon.classList.add('hidden');
+            }
+            
+            // --- 2. RENDER TECH STACK TAGS ---
+            modalTags.innerHTML = '';
+            data.tags.forEach(tag => { 
+                const span = document.createElement('span'); 
+                span.className = 'px-3 py-1 text-xs rounded-full bg-slate-100 text-slate-600 font-semibold dark:bg-slate-700 dark:text-gray-200'; 
+                span.innerText = tag; 
+                modalTags.appendChild(span); 
+            });
+            
+            // --- 3. LOGIKA TOMBOL LINK ---
             if(data.link && data.link !== '') {
                 modalLink.href = data.link;
                 modalLinkContainer.classList.remove('hidden');
@@ -610,9 +688,10 @@
                 modalLinkContainer.classList.add('hidden');
             }
 
-            modal.classList.remove('hidden');
+            // --- 4. TRIGGER ANIMATION CLASS (Bukan hidden lagi) ---
+            modal.classList.add('modal-visible');
         }
-        function closeModal() { modal.classList.add('hidden'); }
+        function closeModal() { modal.classList.remove('modal-visible'); }
         
         const contactForm = document.getElementById('contact-form');
         const submitBtn = document.getElementById('submit-btn');
