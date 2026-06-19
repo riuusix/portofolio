@@ -201,7 +201,7 @@
                 title: 'iAnalytics (iPhone Log AI Parser)',
                 desc: 'Aplikasi analitik data berbasis Python (konsep mirip 3uTools). Mampu melakukan parsing data log internal iPhone untuk mengecek keaslian perangkat dan Battery Health. Fitur utamanya adalah integrasi dengan Gemini API, yang akan otomatis menganalisis dan memberikan saran perbaikan ketika sistem mendeteksi error hardware kritis seperti "Panic Full".',
                 tags: ['Python', 'HTML', 'Gemini AI API', 'Data Parsing'],
-                img: 'img/project-ianalytics.png',
+                img: 'img/project-analytics.png',
                 link: 'empty'
             } 
         };
