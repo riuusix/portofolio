@@ -221,6 +221,52 @@
             transform: scale(1) translateY(0);
             opacity: 1;
         }
+        /* =========================================
+        FADE SCROLL MASK (Biar ujungnya gak kepotong tajam)
+        ========================================= */
+        .fade-scroll {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
+            mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
+        }
+
+        /* =========================================
+        IOS FOLDER ANIMATION & STAGGERED ICONS
+        ========================================= */
+        #ios-folder {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            will-change: opacity, visibility;
+        }
+
+        #ios-folder.folder-active {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #folder-content {
+            transform: scale(0.6);
+            opacity: 0;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            will-change: transform, opacity;
+        }
+
+        #ios-folder.folder-active #folder-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Animasi Muncul Satu-Satu untuk Icon */
+        @keyframes popInIcon {
+            0% { transform: scale(0.5) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .folder-icon-item {
+            opacity: 0; /* Default hilang */
+            animation: popInIcon 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="antialiased min-h-[100dvh] relative selection:bg-pink-300 selection:text-white dark:text-gray-200 pb-20 md:pb-0">
@@ -329,8 +375,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div>
                         <h3 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4" data-key="about_title">Tentang Aku</h3>
-                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm md:text-base" data-key="about_p1">Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.</p>
-                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-sm md:text-base" data-key="about_p2">Selain teknis, aku punya pengalaman <b>Leadership</b> saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.</p>
+                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm md:text-base" data-key="about_p1">Halo! Aku Budi (bisa juga dipanggil Nara), seorang Fullstack Developer berusia 18 tahun yang berdomisili di Jakarta. Perjalanan kodingku sudah dimulai sejak bangku SMK jurusan Rekayasa Perangkat Lunak (RPL). Saat ini, aku sedang melanjutkan studi sebagai mahasiswa Informatika di Universitas Nasional, di mana aku terus mengeksplorasi teknologi baru dari UI/UX, Web Framework, hingga integrasi AI.</p>
+                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-sm md:text-base" data-key="about_p2">Bagiku, IT bukan cuma soal menulis baris kode, tapi tentang menciptakan solusi. Selain fokus pada <i>hardskill</i>, aku juga mengasah <i>softskill</i> melalui pengalaman aktif di OSIS dan memimpin tim developer saat magang di Icon Plus. Pengalaman ini mengajariku banyak hal tentang <b>Leadership</b>, komunikasi tim, dan manajemen proyek dari tahap ide hingga siap rilis..</p>
                         
                         <div class="mt-8">
                             <h4 class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Tech Stack & Tools</h4>
@@ -360,24 +406,33 @@
                     </div>
 
                     <div class="relative pl-6 md:pl-8 ml-2 md:ml-0 border-l-2 border-slate-200 dark:border-gray-700 space-y-8 md:space-y-10">
-                         <div class="relative group">
+                        <div class="relative group">
                             <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
                             <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">INVOFEST 2025</h4>
                             <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded uppercase">Competition</span>
                             <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_1">Merancang "KotaKita", solusi Smart City berbasis Mobile App. Fokus pada User Research & Figma.</p>
                         </div>
+                        
                         <div class="relative group">
                             <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-orange-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
                             <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">Fullstack Dev @ Icon Plus</h4>
                             <span class="text-[10px] text-orange-700 font-bold bg-orange-100 px-2 py-0.5 rounded uppercase">Internship</span>
                             <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_2">Membangun aplikasi internal IT Support dari nol menggunakan Laravel 11. Menangani Database hingga Deployment.</p>
                         </div>
+                        
                         <div class="relative group">
                             <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
                             <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">Building TrackerThings</h4>
                             <span class="text-[10px] text-indigo-700 font-bold bg-indigo-100 px-2 py-0.5 rounded uppercase">Project</span>
                             <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_3">Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL.</p>
                         </div>
+
+                        <div class="relative group">
+                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-violet-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">AI & Frontend Exploration</h4>
+                            <span class="text-[10px] text-violet-700 font-bold bg-violet-100 px-2 py-0.5 rounded uppercase">Self-Learning</span>
+                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_4">Mengeksplorasi integrasi Gemini AI via Python (iAnalytics) dan membangun antarmuka web interaktif menggunakan React JS.</p>
+                        </div>                    
                     </div>
                 </div>
             </div>
@@ -390,11 +445,11 @@
                     <p class="text-slate-500 dark:text-gray-400 mt-1 text-sm md:text-base" data-key="proj_subtitle">Klik kartu untuk detail &rarr;</p>
                 </div>
             </div>
-            <div class="flex overflow-x-auto gap-6 pb-12 pt-8 px-4 hide-scroll snap-x snap-mandatory -mx-4 md:mx-0">
+            <div class="flex overflow-x-auto gap-6 pb-12 pt-8 px-6 md:px-12 hide-scroll snap-x snap-mandatory -mx-6 md:-mx-12 fade-scroll">
                 <div onclick="openModal('iconplus')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-orange-400 group">
                     <div class="h-40 md:h-48 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center relative"><i class="fas fa-network-wired text-5xl md:text-6xl text-orange-400 group-hover:scale-110 transition duration-500"></i></div>
                     <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">IT Support App</h4>
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">IT Support App (InsightPlus)</h4>
                         <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">App manajemen tiket support IT (PKL).</p>
                         <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-red-100 text-red-600 font-bold">Laravel 11</span></div>
                     </div>
@@ -414,6 +469,118 @@
                         <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Platform Smart City & Laporan.</p>
                         <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-emerald-50 text-emerald-600 font-semibold">UI/UX</span></div>
                     </div>
+                </div>
+                <div onclick="openModal('festivo')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-rose-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-rose-100 to-pink-50 flex items-center justify-center relative"><i class="fas fa-ticket-alt text-5xl md:text-6xl text-rose-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">Festivo</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_festivo">Layanan web pembelian tiket konser/festival.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-rose-50 text-rose-600 font-semibold">Laravel</span></div>
+                    </div>
+                </div>
+
+                <div onclick="openModal('gudang')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-amber-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-amber-100 to-yellow-50 flex items-center justify-center relative"><i class="fas fa-warehouse text-5xl md:text-6xl text-amber-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">Warehouse Dashboard</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_gudang">Desain sistem manajemen stok gudang (PKL).</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-amber-50 text-amber-600 font-semibold">UI/UX</span></div>
+                    </div>
+                </div>
+
+                <div onclick="openModal('splitbuddy')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-teal-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-teal-100 to-emerald-50 flex items-center justify-center relative"><i class="fas fa-hand-holding-dollar text-5xl md:text-6xl text-teal-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">SplitBuddy</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_splitbuddy">Aplikasi split payment / pembayaran patungan bersama.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-teal-50 text-teal-600 font-semibold">UI/UX</span></div>
+                    </div>
+                </div>
+
+                <div onclick="openModal('todo')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-cyan-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-cyan-100 to-blue-50 flex items-center justify-center relative"><i class="fas fa-list-check text-5xl md:text-6xl text-cyan-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">React To-Do Web</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_todo">Aplikasi manajemen tugas interaktif live di Vercel.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-cyan-50 text-cyan-600 font-semibold">React JS</span></div>
+                    </div>
+                </div>
+
+                <div onclick="openModal('ianalytics')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-violet-500 group">
+                    <div class="h-40 md:h-48 bg-gradient-to-br from-violet-100 to-purple-50 flex items-center justify-center relative"><i class="fas fa-microchip text-5xl md:text-6xl text-violet-400 group-hover:scale-110 transition duration-500"></i></div>
+                    <div class="p-5 md:p-6">
+                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">iAnalytics (AI Parser)</h4>
+                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_ianalytics">Python parsing log iPhone terintegrasi Gemini API.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-violet-50 text-violet-600 font-semibold">Python</span>
+                            <span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-slate-800 text-white font-semibold">Gemini AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEYOND CODING SECTION -->
+        <section id="vibe" class="py-10 md:py-16 reveal">
+            <div class="px-2 mb-6 md:mb-8 text-center md:text-left">
+                <h3 class="text-2xl md:text-4xl font-bold text-slate-800 dark:text-white" data-key="vibe_title">Beyond Coding</h3>
+                <p class="text-slate-500 dark:text-gray-400 mt-1 text-sm md:text-base" data-key="vibe_subtitle">Kenali aku lebih dekat di luar urusan kode.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-2 md:px-0">
+                
+                <!-- PERSONALITY CARD -->
+                <div class="md:col-span-2 glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:-translate-y-1 transition duration-300">
+                    <div class="absolute -right-10 -top-10 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
+                        <i class="fas fa-brain text-[150px] text-slate-800 dark:text-white"></i>
+                    </div>
+                    <div class="relative z-10 h-full flex flex-col justify-center">
+                        <h4 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-3">The Introverted Observer</h4>
+                        <p class="text-sm md:text-base text-slate-600 dark:text-gray-400 leading-relaxed max-w-xl text-justify" data-key="vibe_desc">
+                            Seorang introvert yang tetap punya energi untuk aktif dan bersosialisasi. Aku mungkin agak pemilih untuk urusan <i>inner circle</i>, tapi aku sangat terbuka dan berempati dengan siapa saja karena pada dasarnya aku adalah orang yang perasa. Sebagai seorang <i>overthinker</i>, aku terbiasa menganalisis sesuatu dari berbagai sudut pandang—sebuah sifat yang nyatanya sangat membantuku saat harus <i>debugging</i> kode yang rumit atau merancang <i>user flow</i> yang ramah pengguna!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- HOBBIES COLUMN -->
+                <div class="flex flex-col gap-4 md:gap-6">
+                    
+                    <!-- GAMING -->
+                    <div onclick="openFolder('gaming')"class="flex-1 glass-card rounded-3xl p-5 relative overflow-hidden group hover:-translate-y-1 transition duration-300 flex flex-col justify-center">
+                        <div class="absolute -right-4 -bottom-4 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
+                            <i class="fas fa-gamepad text-[80px] text-slate-800 dark:text-white"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-gamepad text-xl text-blue-500 mb-2"></i>
+                            <h4 class="text-md font-bold text-slate-800 dark:text-white mb-1">Gamer at Heart</h4>
+                            <p class="text-[11px] md:text-xs text-slate-500 dark:text-gray-400" data-key="vibe_game">Cara terbaik buat <i>refreshing</i> otak. Entah itu <i>push rank</i>, main RPG, atau membangun rute di game simulasi.</p>
+                        </div>
+                    </div>
+
+                    <!-- MUSIC -->
+                    <div onclick="openFolder('music')" class="flex-1 glass-card rounded-3xl p-5 relative overflow-hidden group hover:-translate-y-1 transition duration-300 flex flex-col justify-center">
+                        <div class="absolute -right-4 -bottom-4 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
+                            <i class="fas fa-headphones-alt text-[80px] text-slate-800 dark:text-white"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-headphones-alt text-xl text-pink-500 mb-2"></i>
+                            <h4 class="text-md font-bold text-slate-800 dark:text-white mb-1">Music Enthusiast</h4>
+                            <p class="text-[11px] md:text-xs text-slate-500 dark:text-gray-400" data-key="vibe_music">Selalu ada <i>soundtrack</i> emosional buat menemani setiap baris kode yang ditulis.</p>
+                        </div>
+                    </div>
+
+                    <!-- FANTASY & ANIME (NEW) -->
+                    <div class="flex-1 glass-card rounded-3xl p-5 relative overflow-hidden group hover:-translate-y-1 transition duration-300 flex flex-col justify-center">
+                        <div class="absolute -right-4 -bottom-4 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
+                            <i class="fas fa-book-journal-whills text-[80px] text-slate-800 dark:text-white"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <i class="fas fa-book-journal-whills text-xl text-emerald-500 mb-2"></i>
+                            <h4 class="text-md font-bold text-slate-800 dark:text-white mb-1">Fantasy Seeker</h4>
+                            <p class="text-[11px] md:text-xs text-slate-500 dark:text-gray-400" data-key="vibe_fantasy">Suka banget tenggelam dalam buku atau anime bergenre fantasi, walau tetap <i>open</i> ke genre seru lainnya.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -476,6 +643,31 @@
         </div>
     </div>
 
+<!-- IOS FOLDER MODAL -->
+    <div id="ios-folder" class="fixed inset-0 z-[70] flex items-center justify-center p-6">
+        <!-- Blur Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-xl" onclick="closeFolder()"></div>
+        
+        <!-- Kotak Folder (Dibikin lebih putih terang: bg-white/95) -->
+        <div id="folder-content" class="relative w-full max-w-sm bg-white/95 dark:bg-slate-800/95 backdrop-blur-3xl rounded-[2.5rem] p-8 shadow-2xl border border-white/50 dark:border-slate-600/50">
+            
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h3 id="folder-title" class="text-2xl font-bold text-slate-800 dark:text-white tracking-wide">Folder</h3>
+                    <!-- Subtitle khusus untuk "Let's connect" -->
+                    <p id="folder-subtitle" class="text-xs text-slate-500 dark:text-gray-400 mt-1 hidden"></p>
+                </div>
+                <button onclick="closeFolder()" class="w-8 h-8 bg-slate-100 dark:bg-slate-700/60 rounded-full flex items-center justify-center text-slate-600 dark:text-white hover:scale-110 transition"><i class="fas fa-times"></i></button>
+            </div>
+
+            <!-- Tempat Icon Muncul -->
+            <div id="folder-grid" class="grid grid-cols-3 gap-y-6 gap-x-4">
+                <!-- Icon akan di-inject lewat JS -->
+            </div>
+
+        </div>
+    </div>
+
     <script>
         const translations = {
             id: {
@@ -484,14 +676,28 @@
                 hero_desc: "Mahasiswa IT yang mengubah kopi menjadi kode.", hero_focus: "Fokus di:",
                 btn_projects: "Lihat Karyaku", btn_cv: "Download CV",
                 about_title: "Tentang Aku",
-                about_p1: "Perjalanan kodingku dimulai dari bangku SMK (RPL). Sekarang aku mahasiswa IT di Universitas Nasional.",
-                about_p2: "Selain teknis, aku punya pengalaman Leadership saat memimpin tim developer di masa magang dan aktif di organisasi OSIS.",
-                timeline_1: "Merancang \"KotaKita\", solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.",
+                about_p1: "Halo! Aku Budi (bisa juga dipanggil Nara), seorang Fullstack Developer berusia 18 tahun yang berdomisili di Jakarta. Perjalanan kodingku sudah dimulai sejak bangku SMK jurusan Rekayasa Perangkat Lunak (RPL). Saat ini, aku sedang melanjutkan studi sebagai mahasiswa Informatika di Universitas Nasional, di mana aku terus mengeksplorasi teknologi baru dari UI/UX, Web Framework, hingga integrasi AI.",
+                about_p2: "Bagiku, IT bukan cuma soal menulis baris kode, tapi tentang menciptakan solusi. Selain fokus pada <i>hardskill</i>, aku juga mengasah <i>softskill</i> melalui pengalaman aktif di OSIS dan memimpin tim developer saat magang di Icon Plus. Pengalaman ini mengajariku banyak hal tentang <b>Leadership</b>, komunikasi tim, dan manajemen proyek dari tahap ide hingga siap rilis.",                timeline_1: "Merancang \"KotaKita\", solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.",
                 timeline_2: "Membangun platform internal IT Support & Talent Mapping lintas supervisor (SPV) menggunakan Laravel 11. Berfungsi sebagai 'LinkedIn Perusahaan' untuk mengelola resource divisi, melacak penugasan Project Manager (PM), serta memetakan tanggung jawab support aplikasi setiap karyawan.",
                 timeline_3: "Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL untuk logika backend yang kompleks.",
-                proj_subtitle: "Klik kartu untuk detail &rarr;",
+                timeline_4: "Mengeksplorasi integrasi Gemini AI via Python (iAnalytics) dan membangun antarmuka web interaktif menggunakan React JS.",
+                // ... (sisanya biarkan sama) ...                proj_subtitle: "Klik kartu untuk detail &rarr;",
                 contact_title: "Kirimi Aku Pesan ✉️", contact_sub: "Tertarik kolaborasi? Yuk diskusi bareng!",
-                btn_send: "Kirim Pesan"
+                btn_send: "Kirim Pesan",
+                card_desc_iconplus: "App manajemen tiket & talent IT (PKL).",
+                card_desc_tracker: "Manajemen akademik & deadline mahasiswa.",
+                card_desc_kotakita: "Platform Smart City & Pelaporan Publik.",
+                card_desc_festivo: "Layanan web pembelian tiket konser/festival.",
+                card_desc_gudang: "Desain sistem manajemen stok gudang (PKL).",
+                card_desc_splitbuddy: "Aplikasi split payment / pembayaran patungan bersama.",
+                card_desc_todo: "Aplikasi manajemen tugas interaktif live di Vercel.",
+                card_desc_ianalytics: "Python parsing log iPhone terintegrasi Gemini API.",
+                vibe_title: "Beyond Coding",
+                vibe_subtitle: "Kenali aku lebih dekat di luar urusan kode.",
+                vibe_desc: "Seorang introvert yang tetap punya energi untuk aktif dan bersosialisasi. Aku mungkin agak pemilih untuk urusan inner circle, tapi aku sangat terbuka dan berempati dengan siapa saja karena pada dasarnya aku adalah orang yang perasa. Sebagai seorang overthinker, aku terbiasa menganalisis sesuatu dari berbagai sudut pandang—sebuah sifat yang nyatanya sangat membantuku saat harus debugging kode yang rumit atau merancang user flow yang ramah pengguna!",
+                vibe_game: "Cara terbaik buat refreshing otak. Entah itu push rank, main RPG, atau membangun rute di game simulasi.",
+                vibe_fantasy: "Suka banget tenggelam dalam buku atau anime bergenre fantasi, walau tetap open ke genre seru lainnya.",
+                vibe_music: "Selalu ada soundtrack emosional buat menemani setiap baris kode yang ditulis.",
             },
             en: {
                 nav_home: "Home", nav_about: "About", nav_projects: "Projects", nav_contact: "Contact",
@@ -499,14 +705,27 @@
                 hero_desc: "IT Student turning coffee into code.", hero_focus: "Focusing on:",
                 btn_projects: "View My Work", btn_cv: "Download CV",
                 about_title: "About Me",
-                about_p1: "My coding journey started in Vocational High School (RPL). Now I'm an IT student at National University.",
-                about_p2: "Beyond tech, I have Leadership experience leading developer teams during internships and active in student organizations.",
-                timeline_1: "Designing \"KotaKita\", a Smart City Mobile App solution. Focused on User Research & High-Fidelity Prototyping in Figma.",
+                about_p1: "Hello! I'm Budi (or can called Nara), an 18-year-old Fullstack Developer based in Jakarta. My coding journey started back in Vocational High School (Software Engineering). Currently, I'm an Informatics student at National University, where I constantly explore new technologies ranging from UI/UX and Web Frameworks to AI integration.",
+                about_p2: "For me, IT isn't just about writing lines of code; it's about creating solutions. Besides honing my <i>hardskills</i>, I've developed my <i>softskills</i> through active participation in the student council and by leading a developer team during my internship at Icon Plus. These experiences taught me a lot about <b>Leadership</b>, team communication, and project management from ideation to deployment.",                timeline_1: "Designing \"KotaKita\", a Smart City Mobile App solution. Focused on User Research & High-Fidelity Prototyping in Figma.",
                 timeline_2: "Built an internal IT Support & Talent Mapping platform across supervisors (SPV) using Laravel 11. Acts as a corporate 'Internal LinkedIn' to manage divisional resources, track Project Manager (PM) assignments, and map each employee's application support responsibilities.",
                 timeline_3: "Initiated the development of student academic management tool. Implemented PHP Native & MySQL for complex backend logic.",
-                proj_subtitle: "Click card for details &rarr;",
+                timeline_4: "Exploring Gemini AI integration via Python (iAnalytics) and building interactive web interfaces using React JS.",                proj_subtitle: "Click card for details &rarr;",
                 contact_title: "Send Me a Message ✉️", contact_sub: "Interested in collaboration? Let's discuss!",
-                btn_send: "Send Message"
+                btn_send: "Send Message",
+                card_desc_iconplus: "IT ticket & talent management app (Internship).",
+                card_desc_tracker: "Academic management & student deadlines.",
+                card_desc_kotakita: "Smart City & Public Reporting Platform.",
+                card_desc_festivo: "Web service for purchasing concert/festival tickets.",
+                card_desc_gudang: "Warehouse stock management system design (Internship).",
+                card_desc_splitbuddy: "Split payment application for shared bills.",
+                card_desc_todo: "Interactive task management app live on Vercel.",
+                card_desc_ianalytics: "Python iPhone log parser integrated with Gemini API.",
+                vibe_title: "Beyond Coding",
+                vibe_subtitle: "Get to know me outside of coding.",
+                vibe_desc: "An introvert with the energy to stay active and socialize. I might be a bit selective with my inner circle, but I'm highly open and empathetic with everyone because I'm naturally perceptive of others' feelings. As an overthinker, I'm used to analyzing things from multiple perspectives—a trait that actually helps me a lot when debugging complex code or designing user-friendly flows!",
+                vibe_game: "The best way to refresh my mind. Whether it's pushing ranks, playing RPGs, or building transit routes in simulation games.",
+                vibe_fantasy: "I love getting lost in fantasy books or anime, though I'm always open to other exciting genres.",
+                vibe_music: "There's always an emotional soundtrack accompanying every line of code I write."
             }
         };
 
@@ -525,7 +744,7 @@
                 const key = el.getAttribute('data-key');
                 if (translations[currentLang][key]) {
                     el.style.opacity = 0;
-                    setTimeout(() => { el.innerText = translations[currentLang][key]; el.style.opacity = 1; }, 200);
+                    setTimeout(() => { el.innerHTML = translations[currentLang][key]; el.style.opacity = 1; }, 200);
                 }
             });
             updateGreeting();
@@ -612,7 +831,7 @@
                 desc: 'Aplikasi manajemen akademik khusus mahasiswa. Membantu mengatur jadwal kuliah, mengingatkan deadline tugas, dan mencatat nilai ujian.', 
                 tags: ['PHP Native', 'MySQL', 'Responsive UI', 'JavaScript'], 
                 img: '/img/project-tracker.png',
-                link: 'https://trackerthings.rf.gd'
+                link: 'empty'
             }, 
             'kotakita': { 
                 title: 'KotaKita (UI/UX Case Study)', 
@@ -620,10 +839,45 @@
                 tags: ['Figma', 'User Research', 'Prototyping'], 
                 img: 'img/project-kotakita.png',
                 link: 'https://www.figma.com/proto/Ch6ytISsLRValqUy4gJm2r/UI-UX-Infovest-2025_KotaKita_Budi-Nur-Rahman?node-id=68-98&t=IkPEjxylyxXDyod0-1' 
+            },
+            'festivo': {
+                title: 'Festivo',
+                desc: 'Platform layanan web komprehensif yang menyediakan fasilitas pembelian tiket untuk konser, festival, dan seminar. Aplikasi ini dirancang agar siap mendukung integrasi Payment Gateway API di masa pengembangan selanjutnya.',
+                tags: ['Laravel', 'PHP', 'MySQL', 'Web App'],
+                img: 'img/project-festivo.png', 
+                link: 'empty'
+            },
+            'gudang': {
+                title: 'Warehouse Management Dashboard',
+                desc: 'Desain konseptual UI/UX untuk aplikasi internal logistik (Tugas PKL). Menyajikan visualisasi dashboard untuk admin gudang memonitor rasio penjualan, arus barang masuk, dan laporan barang keluar secara real-time.',
+                tags: ['UI/UX', 'Figma', 'Dashboard Design'],
+                img: 'img/project-gudang.png',
+                link: 'https://www.figma.com/proto/9aAxNQZmBE3OA1R3M2GX0c/Final-Task-Budi?node-id=0-1&t=UrpbB2H4SXtH7l5k-1'
+            },
+            'splitbuddy': {
+                title: 'SplitBuddy',
+                desc: 'Proyek kolaboratif perancangan UI/UX (Tugas PKL) untuk aplikasi split payment. Bertujuan memberikan solusi antarmuka yang intuitif bagi pengguna yang ingin membagi tagihan pembayaran makan atau belanja bersama teman.',
+                tags: ['UI/UX', 'Figma', 'Teamwork', 'Mobile App'],
+                img: 'img/project-splitbuddy.png',
+                link: 'https://www.figma.com/proto/gAhf4vT3NapxPmDmt8h6Gu/Group-Task---End-to-end-Design-Apps?node-id=2005-8&t=frJyiwzE0jVTaUA0-1'
+            },
+            'todo': {
+                title: 'React To-Do List',
+                desc: 'Aplikasi web manajemen tugas interaktif yang dibangun dari awal menggunakan framework React JS. Aplikasi ini sangat responsif dan telah berhasil di-deploy serta dapat diakses secara live menggunakan Vercel.',
+                tags: ['React JS', 'Vercel', 'Frontend Development'],
+                img: 'img/project-todo.png',
+                link: 'https://to-do-list-three-xi-99.vercel.app/'
+            },
+            'ianalytics': {
+                title: 'iAnalytics (iPhone Log AI Parser)',
+                desc: 'Aplikasi analitik data berbasis Python (konsep mirip 3uTools). Mampu melakukan parsing data log internal iPhone untuk mengecek keaslian perangkat dan Battery Health. Fitur utamanya adalah integrasi dengan Gemini API, yang akan otomatis menganalisis dan memberikan saran perbaikan ketika sistem mendeteksi error hardware kritis seperti "Panic Full".',
+                tags: ['Python', 'HTML', 'Gemini AI API', 'Data Parsing'],
+                img: 'img/project-ianalytics.png',
+                link: 'empty'
             } 
         };
 
-function openModal(projectId) {
+        function openModal(projectId) {
             const data = projectsData[projectId];
             if(!data) return;
             
@@ -681,10 +935,24 @@ function openModal(projectId) {
             });
             
             // --- 3. LOGIKA TOMBOL LINK ---
-            if(data.link && data.link !== '') {
-                modalLink.href = data.link;
+            modalLink.onclick = null; 
+
+            if (data.link === 'empty') {
+                // Tampilan saat project masih tahap building
                 modalLinkContainer.classList.remove('hidden');
+                modalLink.href = "javascript:void(0)";
+                modalLink.innerHTML = '<i class="fas fa-hammer"></i> Masih Tahap Building';
+                // Ubah style tombol jadi warna abu-abu (disabled)
+                modalLink.className = "inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-gray-400 font-bold cursor-not-allowed text-sm";
+            } else if (data.link && data.link !== '') {
+                // Tampilan saat project ada link-nya
+                modalLinkContainer.classList.remove('hidden');
+                modalLink.href = data.link;
+                modalLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Lihat Project';
+                // Balikkan style tombol ke warna gelap/terang normal
+                modalLink.className = "inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-700 dark:hover:bg-gray-200 transition text-sm";
             } else {
+                // Kalau link benar-benar kosong string '', sembunyikan tombol
                 modalLinkContainer.classList.add('hidden');
             }
 
@@ -752,6 +1020,83 @@ function openModal(projectId) {
                 })
                 .catch(err => console.log("Gagal ambil data GitHub:", err));
         }
-    </script>
+
+        const folderData = {
+            'gaming': {
+                title: 'Games',
+                subtitle: '', // Kosongkan kalau tidak perlu
+                items: [
+                    // GANTI 'src' DENGAN LOKASI GAMBAR LOGO GAME KAMU NANTI (misal: img/ml.png)
+                    { name: 'Mobile Legends', type: 'image', src: 'img/icon/ml.png', desc: 'Ayo mabar push rank!' },
+                    { name: 'Honkai: Star Rail', type: 'image', src: 'img/icon/hsr.png', desc: 'Gacha time!' },
+                    { name: 'Genshin Impact', type: 'image', src: 'img/icon/genshin.png', desc: 'Eksplorasi Teyvat' },
+                    { name: 'Transport Fever 2', type: 'image', src: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1066780/capsule_616x353.jpg', desc: 'Lagi sibuk bangun rute kereta' }
+                ]
+            },
+            'music': {
+                title: 'Playlists',
+                subtitle: "Let's connect & listen together! 🎧",
+                items: [
+                    // TAMBAHKAN LINK PROFIL KAMU DI SINI PADA PROPERTI 'url'
+                    { name: 'Spotify', type: 'icon', icon: 'fab fa-spotify', color: 'bg-[#1DB954] text-white', url: 'https://open.spotify.com/user/317iwrepjm3j4cm3dlkw7qo64vni?si=9EuvQfw6RPCbGlvMwgcDjw', desc: 'Buka profil Spotify Budi' },
+                    { name: 'Apple Music', type: 'icon', icon: 'fab fa-apple', color: 'bg-[#fc3c44] text-white', url: 'https://music.apple.com/profile/bieurs', desc: 'Buka profil Apple Music Budi' }
+                ]
+            }
+        };
+
+const iosFolder = document.getElementById('ios-folder');
+        const folderGrid = document.getElementById('folder-grid');
+        const folderTitle = document.getElementById('folder-title');
+        const folderSubtitle = document.getElementById('folder-subtitle');
+
+        function openFolder(folderId) {
+            const data = folderData[folderId];
+            if(!data) return;
+
+            folderTitle.innerText = data.title;
+            
+            // Logika Munculin Subtitle ("Let's connect")
+            if (data.subtitle && data.subtitle !== '') {
+                folderSubtitle.innerText = data.subtitle;
+                folderSubtitle.classList.remove('hidden');
+            } else {
+                folderSubtitle.classList.add('hidden');
+            }
+
+            folderGrid.innerHTML = ''; 
+
+            data.items.forEach((item, index) => {
+                const delay = index * 0.1; 
+                let iconContent = '';
+
+                // Logika pemisah Gambar Game Asli vs FontAwesome Icon
+                if (item.type === 'image') {
+                    iconContent = `<img src="${item.src}" alt="${item.name}" class="w-full h-full object-cover rounded-[1.2rem] shadow-sm">`;
+                } else {
+                    iconContent = `<div class="w-full h-full rounded-[1.2rem] flex items-center justify-center text-4xl shadow-sm ${item.color}"><i class="${item.icon}"></i></div>`;
+                }
+                
+                // LOGIKA KLIK: Kalau ada URL, buka tab baru. Kalau tidak ada, munculin alert.
+                const clickAction = item.url ? `window.open('${item.url}', '_blank')` : `alert('${item.desc}')`;
+
+                // HTML Template untuk setiap App Icon
+                const html = `
+                    <div class="folder-icon-item flex flex-col items-center text-center gap-2 group cursor-pointer" style="animation-delay: ${delay}s" onclick="${clickAction}">
+                        <div class="w-[68px] h-[68px] group-hover:scale-105 transition duration-300">
+                            ${iconContent}
+                        </div>
+                        <span class="text-[11px] font-semibold text-slate-800 dark:text-gray-200 line-clamp-2 leading-tight">${item.name}</span>
+                    </div>
+                `;
+                folderGrid.innerHTML += html;
+            });
+
+            iosFolder.classList.add('folder-active');
+        }
+
+        function closeFolder() {
+            iosFolder.classList.remove('folder-active');
+        }
+        </script>
 </body>
 </html>
