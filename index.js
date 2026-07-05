@@ -159,7 +159,7 @@
                 title: 'TrackerThings', 
                 desc: 'Aplikasi manajemen akademik khusus mahasiswa. Membantu mengatur jadwal kuliah, mengingatkan deadline tugas, dan mencatat nilai ujian.', 
                 tags: ['PHP Native', 'MySQL', 'Responsive UI', 'JavaScript'], 
-                img: '/img/project-tracker.png',
+                img: 'img/project-tracker.png',
                 link: 'empty'
             }, 
             'kotakita': { 
