@@ -1,673 +1,1921 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
-    <meta name="description" content="Portofolio Budi (Nara) - Fullstack Web Developer & UI/UX Designer.">
-    <meta name="author" content="Budi Nara">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <meta property="og:title" content="Budi Nara - Fullstack Developer Portfolio">
-    <meta property="og:description" content="Mahasiswa IT & Laravel Developer. Lihat project dan pengalaman saya di sini.">
-    <meta property="og:image" content="https://i.imgur.com/link_gambar_preview_website_kamu.png"> 
-    <meta property="og:url" content="https://trackerthings.rf.gd/portfolio">
-        
-    <title>Portofolio Budi (Nara)</title>
-    
-    <link rel="icon" href="https://api.dicebear.com/9.x/notionists/svg?seed=Nara&backgroundColor=e5e7eb" type="image/svg+xml">
-    
+    <meta name="description" content="Portofolio Budi Nur Rahman (Nara) - Fullstack Web Developer & UI/UX Designer.">
+    <meta name="author" content="Budi Nur Rahman">
+
+    <meta property="og:title" content="Budi Nur Rahman — Interactive Comic Portfolio">
+    <meta property="og:description"
+        content="Mahasiswa Informatika & Fullstack Developer. Lihat project dan pengalaman saya di sini.">
+    <meta property="og:image" content="img/aku.jpeg">
+    <meta property="og:url" content="https://riuusix.github.io/portofolio">
+
+    <title>Budi Nur Rahman — Interactive Comic Portfolio</title>
+
+    <link rel="icon" href="https://api.dicebear.com/9.x/notionists/svg?seed=Nara&backgroundColor=f2f0ea"
+        type="image/svg+xml">
+
+    <!-- Prevent dark-mode flash by reading saved preference before paint -->
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) { }
+        })();
+    </script>
+
+    <!-- DOODLEVERSE Typography: Anton (Editorial Comic), Bricolage Grotesque (Display), DM Sans (Body), Caveat (Sketch), Bangers (SFX) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Bricolage+Grotesque:wght@600;700;800&family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        display: ['"Bricolage Grotesque"', '"Space Grotesk"', 'sans-serif'],
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        accent: ['"Caveat"', 'cursive'],
+                    },
                     colors: {
-                        dark: { bg: '#0a0a0a', card: 'rgba(20, 20, 20, 0.6)', text: '#f5f5f7' }
+                        paper: '#FFFFFF',
+                        warm: '#F2F0EA',
+                        ink: '#171717',
+                        softink: '#333333',
+                        mutedink: '#777777',
+                        sketch: '#D9D9D9',
                     },
                     animation: {
-                        'scroll': 'scroll 20s linear infinite',
-                        'iridescent': 'iridescent 3s linear infinite',
+                        'scroll': 'scroll 22s linear infinite',
                     },
                     keyframes: {
                         scroll: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
-                        },
-                        iridescent: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                            '100%': { backgroundPosition: '0% 50%' },
                         }
                     },
                     screens: {
-                        'xs': '375px', 
+                        'xs': '375px',
                     }
                 }
             }
         }
     </script>
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <style>
-                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --toggle-bg: rgba(0, 0, 0, 0.05);
-            --thumb-bg: rgba(255, 255, 255, 0.8);
-            --thumb-shadow: 0 2px 5px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.8);
-        }
-
-        html.dark :root {
-            --toggle-bg: rgba(255, 255, 255, 0.15);
-            --thumb-bg: rgba(255, 255, 255, 0.2); 
-            --thumb-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-            transition: background-color 0.5s ease, color 0.5s ease;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent; 
-        }
-
-        html.dark body { background-color: #0a0a0a; color: #f5f5f7; }
-
-        /* Liquid Switch */
-        .switch-wrapper { display: flex; gap: 8px; align-items: center; }
-        
-        .switch-container { 
-            position: relative; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            width: 74px; 
-            height: 38px; 
-            background: var(--toggle-bg); 
-            border-radius: 99px; 
-            padding: 4px; 
-            cursor: pointer; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); 
-        }
-
-        .switch-label { 
-            font-size: 10px; 
-            font-weight: 700; 
-            z-index: 2; 
-            flex: 1; 
-            text-align: center; 
-            pointer-events: none; 
-            transition: opacity 0.3s; 
-            opacity: 0.5; 
-        }
-        .switch-label.active-label { opacity: 1; }
-        
-        .switch-thumb { 
-            position: absolute; 
-            left: 4px; 
-            top: 4px; 
-            width: 30px; 
-            height: 30px; 
-            background: var(--thumb-bg); 
-            border-radius: 50%; 
-            z-index: 1; 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: var(--thumb-shadow);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s ease, border-radius 0.3s ease, background 0.3s ease; 
-        }
-        
-        .switch-thumb::after { 
-            content: ''; 
-            position: absolute; 
-            top: 3px; left: 6px; right: 6px; height: 12px; 
-            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%); 
-            border-radius: 20px; 
-            opacity: 0.7; 
-        }
-
-        .switch-container:active .switch-thumb { 
-            width: 45px; 
-            border-radius: 20px; 
-            background: linear-gradient(135deg, rgba(255,182,255,0.4), rgba(173,216,230,0.4), rgba(144,238,144,0.4), rgba(255,255,224,0.4));
-            background-size: 200% 200%;
-            animation: iridescent 2s linear infinite;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.6), inset 0 2px 10px rgba(255,255,255,0.8), inset 0 -2px 10px rgba(0,0,0,0.05); 
-        }
-
-        .switch-container.active .switch-thumb { transform: translateX(36px); }
-        .switch-container.active:active .switch-thumb { transform: translateX(26px); }
-
-        /* Animations */
-        .marquee-container { mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-        
-        .music-bar { width: 3px; background-color: #ec4899; border-radius: 99px; animation: equalizer 1s infinite ease-in-out; }
-        .music-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
-        .music-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
-        .music-bar:nth-child(3) { height: 8px; animation-delay: 0.5s; }
-        .music-bar:nth-child(4) { height: 14px; animation-delay: 0.2s; }
-        @keyframes equalizer { 0%, 100% { height: 6px; } 50% { height: 100%; } }
-
-        .blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.8; animation: move 10s infinite alternate; }
-        .blob-1 { top: 5%; left: 5%; width: 300px; height: 300px; background: #d8b4fe; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-        .blob-2 { bottom: 10%; right: 0%; width: 300px; height: 300px; background: #93c5fd; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation-duration: 15s; }
-        .blob-3 { top: 40%; left: 30%; width: 250px; height: 250px; background: #f9a8d4; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation-duration: 12s; }
-        @keyframes move { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(30px, 40px) rotate(10deg); } }
-
-        .glass-card { background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05); transition: background 0.5s ease, border 0.5s ease; }
-        html.dark .glass-card { background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
-        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.9); transition: background 0.5s ease; }
-        html.dark .glass-nav { background: rgba(20, 20, 20, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-        .text-gradient { background: linear-gradient(to right, #4f46e5, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        #project-modal { transition: opacity 0.3s ease; }
-        #project-modal.hidden { opacity: 0; pointer-events: none; }
-        #project-modal:not(.hidden) { opacity: 1; pointer-events: auto; }
-        
-        html.dark input, html.dark textarea { background-color: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); color: #fff; }
-        html.dark input::placeholder { color: #888; }
-
-        .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
-        
-        /* Mobile Menu Animation */
-        #mobile-menu {
-            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-origin: top;
-        }
-        #mobile-menu.menu-closed {
-            opacity: 0;
-            transform: scale(0.95) translateY(-20px);
-            pointer-events: none;
-        }
-        #mobile-menu.menu-open {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: auto;
-        }
-        /* =========================================
-        APPLE SMOOTH MODAL ANIMATION (60Hz VIBE)
-        ========================================= */
-        #project-modal {
-            visibility: hidden; /* Ini yang menghilangkan bayangan/ghosting total */
-            opacity: 0;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
-            will-change: opacity, visibility;
-        }
-
-        #project-modal #modal-card {
-            transform: scale(0.92) translateY(15px);
-            opacity: 0;
-            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-            will-change: transform, opacity;
-        }
-
-        /* KETIKA MODAL AKTIF / TERBUKA */
-        #project-modal.modal-visible {
-            visibility: visible;
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        #project-modal.modal-visible #modal-card {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        /* =========================================
-        FADE SCROLL MASK (Biar ujungnya gak kepotong tajam)
-        ========================================= */
-        .fade-scroll {
-            -webkit-mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
-            mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
-        }
-
-        /* =========================================
-        IOS FOLDER ANIMATION & STAGGERED ICONS
-        ========================================= */
-        #ios-folder {
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.4s ease, visibility 0.4s;
-            will-change: opacity, visibility;
-        }
-
-        #ios-folder.folder-active {
-            visibility: visible;
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        #folder-content {
-            transform: scale(0.6);
-            opacity: 0;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-            will-change: transform, opacity;
-        }
-
-        #ios-folder.folder-active #folder-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        /* Animasi Muncul Satu-Satu untuk Icon */
-        @keyframes popInIcon {
-            0% { transform: scale(0.5) translateY(20px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-
-        .folder-icon-item {
-            opacity: 0; /* Default hilang */
-            animation: popInIcon 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/doodleverse.css">
 </head>
-<body class="antialiased min-h-[100dvh] relative selection:bg-pink-300 selection:text-white dark:text-gray-200 pb-20 md:pb-0">
 
-    <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-    <div class="noise-overlay"></div>
+<body class="min-h-[100dvh] relative pb-24 md:pb-0">
 
-    <div class="fixed bottom-6 left-4 z-50 glass-card px-3 py-2 md:px-4 md:py-3 rounded-full flex items-center gap-3 animate-bounce shadow-2xl border border-white/40 dark:border-white/10 scale-90 md:scale-100 origin-bottom-left" style="animation-duration: 3s;">
-        <div class="w-8 h-8 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900">
-            <i class="fas fa-music text-xs"></i>
+    <!-- Top Ink Scroll Progress Bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Ephemeral Comic SFX Overlay Layer (BOOM! / BAM! / POW! / YAY! / CLICK!) -->
+    <div id="sfx-layer" aria-hidden="true"></div>
+
+    <!-- Floating Now Playing Sticker (Preserved & Monochrome-Restyled) -->
+    <div class="fixed bottom-5 left-4 z-40 comic-panel px-3 py-2 md:px-4 md:py-2.5 rounded-xl flex items-center gap-3 scale-90 md:scale-100 origin-bottom-left"
+        aria-label="Now Playing: Silly Dance by NCT WISH">
+        <div class="w-8 h-8 rounded-lg bg-[var(--ink)] text-[var(--paper)] flex items-center justify-center shrink-0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13" />
+                <circle cx="6" cy="18" r="3" />
+                <circle cx="18" cy="16" r="3" />
+            </svg>
         </div>
-        <div class="flex flex-col">
-            <span class="text-[8px] md:text-[9px] uppercase font-bold text-slate-400 tracking-wider">Now Playing</span>
-            <span class="text-[10px] md:text-xs font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                Silly Dance - NCT WISH
-                <div class="flex items-end h-3 gap-[2px]">
-                    <div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div>
-                </div>
+        <div class="flex flex-col leading-tight">
+            <span class="font-display text-[9px] uppercase font-bold tracking-widest text-[var(--muted-ink)]">Now
+                Playing</span>
+            <span class="text-[11px] md:text-xs font-bold text-[var(--ink)] flex items-center gap-2">
+                Silly Dance — NCT WISH
+                <span class="flex items-end h-3.5 gap-[2px]" aria-hidden="true">
+                    <span class="music-bar"></span><span class="music-bar"></span><span class="music-bar"></span><span
+                        class="music-bar"></span>
+                </span>
             </span>
         </div>
     </div>
 
-    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-4 z-50 p-3 md:p-4 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white shadow-lg hover:bg-slate-700 dark:hover:bg-gray-200 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none scale-90 md:scale-100 origin-bottom-right">
-        <i class="fas fa-arrow-up"></i>
+    <!-- Back to Top Ink Button -->
+    <button type="button" id="back-to-top" aria-label="Kembali ke atas" data-aria-key="aria_back_to_top"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="fixed bottom-5 right-4 z-40 ink-btn ink-btn-primary w-11 h-11 md:w-12 md:h-12 rounded-xl opacity-0 translate-y-10 pointer-events-none transition-all duration-300">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5" />
+            <path d="M5 12l7-7 7 7" />
+        </svg>
     </button>
 
-    <nav class="fixed top-0 left-0 w-full z-50 px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))] transition-all duration-300">
-        <div class="max-w-6xl mx-auto glass-nav rounded-full px-4 md:px-6 py-3 flex justify-between items-center shadow-sm relative z-50">
-            <span class="font-bold text-lg md:text-xl tracking-wider text-slate-800 dark:text-white">NARA.</span>
-            
-            <div class="flex items-center gap-4">
-                <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-600 dark:text-gray-300 items-center mr-2">
-                    <a href="#home" class="hover:text-pink-500 transition" data-key="nav_home">Home</a>
-                    <a href="#about" class="hover:text-pink-500 transition" data-key="nav_about">Tentang</a>
-                    <a href="#projects" class="hover:text-pink-500 transition" data-key="nav_projects">Project</a>
-                    <a href="#contact" class="hover:text-pink-500 transition" data-key="nav_contact">Kontak</a>
-                    <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+    <!-- DOODLEVERSE NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
+        <nav aria-label="Main navigation"
+            class="max-w-6xl mx-auto comic-nav px-4 md:px-6 py-2.5 flex justify-between items-center relative z-50">
+            <a href="#home" class="flex items-center gap-2.5 group focus-visible:outline-none">
+                <span
+                    class="w-8 h-8 rounded-lg bg-[var(--ink)] text-[var(--paper)] font-display font-extrabold text-sm flex items-center justify-center border-2 border-[var(--border-ink)] group-hover:-rotate-6 transition-transform">N</span>
+                <span class="font-display font-extrabold text-lg md:text-xl tracking-tight text-[var(--ink)]">NARA<span
+                        class="font-accent text-2xl leading-none">.</span></span>
+            </a>
+
+            <div class="flex items-center gap-3 md:gap-5">
+                <div class="hidden md:flex items-center gap-6 text-sm mr-1">
+                    <a href="#home" class="nav-link is-active" data-nav-section="home" data-key="nav_home">Home</a>
+                    <a href="#about" class="nav-link" data-nav-section="about" data-key="nav_about">Tentang</a>
+                    <a href="#projects" class="nav-link" data-nav-section="projects" data-key="nav_projects">Project</a>
+                    <a href="#contact" class="nav-link" data-nav-section="contact" data-key="nav_contact">Kontak</a>
+                    <div class="h-5 w-[2px] bg-[var(--sketch-line)]" aria-hidden="true"></div>
                 </div>
 
-                <div class="switch-wrapper scale-90 md:scale-100">
-                    <div class="switch-container" id="themeToggle" onclick="toggleTheme()">
-                        <div class="switch-thumb"></div><span class="switch-label text-orange-500">☀️</span><span class="switch-label text-blue-300">🌙</span>
-                    </div>
-                    <div class="switch-container" id="langToggle" onclick="toggleLanguage()">
-                        <div class="switch-thumb"></div><span class="switch-label text-slate-600">ID</span><span class="switch-label text-slate-600">EN</span>
-                    </div>
+                <!-- Accessible Monochrome Comic Switches -->
+                <div class="flex items-center gap-2 scale-90 sm:scale-100 origin-right">
+                    <button type="button" class="comic-switch" id="themeToggle" aria-label="Toggle dark mode"
+                        aria-pressed="false" onclick="toggleTheme()">
+                        <span class="comic-switch-thumb" aria-hidden="true"></span>
+                        <span class="comic-switch-label" aria-hidden="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4" />
+                                <path
+                                    d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                            </svg>
+                        </span>
+                        <span class="comic-switch-label" aria-hidden="true">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                            </svg>
+                        </span>
+                    </button>
+
+                    <button type="button" class="comic-switch" id="langToggle"
+                        aria-label="Switch language between Indonesian and English" aria-pressed="false"
+                        onclick="toggleLanguage()">
+                        <span class="comic-switch-thumb" aria-hidden="true"></span>
+                        <span class="comic-switch-label" aria-hidden="true">ID</span>
+                        <span class="comic-switch-label" aria-hidden="true">EN</span>
+                    </button>
+
+                    <!-- Optional Subtle Comic UI Sound Toggle (Muted by Default) -->
+                    <button type="button" class="sound-toggle-btn" id="sound-toggle-btn"
+                        aria-label="Toggle subtle comic UI sound effects" aria-pressed="false"
+                        onclick="toggleComicSound()" title="Comic SFX Audio (Muted by default)">
+                        <i class="fas fa-volume-mute text-xs sound-icon-off" aria-hidden="true"></i>
+                        <i class="fas fa-volume-up text-xs sound-icon-on hidden" aria-hidden="true"></i>
+                    </button>
                 </div>
 
-                <div class="md:hidden flex items-center ml-2">
-                    <div class="text-slate-600 dark:text-white cursor-pointer p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition" id="mobile-menu-btn"><i class="fas fa-bars text-lg"></i></div>
-                </div>
+                <!-- Accessible Mobile Menu Trigger -->
+                <button type="button" id="mobile-menu-btn" aria-label="Buka menu navigasi" aria-expanded="false"
+                    aria-controls="mobile-menu" class="md:hidden ink-btn ink-btn-secondary w-10 h-10 rounded-xl">
+                    <svg id="mobile-menu-icon-open" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                        <path d="M4 7h16M4 12h16M4 17h12" />
+                    </svg>
+                    <svg id="mobile-menu-icon-close" class="hidden" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                        <path d="M6 6l12 12M18 6l-12 12" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Playful Comic-Panel Mobile Drawer -->
+        <div id="mobile-menu"
+            class="hidden absolute top-[76px] left-4 right-4 max-w-6xl mx-auto comic-panel p-5 flex-col space-y-2 md:hidden z-40 menu-closed">
+            <p class="font-accent text-lg text-[var(--muted-ink)] px-2 pb-1 border-b border-dashed border-[var(--sketch-line)]"
+                data-key="nav_drawer_note">Mau lompat ke panel mana?</p>
+            <a href="#home"
+                class="block px-3 py-2.5 rounded-lg font-display font-bold text-[var(--ink)] hover:bg-[var(--warm-paper)] transition"
+                data-key="nav_home" onclick="toggleMenu()">Home</a>
+            <a href="#about"
+                class="block px-3 py-2.5 rounded-lg font-display font-bold text-[var(--ink)] hover:bg-[var(--warm-paper)] transition"
+                data-key="nav_about" onclick="toggleMenu()">Tentang</a>
+            <a href="#projects"
+                class="block px-3 py-2.5 rounded-lg font-display font-bold text-[var(--ink)] hover:bg-[var(--warm-paper)] transition"
+                data-key="nav_projects" onclick="toggleMenu()">Project</a>
+            <a href="#contact"
+                class="block px-3 py-2.5 rounded-lg font-display font-bold text-[var(--ink)] hover:bg-[var(--warm-paper)] transition"
+                data-key="nav_contact" onclick="toggleMenu()">Kontak</a>
+        </div>
+    </header>
+
+    <!-- PHASE 9: STEP 1 LOADING SCREEN + STEP 2 SHORT INTRO-ONLY 8-PANEL RUSH-UP COMIC WALL -->
+    <noscript><style>#p9-loader,#p9-wall-overlay,#p9-wall-spacer,#p9-skip-btn{display:none!important}</style></noscript>
+
+    <!-- STEP 1: DEDICATED MONOCHROME COMIC LOADING SCREEN (No Fake %, Replays on Every Full Refresh) -->
+    <div id="p9-loader" class="p9-loader" role="status" aria-live="polite" aria-label="Preparing portfolio">
+        <div class="p9-loader-card">
+            <span class="p9-tag">PREPARING PORTFOLIO</span>
+            <svg viewBox="0 0 140 140" width="108" height="108" class="text-[var(--ink)]" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M32 132C34 106 48 96 70 96C92 96 106 106 108 132" fill="var(--warm-paper)" stroke="currentColor" stroke-width="3.2"/>
+                <path d="M63 123l-4 3 4 3M77 123l4 3-4 3M72 121l-4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <g class="avatar-arm-wave">
+                    <path d="M107 104C116 96 122 86 121 76C120 71 115 71 113 76L111 81C112 74 108 70 105 74C103 77 102 84 101 89C98 86 94 89 96 94C98 99 102 103 107 104Z" fill="var(--surface)" stroke="currentColor" stroke-width="2.8"/>
+                </g>
+                <rect x="40" y="34" width="60" height="62" rx="28" fill="var(--surface)" stroke="currentColor" stroke-width="3.2"/>
+                <path d="M38 56C36 36 48 22 70 22C92 22 104 36 102 56C97 46 89 42 81 45C76 37 64 36 56 44C49 41 42 47 38 56Z" fill="currentColor"/>
+                <path d="M68 23C66 13 75 10 81 16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <g stroke="currentColor" stroke-width="2.8" fill="var(--surface)"><circle cx="56" cy="66" r="11"/><circle cx="84" cy="66" r="11"/><path d="M67 66h6"/></g>
+                <circle cx="56" cy="66" r="3.4" fill="currentColor"/><circle cx="84" cy="66" r="3.4" fill="currentColor"/>
+                <path d="M61 81C65 87 75 87 79 81" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <div class="font-editorial text-3xl leading-none text-[var(--ink)]">BUDI NUR RAHMAN</div>
+                <div class="font-accent text-2xl text-[var(--muted-ink)] mt-0.5" data-key="cb_p2_nick">&ldquo;Panggil saja Nara.&rdquo;</div>
+            </div>
+            <div class="p9-loader-track" aria-hidden="true"><div class="p9-loader-sweep"></div></div>
+            <div class="text-[11px] font-display font-extrabold uppercase tracking-widest text-[var(--muted-ink)]">LOADING ASSETS &amp; FONTS...</div>
+        </div>
+    </div>
+
+    <button type="button" id="p9-skip-btn" class="p9-skip-btn" aria-label="Skip intro to Hero">
+        SKIP INTRO &darr;
+    </button>
+
+    <!-- STEP 2: SHORT SCROLL-DRIVEN 8-PANEL COMIC WALL (Rushes Upward to Reveal Hero Underneath) -->
+    <div id="p9-wall-spacer" class="p9-wall-spacer" aria-hidden="true"></div>
+
+    <div id="p9-wall-overlay" class="p9-wall-overlay" aria-label="Comic Parallax Intro">
+        <!-- Background Sheet (Slowest: 0.82x) -->
+        <div class="p9-wall-bg" data-rush="0.82"></div>
+
+        <!-- Panel 1: Wide Desk Scene (1.15x) -->
+        <div class="p9-panel p9-desk p9-panel-halftone" data-rush="1.15" data-rot="-2">
+            <span class="p9-tag absolute top-2.5 left-2.5 z-[3]">JAKARTA &middot; DESK</span>
+            <svg viewBox="0 0 420 260" class="w-full h-full text-[var(--ink)]" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="22" y="42" width="96" height="92" fill="#111111"/>
+                <path d="M70 42 v92 M22 88 h96" stroke="#FFFFFF" stroke-width="2"/>
+                <circle cx="48" cy="64" r="2.2" fill="#FFFFFF"/><circle cx="94" cy="60" r="2" fill="#FFFFFF"/>
+                <rect x="0" y="182" width="420" height="78" fill="var(--surface)" stroke="currentColor" stroke-width="3.5"/>
+                <g transform="translate(56, 148)"><path d="M4 10 H26 V28 C26 31 23 33 19 33 H11 C7 33 4 31 4 28 Z" fill="var(--warm-paper)" stroke="currentColor" stroke-width="2.6"/><path d="M26 15 H31 C34 15 34 24 31 24 H26" stroke="currentColor" stroke-width="2.4"/></g>
+                <g transform="translate(152, 146)"><rect x="4" y="4" width="94" height="36" rx="2" fill="var(--ink)"/><path d="M42 18 l-5 4 5 4 M58 18 l5 4 -5 4 M52 16 l-3 12" stroke="var(--paper)" stroke-width="2.2" stroke-linecap="round"/><path d="M0 40 H102 L96 46 H6 Z" fill="var(--warm-paper)" stroke="currentColor" stroke-width="2.6"/></g>
+                <g transform="translate(292, 158)"><rect x="0" y="6" width="60" height="24" fill="var(--warm-paper)" stroke="currentColor" stroke-width="2.6"/><path d="M12 6 v24 M22 14 h26 M22 20 h18" stroke="currentColor" stroke-width="2"/></g>
+            </svg>
+        </div>
+
+        <!-- Panel 2: Full Name Panel (1.38x) -->
+        <div class="p9-panel p9-name" data-rush="1.38" data-rot="2.5">
+            <span class="p9-tag self-start mb-2">FULL NAME</span>
+            <div class="font-editorial text-3xl sm:text-5xl leading-[0.93] text-[var(--ink)]">BUDI NUR<br>RAHMAN</div>
+        </div>
+
+        <!-- Panel 3: Dramatic Eyes Close-Up (1.55x) -->
+        <div class="p9-panel p9-closeup p9-panel-halftone" data-rush="1.55" data-rot="-3">
+            <svg viewBox="0 0 220 180" class="w-full h-full text-[var(--ink)]" fill="none" aria-hidden="true">
+                <rect x="24" y="28" width="172" height="122" rx="38" fill="var(--surface)" stroke="currentColor" stroke-width="4"/>
+                <path d="M22 62 C30 22 68 10 110 10 C152 10 190 22 198 62 C178 44 152 38 130 46 C116 32 96 32 82 46 C62 38 40 44 22 62 Z" fill="currentColor"/>
+                <g stroke="currentColor" stroke-width="4.2" fill="var(--surface)"><circle cx="78" cy="94" r="24"/><circle cx="142" cy="94" r="24"/><path d="M102 94 h16"/></g>
+                <circle cx="80" cy="94" r="7" fill="currentColor"/><circle cx="144" cy="94" r="7" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <!-- Panel 4: Separate Nickname Overlapping Panel (Foreground Fast: 1.85x) -->
+        <div class="p9-panel p9-nick" data-rush="1.85" data-rot="-2">
+            <span class="font-accent text-2xl sm:text-3xl text-[var(--ink)]" data-key="cb_p2_nick">&ldquo;Panggil saja Nara.&rdquo;</span>
+            <span class="font-sfx text-xl bg-[var(--ink)] text-[var(--paper)] px-2 py-0.5" aria-hidden="true">YO!</span>
+        </div>
+
+        <!-- Panel 5: Noir Laptop Code Panel (1.48x) -->
+        <div class="p9-panel p9-panel-dark p9-laptop" data-rush="1.48" data-rot="2">
+            <div class="flex items-center justify-between">
+                <span class="font-editorial text-[11px] tracking-widest text-[#FFFFFF]">CODE // TERMINAL</span>
+                <span class="font-sfx text-base text-[#FFFFFF]" aria-hidden="true">CLACK!</span>
+            </div>
+            <div class="font-mono text-[11px] text-[#E5E5E5] leading-relaxed">
+                <div>&gt; Next.js + Laravel + Supabase</div>
+                <div>&gt; UI/UX &amp; Backend Systems</div>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden absolute top-24 left-4 right-4 glass-card rounded-2xl p-6 flex-col space-y-4 shadow-xl md:hidden z-40 menu-closed">
-            <a href="#home" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_home" onclick="toggleMenu()">Home</a>
-            <a href="#about" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_about" onclick="toggleMenu()">Tentang</a>
-            <a href="#projects" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_projects" onclick="toggleMenu()">Project</a>
-            <a href="#contact" class="block text-slate-600 dark:text-gray-200 font-medium" data-key="nav_contact" onclick="toggleMenu()">Kontak</a>
+        <!-- Panel 6: Sketchbook Wireframe (1.25x, Desktop only) -->
+        <div class="p9-panel p9-sketch p9-panel-hatch" data-rush="1.25" data-rot="-3">
+            <div class="bg-[var(--surface)] border-[2.5px] border-[var(--border-ink)] p-2.5 w-full h-full flex flex-col justify-between">
+                <span class="font-editorial text-[11px] tracking-wider">SKETCHBOOK</span>
+                <svg viewBox="0 0 180 90" class="w-full text-[var(--ink)]" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                    <rect x="6" y="6" width="70" height="78" fill="var(--warm-paper)"/><path d="M16 24 h44 M16 38 h50 M16 52 h36"/>
+                    <rect x="92" y="6" width="82" height="78" fill="var(--surface)"/><rect x="102" y="16" width="62" height="24" fill="currentColor"/><rect x="102" y="48" width="62" height="26" fill="var(--warm-paper)"/>
+                </svg>
+            </div>
         </div>
-    </nav>
 
-    <main class="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
-        <section id="home" class="min-h-[100dvh] flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-10 pt-24 md:pt-0">
-            <div class="flex-1 text-center md:text-left space-y-4 md:space-y-5">
-                <div class="inline-block px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/60 dark:bg-white/10 border border-white dark:border-white/20 text-xs md:text-sm text-slate-600 dark:text-gray-300 font-medium shadow-sm">
-                    <span id="greeting-badge">👋 Halo, selamat datang!</span>
-                </div>
-                <h1 class="text-4xl xs:text-5xl md:text-7xl font-bold leading-tight text-slate-800 dark:text-white">
-                    <span data-key="hero_iam">Aku</span> <span class="text-gradient">Budi Nur Rahman.</span>
-                </h1>
-                <h2 class="text-base xs:text-lg md:text-2xl text-slate-500 dark:text-gray-400 font-light">
-                    <span data-key="hero_callme">Atau panggil aja</span> <span class="font-semibold text-slate-800 dark:text-white border-b-2 border-pink-400">Nara</span>.
-                </h2>
-                <p class="text-slate-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 leading-relaxed text-sm md:text-lg min-h-[60px] md:min-h-[80px]">
-                    <span data-key="hero_desc">Mahasiswa IT yang mengubah kopi menjadi kode.</span><br>
-                    <span data-key="hero_focus">Fokus di:</span> <span id="typing-text" class="font-bold text-pink-500 border-r-2 border-pink-500 pr-1"></span>
-                </p>
-                <div class="flex flex-wrap gap-3 justify-center md:justify-start pt-2">
-                    <a href="#projects" class="px-6 py-2.5 rounded-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-semibold text-sm md:text-base hover:bg-slate-700 transition shadow-lg" data-key="btn_projects">Lihat Karyaku</a>
-                    <a href="pdf/CV_Budi Nur Rahman.pdf" target="_blank" class="px-6 py-2.5 rounded-full border-2 border-slate-300 dark:border-gray-600 text-slate-600 dark:text-gray-300 font-semibold text-sm md:text-base hover:border-slate-800 dark:hover:border-white transition flex items-center gap-2"><i class="fas fa-download"></i> <span data-key="btn_cv">Download CV</span></a>
+        <!-- Panel 7: Foreground Waving Nara Mascot (Fastest Foreground: 2.05x + scale) -->
+        <div class="p9-panel p9-panel-dark p9-mascot-fg" data-rush="2.05" data-rot="1.5" data-scale="0.08">
+            <span class="p9-tag absolute top-2.5 left-2.5 !bg-[#FFFFFF] !text-[#111111]">SCROLL TO ENTER &darr;</span>
+            <svg viewBox="0 0 240 210" class="w-[210px] max-w-full block" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M54 206 C58 156 80 140 120 140 C160 140 182 156 186 206 Z" fill="#F2F0EA" stroke="#FFFFFF" stroke-width="4"/>
+                <path d="M108 178 l-6 5 6 5 M132 178 l6 5 -6 5 M123 175 l-5 14" stroke="#111111" stroke-width="2.6" stroke-linecap="round"/>
+                <g class="avatar-arm-wave">
+                    <path d="M182 158 C202 142 214 122 212 104 C210 95 201 95 198 104 L194 114 C196 101 189 94 184 101 C180 107 178 120 176 129 C170 124 164 129 167 138 C170 147 176 153 182 158 Z" fill="#FFFFFF" stroke="#111111" stroke-width="3.4"/>
+                </g>
+                <rect x="74" y="44" width="92" height="96" rx="44" fill="#FFFFFF" stroke="#111111" stroke-width="4"/>
+                <path d="M71 80 C68 48 88 26 120 26 C152 26 172 48 169 80 C161 64 149 58 137 62 C128 50 110 48 98 60 C88 56 78 65 71 80 Z" fill="#111111" stroke="#FFFFFF" stroke-width="2"/>
+                <path d="M117 28 C115 12 128 8 136 17" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                <g stroke="#111111" stroke-width="3.6" fill="#FFFFFF"><circle cx="100" cy="94" r="16"/><circle cx="140" cy="94" r="16"/><path d="M116 94 h8"/></g>
+                <circle cx="100" cy="94" r="5" fill="#111111"/><circle cx="140" cy="94" r="5" fill="#111111"/>
+                <path d="M107 117 C113 125 127 125 133 117" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Panel 8: Verified Projects Teaser (1.65x, Desktop only) -->
+        <div class="p9-panel p9-stack p9-panel-halftone" data-rush="1.65" data-rot="-2">
+            <span class="p9-tag self-start">PRODUCTION &amp; LABS</span>
+            <div class="font-editorial text-xl leading-tight text-[var(--ink)]">CATURNAWA 2026 &middot; TRACKERTHINGS &middot; INSIGHTPLUS</div>
+            <span class="font-accent text-lg text-[var(--muted-ink)]">Fullstack Web &amp; UI/UX &rarr;</span>
+        </div>
+
+        <div id="p9-scroll-cue" class="p9-scroll-cue">SCROLL TO LAUNCH INTO HERO &darr;</div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
+        <!-- HERO — MEET THE DEVELOPER! (Asymmetric Editorial Comic Spread) -->
+        <section id="home" class="relative min-h-[100dvh] flex flex-col justify-center pt-28 pb-14 md:pt-24 md:pb-16">
+            <!-- Phase 4.2 Hybrid Pop-Art Editorial × Screentone Noir Hero Environment + Phase 6 Diagonal Parallax -->
+            <div class="env-backdrop hero-noir-env" aria-hidden="true">
+                <div class="hero-bg-halftone-left" data-parallax="0.10" data-parallax-x="-0.06"></div>
+                <div class="hero-bg-seam" data-parallax="0.16" data-parallax-x="0.08"></div>
+                <div class="hero-bg-noir-slash" data-parallax="0.18" data-parallax-x="0.09">
+                    <!-- Large Dramatic Impact Starburst Outline on Dark Noir Plane -->
+                    <svg class="hidden lg:block absolute right-[4%] top-[8%] w-[460px] h-[460px] text-white opacity-[0.12]" data-parallax="-0.12" data-parallax-scale="0.06" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                        <polygon points="100,6 118,48 164,22 148,66 194,76 158,108 184,152 138,144 128,192 98,158 64,188 64,142 18,150 42,108 8,74 56,66 44,20 84,46"/>
+                    </svg>
                 </div>
             </div>
-            <div class="flex-1 flex justify-center relative">
-                <div class="relative w-60 h-64 xs:w-72 xs:h-80 md:w-80 md:h-96 glass-card rounded-[2rem] p-3 transform rotate-3 hover:rotate-0 transition duration-500 shadow-2xl">
-                    <div class="w-full h-full rounded-[1.5rem] overflow-hidden bg-gray-100 relative">
-                        <img src="img/aku.jpeg" alt="Nara" class="object-cover w-full h-full" loading="lazy">
-                    </div>
-                    <div class="absolute -bottom-6 -right-4 glass-card px-4 py-2 rounded-xl shadow-lg animate-bounce duration-[3000ms] flex items-center gap-2">
-                        <span class="text-xl">🚀</span>
-                        <div class="text-left leading-tight">
-                            <p class="text-[9px] text-slate-400 dark:text-gray-400 font-bold uppercase">Status</p>
-                            <p class="font-bold text-slate-700 dark:text-white text-xs">Open to Work</p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+                <!-- Left Editorial Column (7 cols — Sharp Pop-Art Editorial Frame) -->
+                <div class="lg:col-span-7 text-left space-y-5 md:space-y-6 relative">
+                    <!-- Speech Bubble Greeting + Bold Editorial Caption Tag -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="speech-bubble speech-pop">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M18 11V6a2 2 0 0 0-4 0" />
+                                <path d="M14 10V4a2 2 0 0 0-4 0v6" />
+                                <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+                                <path
+                                    d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+                            </svg>
+                            <span id="greeting-badge" class="font-display font-bold text-xs md:text-sm">Halo, selamat
+                                datang!</span>
                         </div>
+                        <span class="comic-caption-box hero-pop" style="--pop-delay: 110ms;">JAKARTA &middot; FULLSTACK DEV</span>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="about" class="py-12 md:py-20 reveal">
-            <div class="glass-card rounded-3xl p-6 md:p-12">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-4" data-key="about_title">Tentang Aku</h3>
-                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed mb-6 text-sm md:text-base" data-key="about_p1">Halo! Aku Budi (bisa juga dipanggil Nara), seorang Fullstack Developer berusia 18 tahun yang berdomisili di Jakarta. Perjalanan kodingku sudah dimulai sejak bangku SMK jurusan Rekayasa Perangkat Lunak (RPL). Saat ini, aku sedang melanjutkan studi sebagai mahasiswa Informatika di Universitas Nasional, di mana aku terus mengeksplorasi teknologi baru dari UI/UX, Web Framework, hingga integrasi AI.</p>
-                        <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-sm md:text-base" data-key="about_p2">Bagiku, IT bukan cuma soal menulis baris kode, tapi tentang menciptakan solusi. Selain fokus pada <i>hardskill</i>, aku juga mengasah <i>softskill</i> melalui pengalaman aktif di OSIS dan memimpin tim developer saat magang di Icon Plus. Pengalaman ini mengajariku banyak hal tentang <b>Leadership</b>, komunikasi tim, dan manajemen proyek dari tahap ide hingga siap rilis..</p>
-                        
-                        <div class="mt-8">
-                            <h4 class="text-xs md:text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Tech Stack & Tools</h4>
-                            <div class="marquee-container w-full overflow-hidden relative">
-                                <div class="flex gap-6 md:gap-8 text-3xl md:text-4xl text-slate-600 dark:text-gray-300 animate-scroll whitespace-nowrap py-2 w-max">
-                                    <i class="fab fa-laravel text-red-600"></i> <i class="fab fa-php text-purple-600"></i> <i class="fab fa-js text-yellow-400"></i> <i class="fab fa-html5 text-orange-500"></i> <i class="fab fa-figma text-purple-400"></i> <i class="fab fa-css3-alt text-blue-500"></i> <i class="fas fa-database text-slate-500"></i> <i class="fab fa-git-alt text-red-500"></i>
-                                    <i class="fab fa-laravel text-red-600"></i> <i class="fab fa-php text-purple-600"></i> <i class="fab fa-js text-yellow-400"></i> <i class="fab fa-html5 text-orange-500"></i> <i class="fab fa-figma text-purple-400"></i> <i class="fab fa-css3-alt text-blue-500"></i> <i class="fas fa-database text-slate-500"></i> <i class="fab fa-git-alt text-red-500"></i>
-                                </div>
+                    <!-- Sharp Editorial Headline Panel (Pop-Art Comic Editorial) -->
+                    <div class="hero-editorial-plate hero-pop space-y-3" style="--pop-delay: 140ms;">
+                        <h1 class="text-[var(--ink)]">
+                            <span class="block font-display text-xl sm:text-2xl font-bold text-[var(--muted-ink)] tracking-tight mb-1"
+                                data-key="hero_iam">Halo! Aku</span>
+                            <span class="font-editorial block text-5xl xs:text-6xl md:text-7xl lg:text-[4.9rem] leading-[0.94] tracking-[0.01em] relative">
+                                Budi Nur Rahman
+                            </span>
+                        </h1>
+                        <h2 class="font-display font-semibold text-base md:text-xl text-[var(--soft-ink)] pt-1">
+                            <span data-key="hero_callme">— atau panggil saja</span>
+                            <span class="px-2.5 py-0.5 bg-[var(--ink)] text-[var(--paper)] font-extrabold">Nara</span>.
+                        </h2>
+                        <div class="pt-1">
+                            <div class="caption-strip text-xs sm:text-sm">
+                                <span class="uppercase tracking-widest opacity-75" data-key="hero_focus">Fokus di:</span>
+                                <span class="font-extrabold">
+                                    <span id="typing-text">Fullstack Developer</span><span
+                                        class="inline-block w-[3px] h-[1.05em] bg-[var(--paper)] align-[-0.15em] ml-1"
+                                        style="animation: inkBlink 0.9s steps(1) infinite;" aria-hidden="true"></span>
+                                </span>
                             </div>
                         </div>
-
-                        <div id="github-stats" class="mt-8 glass-card p-4 rounded-2xl flex gap-4 items-center justify-between hidden reveal hover:scale-[1.02] transition duration-300 border border-slate-200/50 dark:border-white/10">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-800 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 text-xl"><i class="fab fa-github"></i></div>
-                                <div>
-                                    <span id="gh-repos" class="block text-lg font-bold text-slate-800 dark:text-white">0</span>
-                                    <span class="text-[10px] md:text-xs text-slate-500 dark:text-gray-400 font-medium uppercase">Repos</span>
-                                </div>
-                            </div>
-                            <div class="w-px h-8 bg-slate-300 dark:bg-gray-700"></div>
-                            <div class="text-center">
-                                <span id="gh-followers" class="block text-lg font-bold text-slate-800 dark:text-white">0</span>
-                                <span class="text-[10px] md:text-xs text-slate-500 dark:text-gray-400 font-medium uppercase">Followers</span>
-                            </div>
-                            <a id="gh-link" href="#" target="_blank" class="text-[10px] md:text-xs bg-slate-800 dark:bg-white dark:text-slate-900 text-white px-4 py-2 rounded-full hover:bg-slate-700 transition font-bold">Follow</a>
-                        </div>
-                    </div>
-
-                    <div class="relative pl-6 md:pl-8 ml-2 md:ml-0 border-l-2 border-slate-200 dark:border-gray-700 space-y-8 md:space-y-10">
-                        <div class="relative group">
-                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
-                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">INVOFEST 2025</h4>
-                            <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded uppercase">Competition</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_1">Merancang KotaKita, solusi Smart City berbasis Mobile App. Fokus pada User Research & High-Fidelity Prototyping di Figma.</p>
-                        </div>
-                        
-                        <div class="relative group">
-                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-orange-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
-                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">Fullstack Dev @ Icon Plus</h4>
-                            <span class="text-[10px] text-orange-700 font-bold bg-orange-100 px-2 py-0.5 rounded uppercase">Internship</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_2">Membangun platform internal IT Support & Talent Mapping lintas supervisor (SPV) menggunakan Laravel 11. Berfungsi sebagai 'LinkedIn Perusahaan' untuk mengelola resource divisi, melacak penugasan Project Manager (PM), serta memetakan tanggung jawab support aplikasi setiap karyawan.</p>
-                        </div>
-                        
-                        <div class="relative group">
-                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-indigo-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
-                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">Building TrackerThings</h4>
-                            <span class="text-[10px] text-indigo-700 font-bold bg-indigo-100 px-2 py-0.5 rounded uppercase">Project</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_3">Inisiatif mengembangkan manajemen akademik mahasiswa. Implementasi PHP Native & MySQL untuk logika backend yang kompleks.</p>
-                        </div>
-
-                        <div class="relative group">
-                            <span class="absolute -left-[35px] md:-left-[41px] top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-violet-500 border-4 border-white dark:border-slate-800 shadow-sm"></span>
-                            <h4 class="font-bold text-base md:text-lg text-slate-800 dark:text-white">AI & Frontend Exploration</h4>
-                            <span class="text-[10px] text-violet-700 font-bold bg-violet-100 px-2 py-0.5 rounded uppercase">Self-Learning</span>
-                            <p class="text-sm text-slate-500 dark:text-gray-400 mt-1 md:mt-2 leading-relaxed" data-key="timeline_4">Mengeksplorasi integrasi Gemini AI via Python (iAnalytics) dan membangun antarmuka web interaktif menggunakan React JS.</p>
-                        </div>                    
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-10 reveal">
-            <div class="flex justify-between items-end mb-6 md:mb-8 px-2">
-                <div>
-                    <h3 class="text-2xl md:text-4xl font-bold text-slate-800 dark:text-white">Featured Projects</h3>
-                    <p class="text-slate-500 dark:text-gray-400 mt-1 text-sm md:text-base" data-key="proj_subtitle">Klik kartu untuk detail &rarr;</p>
-                </div>
-            </div>
-            <div class="flex overflow-x-auto gap-6 pb-12 pt-8 px-6 md:px-12 hide-scroll snap-x snap-mandatory -mx-6 md:-mx-12 fade-scroll">
-                <div onclick="openModal('iconplus')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-orange-400 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center relative"><i class="fas fa-network-wired text-5xl md:text-6xl text-orange-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">IT Support App (InsightPlus)</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">App manajemen tiket support IT (PKL).</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-red-100 text-red-600 font-bold">Laravel 11</span></div>
-                    </div>
-                </div>
-                <div onclick="openModal('tracker')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-indigo-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center relative"><i class="fas fa-calendar-check text-5xl md:text-6xl text-indigo-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">TrackerThings</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Manajemen akademik & deadline.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-indigo-50 text-indigo-600 font-semibold">PHP Native</span></div>
-                    </div>
-                </div>
-                <div onclick="openModal('kotakita')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-emerald-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-emerald-100 to-teal-50 flex items-center justify-center relative"><i class="fas fa-map-location-dot text-5xl md:text-6xl text-emerald-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">KotaKita</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3">Platform Smart City & Laporan.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-emerald-50 text-emerald-600 font-semibold">UI/UX</span></div>
-                    </div>
-                </div>
-                <div onclick="openModal('festivo')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-rose-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-rose-100 to-pink-50 flex items-center justify-center relative"><i class="fas fa-ticket-alt text-5xl md:text-6xl text-rose-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">Festivo</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_festivo">Layanan web pembelian tiket konser/festival.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-rose-50 text-rose-600 font-semibold">Laravel</span></div>
-                    </div>
-                </div>
-
-                <div onclick="openModal('gudang')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-amber-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-amber-100 to-yellow-50 flex items-center justify-center relative"><i class="fas fa-warehouse text-5xl md:text-6xl text-amber-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">Warehouse Dashboard</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_gudang">Desain sistem manajemen stok gudang (PKL).</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-amber-50 text-amber-600 font-semibold">UI/UX</span></div>
-                    </div>
-                </div>
-
-                <div onclick="openModal('splitbuddy')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-teal-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-teal-100 to-emerald-50 flex items-center justify-center relative"><i class="fas fa-hand-holding-dollar text-5xl md:text-6xl text-teal-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">SplitBuddy</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_splitbuddy">Aplikasi split payment / pembayaran patungan bersama.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-teal-50 text-teal-600 font-semibold">UI/UX</span></div>
-                    </div>
-                </div>
-
-                <div onclick="openModal('todo')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-cyan-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-cyan-100 to-blue-50 flex items-center justify-center relative"><i class="fas fa-list-check text-5xl md:text-6xl text-cyan-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">React To-Do Web</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_todo">Aplikasi manajemen tugas interaktif live di Vercel.</p>
-                        <div class="flex gap-2 flex-wrap"><span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-cyan-50 text-cyan-600 font-semibold">React JS</span></div>
-                    </div>
-                </div>
-
-                <div onclick="openModal('ianalytics')" class="cursor-pointer snap-center shrink-0 w-72 md:w-96 glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-md hover:shadow-xl border-t-4 border-violet-500 group">
-                    <div class="h-40 md:h-48 bg-gradient-to-br from-violet-100 to-purple-50 flex items-center justify-center relative"><i class="fas fa-microchip text-5xl md:text-6xl text-violet-400 group-hover:scale-110 transition duration-500"></i></div>
-                    <div class="p-5 md:p-6">
-                        <h4 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">iAnalytics (AI Parser)</h4>
-                        <p class="text-xs md:text-sm text-slate-500 dark:text-gray-300 mb-4 line-clamp-3" data-key="card_desc_ianalytics">Python parsing log iPhone terintegrasi Gemini API.</p>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-violet-50 text-violet-600 font-semibold">Python</span>
-                            <span class="px-2 py-1 text-[10px] md:text-xs rounded-full bg-slate-800 text-white font-semibold">Gemini AI</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- BEYOND CODING SECTION -->
-        <section id="vibe" class="py-10 md:py-16 reveal">
-            <div class="px-2 mb-6 md:mb-8 text-center md:text-left">
-                <h3 class="text-2xl md:text-4xl font-bold text-slate-800 dark:text-white" data-key="vibe_title">Beyond Coding</h3>
-                <p class="text-slate-500 dark:text-gray-400 mt-1 text-sm md:text-base" data-key="vibe_subtitle">Kenali aku lebih dekat di luar urusan kode.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-2 md:px-0">
-                
-                <!-- PERSONALITY CARD -->
-                <div class="md:col-span-2 glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:-translate-y-1 transition duration-300">
-                    <div class="absolute -right-10 -top-10 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
-                        <i class="fas fa-brain text-[150px] text-slate-800 dark:text-white"></i>
-                    </div>
-                    <div class="relative z-10 h-full flex flex-col justify-center">
-                        <h4 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-3">The Introverted Observer</h4>
-                        <p class="text-sm md:text-base text-slate-600 dark:text-gray-400 leading-relaxed max-w-xl text-justify" data-key="vibe_desc">
-                            Seorang introvert yang tetap punya energi untuk aktif dan bersosialisasi. Aku mungkin agak pemilih untuk urusan <i>inner circle</i>, tapi aku sangat terbuka dan berempati dengan siapa saja karena pada dasarnya aku adalah orang yang perasa. Sebagai seorang <i>overthinker</i>, aku terbiasa menganalisis sesuatu dari berbagai sudut pandang—sebuah sifat yang nyatanya sangat membantuku saat harus <i>debugging</i> kode yang rumit atau merancang <i>user flow</i> yang ramah pengguna!
+                        <p class="text-[var(--soft-ink)] text-sm md:text-base leading-relaxed max-w-lg pt-1" data-key="hero_desc">
+                            Mahasiswa Informatika yang mengubah ide dan kopi menjadi pengalaman digital interaktif.
                         </p>
                     </div>
+
+                    <!-- Expressive CTAs (Trigger Ephemeral BOOM! SFX) -->
+                    <div class="flex flex-wrap items-center gap-3.5 pt-1 relative">
+                        <a href="#projects" data-sfx="BOOM!"
+                            class="ink-btn ink-btn-primary px-6 py-3.5 text-sm md:text-base rounded-none">
+                            <span data-key="btn_projects">Lihat Karyaku</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M13 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a href="pdf/CV_Budi Nur Rahman.pdf" target="_blank" rel="noopener noreferrer" data-sfx="BOOM!"
+                            class="ink-btn ink-btn-secondary px-6 py-3.5 text-sm md:text-base rounded-none">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <span data-key="btn_cv">Download CV</span>
+                        </a>
+                        <span
+                            class="hidden sm:inline-flex items-center gap-1.5 font-accent text-xl text-[var(--muted-ink)] ml-1 select-none"
+                            aria-hidden="true">
+                            <svg width="36" height="22" viewBox="0 0 40 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M37 16C26 18 14 14 5 8" />
+                                <path d="M11 6L4 7.5L8 14" />
+                            </svg>
+                            <span data-key="hero_cta_note">klik mascot-ku juga!</span>
+                        </span>
+                    </div>
                 </div>
 
-                <!-- HOBBIES COLUMN -->
-                <div class="flex flex-col gap-4 md:gap-6">
-                    
-                    <!-- GAMING -->
-                    <div onclick="openFolder('gaming')"class="flex-1 glass-card rounded-3xl p-5 relative overflow-hidden group hover:-translate-y-1 transition duration-300 flex flex-col justify-center">
-                        <div class="absolute -right-4 -bottom-4 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
-                            <i class="fas fa-gamepad text-[80px] text-slate-800 dark:text-white"></i>
+                <!-- Right Illustrated Column: Framed Portrait + Custom Interactive SVG Mascot (5 cols) -->
+                <div class="lg:col-span-5 flex justify-center relative pt-4 lg:pt-0">
+                    <div class="relative w-full max-w-[340px] sm:max-w-[370px]">
+                        <!-- Halftone Backing Plate -->
+                        <div class="absolute -inset-3 translate-x-3 translate-y-3 rounded-[24px] halftone-bg border-2 border-dashed border-[var(--sketch-line)] pointer-events-none"
+                            aria-hidden="true"></div>
+
+                        <!-- Main Portrait Comic Frame -->
+                        <div class="portrait-frame p-3 relative z-10">
+                            <!-- Sketch Tape Strips -->
+                            <div class="tape-strip -top-2.5 left-8 -rotate-6" aria-hidden="true"></div>
+                            <div class="tape-strip -top-2.5 right-8 rotate-6" aria-hidden="true"></div>
+
+                            <div
+                                class="aspect-[4/4.6] rounded-[14px] overflow-hidden border-2 border-[var(--border-ink)] bg-[var(--warm-paper)] relative">
+                                <img src="img/aku.jpeg" alt="Potret Budi Nur Rahman (Nara)"
+                                    class="portrait-photo object-cover w-full h-full" loading="eager">
+                                <!-- Corner Issue Stamp -->
+                                <span
+                                    class="absolute top-2.5 left-2.5 px-2 py-0.5 text-[10px] font-display font-extrabold uppercase tracking-wider bg-[var(--paper)] text-[var(--ink)] border-[1.5px] border-[var(--border-ink)] rounded">
+                                    FIG. 01
+                                </span>
+                                <!-- Status Stamp (top-right, clear of mascot) -->
+                                <span
+                                    class="absolute top-2.5 right-2.5 inline-flex items-center gap-1.5 text-[10px] font-display font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[var(--ink)] text-[var(--paper)] border-[1.5px] border-[var(--paper)]">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--paper)] inline-block"
+                                        aria-hidden="true"></span>
+                                    <span data-key="hero_status">Open to Work</span>
+                                </span>
+                            </div>
+
+                            <!-- Caption Strip -->
+                            <div class="flex items-center justify-between pt-2.5 px-1 pr-28">
+                                <span class="font-accent text-xl leading-none text-[var(--ink)]">Budi / Nara</span>
+                            </div>
                         </div>
-                        <div class="relative z-10">
-                            <i class="fas fa-gamepad text-xl text-blue-500 mb-2"></i>
-                            <h4 class="text-md font-bold text-slate-800 dark:text-white mb-1">Gamer at Heart</h4>
-                            <p class="text-[11px] md:text-xs text-slate-500 dark:text-gray-400" data-key="vibe_game">Cara terbaik buat <i>refreshing</i> otak. Entah itu <i>push rank</i>, main RPG, atau membangun rute di game simulasi.</p>
+
+                        <!-- ORIGINAL DOODLEVERSE MONOCHROME CARTOON MASCOT (Interactive 4-State SVG) -->
+                        <div class="absolute -bottom-8 -right-3 sm:-right-7 z-20 flex flex-col items-end">
+                            <!-- Dynamic Mascot Quip Bubble -->
+                            <div id="mascot-quip" role="status" aria-live="polite"
+                                class="mb-1.5 px-3 py-1 bg-[var(--surface)] text-[var(--ink)] border-2 border-[var(--border-ink)] rounded-xl shadow-[3px_3px_0_var(--shadow-ink)] font-accent text-base sm:text-lg leading-tight whitespace-nowrap opacity-0 translate-y-1 pointer-events-none transition-all duration-200">
+                                Halo! Klik aku!
+                            </div>
+
+                            <button type="button" id="doodle-mascot"
+                                class="mascot-btn mascot-idle group relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-[var(--surface)] border-2 border-[var(--border-ink)] shadow-[4px_4px_0_var(--shadow-ink)] hover:shadow-[6px_6px_0_var(--shadow-ink)] p-1.5 cursor-pointer transition-shadow"
+                                aria-label="Karakter kartun Nara — klik untuk ganti ekspresi"
+                                data-aria-key="aria_mascot">
+                                <!-- Comic Impact Speed-Lines Burst on Click -->
+                                <svg id="mascot-burst"
+                                    class="comic-burst -inset-5 w-[calc(100%+2.5rem)] h-[calc(100%+2.5rem)] text-[var(--ink)]"
+                                    viewBox="0 0 180 180" fill="none" stroke="currentColor" stroke-width="2.8"
+                                    stroke-linecap="round" aria-hidden="true">
+                                    <path
+                                        d="M90 6v16M90 158v16M6 90h16M158 90h16M26 26l12 12M142 142l12 12M154 26l-12 12M38 142l-12 12" />
+                                </svg>
+                                <svg viewBox="0 0 140 140" class="w-full h-full overflow-visible text-[var(--ink)]"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <!-- Subtle sparkle marks -->
+                                    <g id="mascot-sparkles" stroke="currentColor" stroke-width="2.2"
+                                        stroke-linecap="round">
+                                        <path d="M18 24v8M14 28h8" />
+                                        <path d="M122 18l3 5-3 5-3-5z" fill="var(--warm-paper)" />
+                                    </g>
+
+                                    <!-- Hoodie / Shoulders (with subtle breathing) -->
+                                    <g class="mascot-body-breathe">
+                                        <path d="M32 132C34 106 48 96 70 96C92 96 106 106 108 132"
+                                            fill="var(--warm-paper)" stroke="currentColor" stroke-width="3.2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <!-- Hoodie Collar & Strings -->
+                                        <path d="M54 98C60 108 80 108 86 98" stroke="currentColor" stroke-width="2.6"
+                                            stroke-linecap="round" />
+                                        <path d="M62 106v14M78 106v14" stroke="currentColor" stroke-width="2.2"
+                                            stroke-linecap="round" />
+                                        <!-- Code Badge on Hoodie -->
+                                        <path d="M63 123l-4 3 4 3M77 123l4 3-4 3M72 121l-4 10" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+
+                                    <!-- Waving Cartoon Hand -->
+                                    <g class="mascot-hand" id="mascot-hand">
+                                        <path
+                                            d="M107 104C116 96 122 86 121 76C120 71 115 71 113 76L111 81C112 74 108 70 105 74C103 77 102 84 101 89C98 86 94 89 96 94C98 99 102 103 107 104Z"
+                                            fill="var(--paper)" stroke="currentColor" stroke-width="2.8"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+
+                                    <!-- Head & Ears -->
+                                    <g id="mascot-head">
+                                        <circle cx="38" cy="68" r="7" fill="var(--paper)" stroke="currentColor"
+                                            stroke-width="2.8" />
+                                        <circle cx="102" cy="68" r="7" fill="var(--paper)" stroke="currentColor"
+                                            stroke-width="2.8" />
+                                        <rect x="40" y="34" width="60" height="62" rx="28" fill="var(--paper)"
+                                            stroke="currentColor" stroke-width="3.2" />
+
+                                        <!-- Stylized Messy Ink Hair -->
+                                        <path
+                                            d="M38 56C36 36 48 22 70 22C92 22 104 36 102 56C97 46 89 42 81 45C76 37 64 36 56 44C49 41 42 47 38 56Z"
+                                            fill="currentColor" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linejoin="round" />
+                                        <!-- Ahoge / Cowlick Strand -->
+                                        <path d="M68 23C66 13 75 10 81 16" stroke="currentColor" stroke-width="3"
+                                            stroke-linecap="round" />
+
+                                        <!-- Round Ink Glasses -->
+                                        <g stroke="currentColor" stroke-width="2.8" fill="var(--paper)">
+                                            <circle cx="56" cy="66" r="11" />
+                                            <circle cx="84" cy="66" r="11" />
+                                            <path d="M67 66h6" stroke-linecap="round" />
+                                        </g>
+
+                                        <!-- Eyes / Pupils (Tracked on Desktop Pointer + Idle Blink) -->
+                                        <g id="mascot-pupils">
+                                            <g class="mascot-blink-group">
+                                                <circle id="eye-left" cx="56" cy="66" r="3.4" fill="currentColor" />
+                                                <circle id="eye-right" cx="84" cy="66" r="3.4" fill="currentColor" />
+                                            </g>
+                                            <!-- Wink Right Eye (hidden unless wink state) -->
+                                            <path id="eye-right-wink" class="hidden" d="M79 66C81 63 87 63 89 66"
+                                                stroke="currentColor" stroke-width="2.8" stroke-linecap="round" />
+                                        </g>
+
+                                        <!-- Eyebrows (Swap by expression) -->
+                                        <path id="brow-left" d="M49 52C53 50 58 50 62 52" stroke="currentColor"
+                                            stroke-width="2.4" stroke-linecap="round" />
+                                        <path id="brow-right" d="M78 52C82 50 87 50 91 52" stroke="currentColor"
+                                            stroke-width="2.4" stroke-linecap="round" />
+
+                                        <!-- Expressive Mouths (4 States) -->
+                                        <path id="mouth-happy" d="M61 81C65 87 75 87 79 81" stroke="currentColor"
+                                            stroke-width="2.8" stroke-linecap="round" />
+                                        <path id="mouth-focused" class="hidden" d="M64 83H76" stroke="currentColor"
+                                            stroke-width="2.8" stroke-linecap="round" />
+                                        <circle id="mouth-amazed" class="hidden" cx="70" cy="83" r="4.5"
+                                            fill="var(--warm-paper)" stroke="currentColor" stroke-width="2.6" />
+                                        <path id="mouth-wink" class="hidden" d="M62 82C67 87 74 86 79 80"
+                                            stroke="currentColor" stroke-width="2.8" stroke-linecap="round" />
+
+                                        <!-- Sketch Blush Lines -->
+                                        <path d="M45 77l3 2M49 77l3 2M88 77l3 2M92 77l3 2" stroke="currentColor"
+                                            stroke-width="1.6" stroke-linecap="round" opacity="0.55" />
+                                    </g>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- MUSIC -->
-                    <div onclick="openFolder('music')" class="flex-1 glass-card rounded-3xl p-5 relative overflow-hidden group hover:-translate-y-1 transition duration-300 flex flex-col justify-center">
-                        <div class="absolute -right-4 -bottom-4 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
-                            <i class="fas fa-headphones-alt text-[80px] text-slate-800 dark:text-white"></i>
-                        </div>
-                        <div class="relative z-10">
-                            <i class="fas fa-headphones-alt text-xl text-pink-500 mb-2"></i>
-                            <h4 class="text-md font-bold text-slate-800 dark:text-white mb-1">Music Enthusiast</h4>
-                            <p class="text-[11px] md:text-xs text-slate-500 dark:text-gray-400" data-key="vibe_music">Selalu ada <i>soundtrack</i> emosional buat menemani setiap baris kode yang ditulis.</p>
-                        </div>
-                    </div>
-
-                    <!-- FANTASY & ANIME (NEW) -->
-                    <div class="flex-1 glass-card rounded-3xl p-5 relative overflow-hidden group hover:-translate-y-1 transition duration-300 flex flex-col justify-center">
-                        <div class="absolute -right-4 -bottom-4 opacity-10 dark:opacity-5 group-hover:scale-110 transition duration-500">
-                            <i class="fas fa-book-journal-whills text-[80px] text-slate-800 dark:text-white"></i>
-                        </div>
-                        <div class="relative z-10">
-                            <i class="fas fa-book-journal-whills text-xl text-emerald-500 mb-2"></i>
-                            <h4 class="text-md font-bold text-slate-800 dark:text-white mb-1">Fantasy Seeker</h4>
-                            <p class="text-[11px] md:text-xs text-slate-500 dark:text-gray-400" data-key="vibe_fantasy">Suka banget tenggelam dalam buku atau anime bergenre fantasi, walau tetap <i>open</i> ke genre seru lainnya.</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="max-w-3xl mx-auto py-12 md:py-20 reveal">
-            <div class="glass-card rounded-3xl p-6 md:p-8 relative overflow-hidden">
-                <h3 class="text-xl md:text-2xl font-bold text-center mb-2 text-slate-800 dark:text-white" data-key="contact_title">Kirimi Aku Pesan ✉️</h3>
-                <p class="text-center text-slate-500 dark:text-gray-300 mb-6 text-sm" data-key="contact_sub">Tertarik kolaborasi? Yuk diskusi bareng!</p>
-                <form id="contact-form" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" name="name" required placeholder="Nama Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700 text-sm">
-                        <input type="email" name="email" required placeholder="Email Kamu" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700 text-sm">
+        <!-- Memphis Monochrome Zigzag Divider -->
+        <div class="memphis-divider" aria-hidden="true">
+            <svg width="260" height="16" viewBox="0 0 260 16" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="M2 12L14 4L26 12L38 4L50 12L62 4L74 12L86 4L98 12L110 4L122 12L134 4L146 12L158 4L170 12L182 4L194 12L206 4L218 12L230 4L242 12L254 4" />
+            </svg>
+        </div>
+
+        <!-- ABOUT — EDITORIAL SCREENTONE -->
+        <section id="about" class="relative py-16 md:py-24 reveal">
+            <!-- Full-Section Editorial Screentone Environment + Phase 6 Crosshatch & Floating Doodle Parallax -->
+            <div class="env-backdrop about-comic-env" aria-hidden="true">
+                <div class="about-bg-halftone" data-parallax="0.12"></div>
+                <div class="about-bg-crosshatch" data-parallax="-0.14"></div>
+                <div class="about-bg-noir-wedge" data-parallax="0.20" data-parallax-x="-0.08"></div>
+                <!-- Floating Foreground Comic Ink Doodles -->
+                <svg class="hidden lg:block absolute top-14 left-6 w-12 h-12 text-[var(--ink)] opacity-25" data-parallax="-0.18" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+                    <path d="M24 6v14M24 28v14M6 24h14M28 24h14"/>
+                </svg>
+                <svg class="hidden lg:block absolute bottom-20 right-8 w-14 h-14 text-[var(--ink)] opacity-25" data-parallax="-0.22" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+                    <polygon points="28,4 34,22 52,28 34,34 28,52 22,34 4,28 22,22"/>
+                </svg>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <p class="font-accent text-2xl text-[var(--muted-ink)] -rotate-1 inline-block"
+                        data-key="about_kicker">My Little Corner</p>
+                    <h3
+                        class="font-editorial text-4xl md:text-6xl text-[var(--ink)] leading-none relative inline-block">
+                        <span data-key="about_title">Tentang Aku</span>
+                    </h3>
+                </div>
+                <span class="comic-caption-box self-start md:self-auto">FILE 02 &middot; CHARACTER SHEET</span>
+            </div>
+
+            <!-- PHASE 5 + 6: INTERLOCKING COMIC CHARACTER PROFILE / STORYBOARD WITH NARA COMIC AVATAR -->
+            <div class="char-board">
+
+                <!-- A. DEDICATED NARA COMIC AVATAR (5 cols on lg+ — Replaces Repeated Hero Portrait) -->
+                <article class="c-panel col-span-12 lg:col-span-5 flex flex-col">
+                    <div class="c-panel-bar">
+                        <span>A // NARA COMIC AVATAR</span>
+                        <span>JAKARTA &middot; 18 Y/O</span>
                     </div>
-                    <textarea name="message" required placeholder="Tulis pesan..." rows="4" class="w-full bg-white/50 border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400 transition placeholder-slate-400 text-slate-700 text-sm"></textarea>
-                    <button type="submit" id="submit-btn" class="w-full bg-slate-800 dark:bg-white dark:text-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-700 dark:hover:bg-gray-200 transition transform active:scale-95 flex justify-center items-center gap-2 text-sm md:text-base">
-                        <span data-key="btn_send">Kirim Pesan</span>
-                        <i class="fas fa-spinner fa-spin hidden" id="loading-icon"></i>
+
+                    <div class="avatar-stage halftone-bg">
+                        <div class="avatar-canvas">
+                            <!-- Dynamic Comic SFX Tag -->
+                            <span id="avatar-stage-sfx" class="avatar-sfx-pill" aria-hidden="true">YO!</span>
+                            <!-- Dynamic Comic Annotation -->
+                            <span id="avatar-stage-anno" class="anno-tag top-2.5 right-3 rotate-[4deg]" aria-hidden="true">coffee &rarr; code!</span>
+
+                            <!-- MAIN DEDICATED NARA COMIC AVATAR SVG (Preserves Glasses, Messy Hair + Ahoge, </> Hoodie) -->
+                            <svg id="nara-avatar-svg" viewBox="0 0 320 275" class="w-full h-full max-h-[275px] relative z-[2] text-[var(--ink)]" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi maskot komik Budi Nara di meja kerja">
+                                <!-- Background Comic Sparkles -->
+                                <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                                    <path d="M36 58v12M30 64h12"/>
+                                    <path d="M276 48l4 7-4 7-4-7z" fill="var(--warm-paper)"/>
+                                    <circle cx="48" cy="112" r="3" fill="currentColor"/>
+                                    <circle cx="272" cy="108" r="3" fill="currentColor"/>
+                                </g>
+
+                                <!-- THINKING BUBBLE PROP -->
+                                <g id="av-prop-thinking" style="display:none;" stroke="currentColor" stroke-width="2.4">
+                                    <circle cx="234" cy="76" r="4" fill="var(--surface)"/>
+                                    <circle cx="246" cy="64" r="6" fill="var(--surface)"/>
+                                    <path d="M248 34c0-9 8-15 18-15 6 0 11 2 14 6 8 0 14 6 14 13s-6 13-14 13h-26c-7 0-12-5-12-11 0-4 2-6 6-6z" fill="var(--surface)"/>
+                                    <text x="268" y="42" font-family="Anton, sans-serif" font-size="14" fill="currentColor" stroke="none" text-anchor="middle">?!...</text>
+                                </g>
+
+                                <!-- HAPPY STARBURST PROP -->
+                                <g id="av-prop-happy" style="display:none;" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                                    <path d="M76 38l8 8M244 38l-8 8M160 12v10M60 76h10M250 76h10"/>
+                                </g>
+
+                                <!-- UPPER BODY & HOODIE -->
+                                <g>
+                                    <path d="M90 232 C94 176 118 158 160 158 C202 158 226 176 230 232 Z" fill="var(--warm-paper)" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+                                    <path d="M126 160 C138 180 182 180 194 160" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+                                    <path d="M144 175 v26 M176 175 v26" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+                                    <circle cx="144" cy="203" r="2.5" fill="currentColor"/>
+                                    <circle cx="176" cy="203" r="2.5" fill="currentColor"/>
+                                    <path d="M148 206 l-7 5 7 5 M172 206 l7 5 -7 5 M163 203 l-6 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+
+                                <!-- POSE 1: WAVING -->
+                                <g id="av-pose-waving">
+                                    <path d="M96 196 C80 206 78 220 92 228" fill="var(--warm-paper)" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>
+                                    <g class="avatar-arm-wave">
+                                        <path d="M222 184 C244 166 258 144 256 124 C254 114 244 114 240 124 L236 134 C238 120 230 112 224 120 C220 126 218 140 216 150 C210 144 202 150 206 160 C210 170 216 178 222 184 Z" fill="var(--surface)" stroke="currentColor" stroke-width="3.6" stroke-linejoin="round"/>
+                                        <path d="M266 116 C272 124 272 134 266 142" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                                        <path d="M274 112 C282 124 282 136 274 148" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                                    </g>
+                                </g>
+
+                                <!-- POSE 2: THINKING -->
+                                <g id="av-pose-thinking" style="display:none;">
+                                    <path d="M214 196 C228 176 214 156 184 154 C176 153 172 160 178 166 L194 172" fill="var(--surface)" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+
+                                <!-- POSE 3: CODING -->
+                                <g id="av-pose-coding" style="display:none;">
+                                    <ellipse cx="132" cy="218" rx="12" ry="8" fill="var(--surface)" stroke="currentColor" stroke-width="3.2"/>
+                                    <ellipse cx="188" cy="218" rx="12" ry="8" fill="var(--surface)" stroke="currentColor" stroke-width="3.2"/>
+                                </g>
+
+                                <!-- POSE 4: HAPPY -->
+                                <g id="av-pose-happy" style="display:none;">
+                                    <path d="M98 186 C76 168 68 148 74 132 C78 124 88 126 90 136 L94 156" fill="var(--surface)" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M222 186 C244 168 252 148 246 132 C242 124 232 126 230 136 L226 156" fill="var(--surface)" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+
+                                <!-- HEAD & SIGNATURE IDENTITY -->
+                                <g>
+                                    <circle cx="104" cy="108" r="11" fill="var(--surface)" stroke="currentColor" stroke-width="3.6"/>
+                                    <circle cx="216" cy="108" r="11" fill="var(--surface)" stroke="currentColor" stroke-width="3.6"/>
+                                    <rect x="108" y="52" width="104" height="106" rx="48" fill="var(--surface)" stroke="currentColor" stroke-width="4"/>
+                                    <path d="M104 90 C100 54 122 32 160 32 C198 32 220 54 216 90 C208 72 194 65 180 70 C170 56 150 54 136 68 C124 63 112 74 104 90 Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                                    <path d="M156 34 C153 16 168 12 178 22" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+
+                                    <!-- Round Ink Glasses -->
+                                    <g stroke="currentColor" stroke-width="3.6" fill="var(--surface)">
+                                        <circle cx="136" cy="106" r="19"/>
+                                        <circle cx="184" cy="106" r="19"/>
+                                        <path d="M155 106 h10" stroke-linecap="round"/>
+                                    </g>
+
+                                    <!-- Eyes -->
+                                    <g id="av-eyes-normal">
+                                        <circle cx="136" cy="106" r="5.5" fill="currentColor"/>
+                                        <circle cx="184" cy="106" r="5.5" fill="currentColor"/>
+                                        <circle cx="138" cy="104" r="1.8" fill="var(--surface)"/>
+                                        <circle cx="186" cy="104" r="1.8" fill="var(--surface)"/>
+                                    </g>
+                                    <g id="av-eyes-thinking" style="display:none;">
+                                        <circle cx="141" cy="101" r="5.5" fill="currentColor"/>
+                                        <circle cx="189" cy="101" r="5.5" fill="currentColor"/>
+                                    </g>
+                                    <g id="av-eyes-coding" style="display:none;">
+                                        <rect x="130" y="103" width="12" height="5" rx="2" fill="currentColor"/>
+                                        <rect x="178" y="103" width="12" height="5" rx="2" fill="currentColor"/>
+                                    </g>
+                                    <g id="av-eyes-happy" style="display:none;" stroke="currentColor" stroke-width="3.6" stroke-linecap="round">
+                                        <path d="M128 108 C132 100 140 100 144 108"/>
+                                        <path d="M176 108 C180 100 188 100 192 108"/>
+                                    </g>
+
+                                    <!-- Eyebrows -->
+                                    <path id="av-brow-l" d="M124 82 C131 78 140 78 147 82" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                                    <path id="av-brow-r" d="M173 82 C180 78 189 78 196 82" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+
+                                    <!-- Mouths -->
+                                    <path id="av-mouth-wave" d="M145 132 C152 142 168 142 175 132" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>
+                                    <path id="av-mouth-think" style="display:none;" d="M151 136 Q160 132 169 136" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+                                    <path id="av-mouth-code" style="display:none;" d="M150 135 H170" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+                                    <path id="av-mouth-happy" style="display:none;" d="M144 130 C148 146 172 146 176 130 Z" fill="var(--warm-paper)" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/>
+
+                                    <!-- Sketch Blush -->
+                                    <g stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.55">
+                                        <path d="M118 124 l5 3 M125 124 l5 3 M190 124 l5 3 M197 124 l5 3"/>
+                                    </g>
+                                </g>
+
+                                <!-- DESK & PROPS (Coffee Mug, Laptop, Sketchbook) -->
+                                <g>
+                                    <rect x="12" y="232" width="296" height="43" fill="var(--surface)" stroke="currentColor" stroke-width="3.6"/>
+                                    <g transform="translate(36, 194)">
+                                        <path d="M6 12 H30 V32 C30 36 26 38 22 38 H14 C10 38 6 36 6 32 Z" fill="var(--warm-paper)" stroke="currentColor" stroke-width="3"/>
+                                        <path d="M30 17 H35 C38 17 38 28 35 28 H30" stroke="currentColor" stroke-width="2.8"/>
+                                        <g class="avatar-steam" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                                            <path d="M14 6 C14 2 17 1 17 -3"/>
+                                            <path d="M22 6 C22 2 25 1 25 -3"/>
+                                        </g>
+                                    </g>
+                                    <g transform="translate(106, 194)">
+                                        <rect x="6" y="4" width="96" height="40" rx="3" fill="var(--ink)" stroke="currentColor" stroke-width="3"/>
+                                        <path d="M46 20 l-5 4 5 4 M62 20 l5 4 -5 4 M56 18 l-4 12" stroke="var(--paper)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M0 44 H108 L102 50 H6 Z" fill="var(--warm-paper)" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+                                    </g>
+                                    <g transform="translate(234, 210)">
+                                        <rect x="0" y="6" width="52" height="24" fill="var(--warm-paper)" stroke="currentColor" stroke-width="2.8"/>
+                                        <path d="M12 6 v24 M20 14 h22 M20 20 h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <div class="char-name-banner z-[6]">
+                                <div class="font-editorial text-xl leading-none">BUDI NUR RAHMAN</div>
+                                <div class="text-[9.5px] font-display font-bold tracking-widest opacity-85">CALL ME NARA &middot; 4 MODES</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVE 4-EXPRESSION SWITCHER -->
+                    <div class="avatar-expr-bar" role="tablist" aria-label="Pilih ekspresi maskot Nara">
+                        <button type="button" role="tab" aria-selected="true" class="avatar-expr-btn active" data-avatar-expr="waving">Waving</button>
+                        <button type="button" role="tab" aria-selected="false" class="avatar-expr-btn" data-avatar-expr="thinking">Thinking</button>
+                        <button type="button" role="tab" aria-selected="false" class="avatar-expr-btn" data-avatar-expr="coding">Coding</button>
+                        <button type="button" role="tab" aria-selected="false" class="avatar-expr-btn" data-avatar-expr="happy">Happy</button>
+                    </div>
+
+                    <div class="p-4 flex-1 flex flex-col justify-between gap-3">
+                        <div class="dialogue-bubble">
+                            <p class="text-[13.5px] text-[var(--soft-ink)] leading-relaxed" data-key="about_speech">
+                                Halo! Aku Budi (Nara), Fullstack Developer 18 tahun di Jakarta. Bagiku, IT bukan cuma soal menulis kode, tapi menciptakan solusi—mengasah hardskill dan softskill dari OSIS hingga memimpin tim developer saat magang di Icon Plus.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 border-t-2 border-dashed border-[var(--sketch-line)] pt-2.5">
+                            <span class="font-accent text-lg text-[var(--muted-ink)]">&larr; leadership &amp; team comm</span>
+                            <span class="comic-caption-box text-[11px] py-0.5 px-2">CLASS: BUILDER</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- RIGHT STORYBOARD STACK: B. ORIGIN STORY + C. CHARACTER TRAITS (7 cols on lg+) -->
+                <div class="col-span-12 lg:col-span-7 flex flex-col gap-3">
+
+                    <!-- B. ORIGIN STORY: 2-ACT VISUAL COMIC SEQUENCE -->
+                    <article class="c-panel">
+                        <div class="c-panel-bar">
+                            <span>B // ORIGIN STORY SEQUENCE</span>
+                            <span>SMK RPL &rarr; UNIVERSITAS NASIONAL</span>
+                        </div>
+                        <div class="origin-strip">
+                            <div class="origin-frame">
+                                <div class="flex items-center justify-between">
+                                    <span class="comic-caption-box text-[10px] py-0.5 px-1.5">ACT 01</span>
+                                    <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <rect x="3" y="5" width="22" height="16" fill="var(--paper)" />
+                                        <path d="M9 11l-3 2 3 2M15 11l3 2-3 2M13 10l-2 6M8 24h12" />
+                                    </svg>
+                                </div>
+                                <h4 class="font-display font-extrabold text-[15px] text-[var(--ink)] leading-snug"
+                                    data-key="about_origin_1_title">SMK — Rekayasa Perangkat Lunak (RPL)</h4>
+                                <p class="text-xs text-[var(--soft-ink)] leading-relaxed" data-key="about_origin_1_desc">
+                                    Titik awal perjalanan koding: membangun fondasi logika pemrograman, web development, dan kepemimpinan aktif di OSIS.
+                                </p>
+                            </div>
+
+                            <div class="origin-arrow-wrap flex items-center justify-center text-[var(--ink)]" aria-hidden="true">
+                                <svg width="30" height="22" viewBox="0 0 36 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 12h28M23 5l8 7-8 7" />
+                                </svg>
+                            </div>
+
+                            <div class="origin-frame comic-crosshatch">
+                                <div class="bg-[var(--surface)] border-2 border-[var(--border-ink)] p-2.5 flex-1 flex flex-col gap-1.5">
+                                    <div class="flex items-center justify-between">
+                                        <span class="comic-caption-box text-[10px] py-0.5 px-1.5">ACT 02 &middot; NOW</span>
+                                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M14 4L2 10l12 6 12-6-12-6z" fill="var(--warm-paper)" />
+                                            <path d="M6 12v7c0 2 3.5 4 8 4s8-2 8-4v-7" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="font-display font-extrabold text-[15px] text-[var(--ink)] leading-snug"
+                                        data-key="about_origin_2_title">Informatika — Universitas Nasional</h4>
+                                    <p class="text-xs text-[var(--soft-ink)] leading-relaxed" data-key="about_origin_2_desc">
+                                        Terus mengeksplorasi teknologi baru mulai dari UI/UX, Web Framework modern, hingga integrasi AI &amp; proyek kolaboratif.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- C. CHARACTER TRAITS: 4 EXPRESSIVE MINI COMIC PANELS -->
+                    <article class="c-panel flex-1 flex flex-col">
+                        <div class="c-panel-bar">
+                            <span>C // CHARACTER TRAITS</span>
+                            <span>04 VERIFIED ATTRIBUTES</span>
+                        </div>
+                        <div class="traits-grid flex-1">
+                            <div class="trait-cell">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                                    <circle cx="10" cy="14" r="5" fill="var(--warm-paper)" />
+                                    <circle cx="20" cy="14" r="5" fill="var(--warm-paper)" />
+                                    <path d="M9 14h1M19 14h1" stroke-linecap="round" />
+                                </svg>
+                                <div class="font-editorial text-[15px] leading-tight">Introverted Observer</div>
+                                <p class="text-[11px] text-[var(--soft-ink)] leading-snug" data-key="trait_1_desc">
+                                    Empatik, peka terhadap detail, dan tetap aktif berkolaborasi dalam tim.
+                                </p>
+                            </div>
+
+                            <div class="trait-cell bg-[var(--warm-paper)]">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                                    <circle cx="14" cy="14" r="9" fill="var(--surface)" />
+                                    <path d="M14 9v5l3 3M7 4l2 2M21 4l-2 2" />
+                                </svg>
+                                <div class="font-editorial text-[15px] leading-tight">Overthinker</div>
+                                <p class="text-[11px] text-[var(--soft-ink)] leading-snug" data-key="trait_2_desc">
+                                    Menganalisis dari banyak sudut pandang—senjata saat debugging &amp; merancang UX.
+                                </p>
+                            </div>
+
+                            <div class="trait-cell trait-cell-dark">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M16 4l8 8-10 10-8-8 10-10z" />
+                                    <path d="M4 24l4-4" />
+                                </svg>
+                                <div class="font-editorial text-[15px] leading-tight">Problem Solver</div>
+                                <p class="text-[11px] text-[#DCDCDC] leading-snug" data-key="trait_3_desc">
+                                    Fokus menciptakan solusi nyata dari tahap ide hingga aplikasi siap rilis.
+                                </p>
+                            </div>
+
+                            <div class="trait-cell">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M14 4v5M14 19v5M4 14h5M19 14h5M7 7l3 3M18 18l3 3M21 7l-3 3M10 18l-3 3" />
+                                </svg>
+                                <div class="font-editorial text-[15px] leading-tight">Curious Learner</div>
+                                <p class="text-[11px] text-[var(--soft-ink)] leading-snug" data-key="trait_4_desc">
+                                    Eksplorasi konsisten dari UI/UX &amp; Web Framework hingga integrasi AI.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- D. ILLUSTRATED COMIC SKILL INVENTORY (8 cols on lg+) -->
+                <article class="c-panel col-span-12 lg:col-span-8">
+                    <div class="c-panel-bar">
+                        <span>D // SKILL INVENTORY &amp; EQUIPPED GEAR</span>
+                        <span>08 CORE TOOLS</span>
+                    </div>
+                    <div class="inv-grid">
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">BACKEND</span>
+                            <i class="fab fa-laravel text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">Laravel</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">SERVER</span>
+                            <i class="fab fa-php text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">PHP</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">WEB</span>
+                            <i class="fab fa-js text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">JavaScript</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">UI / WEB</span>
+                            <i class="fab fa-react text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">React / Next</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">AI / DATA</span>
+                            <i class="fab fa-python text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">Python</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">UI / UX</span>
+                            <i class="fab fa-figma text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">Figma</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">DATABASE</span>
+                            <i class="fas fa-database text-lg my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">MySQL / Supa</strong>
+                        </div>
+                        <div class="inv-slot">
+                            <span class="inv-slot-cat">VCS</span>
+                            <i class="fab fa-git-alt text-xl my-1" aria-hidden="true"></i>
+                            <strong class="font-display text-xs font-extrabold">Git</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- E. INTEGRATED GITHUB LIVE TELEMETRY BOX (4 cols on lg+, preserves #github-stats IDs) -->
+                <article id="github-stats" class="c-panel col-span-12 lg:col-span-4 bg-[#111111] text-[#FFFFFF] flex flex-col justify-between">
+                    <div class="c-panel-bar !bg-[#FFFFFF] !text-[#111111] border-b-2 border-[#111111]">
+                        <span>E // GITHUB TELEMETRY</span>
+                        <span>LIVE API</span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between gap-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fab fa-github text-3xl text-[#FFFFFF]" aria-hidden="true"></i>
+                                <div>
+                                    <p class="font-editorial text-xl leading-none text-[#FFFFFF]">@RIUUSIX</p>
+                                    <p class="text-[10px] font-display font-bold uppercase tracking-wider text-[#CCCCCC]">Open Source &amp; Labs</p>
+                                </div>
+                            </div>
+                            <a id="gh-link" href="https://github.com/riuusix" target="_blank" rel="noopener noreferrer"
+                                class="px-3 py-1.5 bg-[#FFFFFF] text-[#111111] font-display font-extrabold text-[11px] uppercase tracking-wider border-2 border-[#FFFFFF] hover:bg-[#111111] hover:text-[#FFFFFF] transition-colors">
+                                Follow &rarr;
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5 text-center">
+                            <div class="border-2 border-[#FFFFFF] p-2.5 bg-white/5">
+                                <span id="gh-repos" class="block font-editorial text-3xl leading-none text-[#FFFFFF]">--</span>
+                                <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#CCCCCC] mt-1 block">Public Repos</span>
+                            </div>
+                            <div class="border-2 border-[#FFFFFF] p-2.5 bg-white/5">
+                                <span id="gh-followers" class="block font-editorial text-3xl leading-none text-[#FFFFFF]">--</span>
+                                <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#CCCCCC] mt-1 block">Followers</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE & JOURNEY — TIMELINE CONCEPT B: CONTINUOUS COMIC STRIP (05 VERIFIED MILESTONES) -->
+        <section id="journey" class="relative py-16 md:py-24 reveal">
+            <div class="env-backdrop journey-comic-env" aria-hidden="true"></div>
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <span class="comic-caption-box mb-2" data-key="journey_kicker">Chronological Journey</span>
+                    <h3 class="font-editorial text-4xl md:text-6xl text-[var(--ink)] leading-none"
+                        data-key="journey_title">Experience &amp; Journey</h3>
+                </div>
+                <span class="comic-caption-box bg-[var(--surface)] text-[var(--ink)] self-start md:self-auto" data-key="journey_badge">05 MILESTONES &middot; CHRONICLE</span>
+            </div>
+
+            <!-- Interlocking Continuous Comic Strip Grid (Strong Black Gutters) -->
+            <div class="comic-strip-board">
+
+                <!-- FRAME 01 (7 cols on md+): PKL @ Icon Plus (Starting Point) -->
+                <article class="comic-strip-frame comic-stagger col-span-12 md:col-span-7" style="--stagger-idx: 0; --enter-tilt: 0deg;">
+                    <div class="comic-strip-bar">
+                        <span>FRAME 01 &middot; INTERNSHIP</span>
+                        <span data-key="tl_badge_start">STARTING POINT</span>
+                    </div>
+                    <div class="p-5 sm:p-6 relative flex-1 flex flex-col justify-between gap-3">
+                        <div>
+                            <div class="flex items-baseline justify-between gap-3 mb-2">
+                                <h4 class="font-display font-extrabold text-xl md:text-2xl text-[var(--ink)]">PKL: Fullstack Developer @ Icon Plus</h4>
+                                <span class="comic-number-stamp text-3xl text-[var(--muted-ink)] opacity-45 shrink-0">01</span>
+                            </div>
+                            <p class="text-sm md:text-[15px] text-[var(--soft-ink)] leading-relaxed" data-key="timeline_1">
+                                Titik awal perjalanan profesional: membangun platform internal IT Support &amp; Talent Mapping lintas supervisor (SPV) menggunakan Laravel 11 untuk mengelola resource divisi, melacak penugasan PM, dan memetakan tanggung jawab support aplikasi.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                            <span class="ink-stamp">Laravel 11</span>
+                            <span class="ink-stamp">MySQL</span>
+                            <span class="ink-stamp">Team Lead</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FRAME 02 (5 cols on md+): INFOVEST — KotaKita -->
+                <article class="comic-strip-frame comic-stagger col-span-12 md:col-span-5 comic-screentone bg-[var(--warm-paper)]" style="--stagger-idx: 1; --enter-tilt: 0deg;">
+                    <div class="comic-strip-bar">
+                        <span>FRAME 02 &middot; COMPETITION</span>
+                        <span>UI / UX</span>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between gap-3">
+                        <div class="bg-[var(--surface)] border-2 border-[var(--border-ink)] p-4">
+                            <div class="flex items-baseline justify-between gap-2 mb-2">
+                                <h4 class="font-display font-extrabold text-xl text-[var(--ink)]">INFOVEST</h4>
+                                <span class="comic-number-stamp text-3xl text-[var(--muted-ink)] opacity-45 shrink-0">02</span>
+                            </div>
+                            <p class="text-sm text-[var(--soft-ink)] leading-relaxed" data-key="timeline_2">
+                                Merancang "KotaKita", konsep aplikasi mobile Smart City. Fokus pada User Research, High-Fidelity Prototyping di Figma, dan solusi pelaporan publik.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="ink-stamp bg-[var(--surface)]">Figma</span>
+                            <span class="ink-stamp bg-[var(--surface)]">User Research</span>
+                            <span class="ink-stamp bg-[var(--surface)]">Smart City</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FRAME 03 (5 cols on md+): AI & Frontend Exploration -->
+                <article class="comic-strip-frame comic-stagger col-span-12 md:col-span-5 comic-speed-lines" style="--stagger-idx: 2; --enter-tilt: 0deg;">
+                    <div class="comic-strip-bar">
+                        <span>FRAME 03 &middot; EXPLORATION</span>
+                        <span>AI &amp; WEB</span>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between gap-3">
+                        <div class="bg-[var(--surface)] border-2 border-[var(--border-ink)] p-4 shadow-[4px_4px_0_var(--shadow-ink)]">
+                            <div class="flex items-baseline justify-between gap-2 mb-2">
+                                <h4 class="font-display font-extrabold text-xl text-[var(--ink)]">AI &amp; Frontend Exploration</h4>
+                                <span class="comic-number-stamp text-3xl text-[var(--muted-ink)] opacity-45 shrink-0">03</span>
+                            </div>
+                            <p class="text-sm text-[var(--soft-ink)] leading-relaxed" data-key="timeline_3">
+                                Mengeksplorasi integrasi Gemini AI menggunakan Python melalui iAnalytics serta membangun antarmuka web interaktif modern dengan React JS.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="ink-stamp bg-[var(--surface)]">Python</span>
+                            <span class="ink-stamp bg-[var(--surface)]">Gemini AI</span>
+                            <span class="ink-stamp bg-[var(--surface)]">React JS</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FRAME 04 (7 cols on md+): Building TrackerThings -->
+                <article class="comic-strip-frame comic-stagger col-span-12 md:col-span-7" style="--stagger-idx: 3; --enter-tilt: 0deg;">
+                    <div class="comic-strip-bar">
+                        <span>FRAME 04 &middot; MULTI-PLATFORM</span>
+                        <a href="https://trackerthings.vercel.app/" target="_blank" rel="noopener noreferrer" class="underline hover:opacity-80">TRACKERTHINGS.VERCEL.APP &nearr;</a>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between gap-3">
+                        <div>
+                            <div class="flex items-baseline justify-between gap-3 mb-2">
+                                <h4 class="font-display font-extrabold text-xl md:text-2xl text-[var(--ink)]">Building TrackerThings</h4>
+                                <span class="comic-number-stamp text-3xl text-[var(--muted-ink)] opacity-45 shrink-0">04</span>
+                            </div>
+                            <p class="text-sm md:text-[15px] text-[var(--soft-ink)] leading-relaxed" data-key="timeline_4">
+                                Mengembangkan platform manajemen akademik mahasiswa lintas platform—versi web dibangun dengan Next.js dan sudah live, iOS (Swift) dalam pengembangan, serta Android direncanakan selanjutnya.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                            <span class="status-pill status-pill-live" data-key="tracker_plat_web">Web &middot; Next.js</span>
+                            <span class="status-pill status-pill-dev" data-key="tracker_plat_ios">iOS &middot; Swift (Dev)</span>
+                            <span class="status-pill status-pill-planned" data-key="tracker_plat_android">Android (Planned)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FRAME 05 (FULL-WIDTH 12-COL FINALE): Caturnawa 2026 — UNAS FEST -->
+                <article class="comic-strip-frame comic-strip-finale comic-stagger col-span-12" style="--stagger-idx: 4; --enter-tilt: 0deg;">
+                    <div class="bg-[#FFFFFF] text-[#111111] px-4 py-2 flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#111111]">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="font-editorial text-sm tracking-widest uppercase">FRAME 05 &middot; LATEST MILESTONE</span>
+                            <span class="px-2 py-0.5 text-[10px] font-display font-extrabold uppercase bg-[#111111] text-[#FFFFFF]">PRODUCTION / LIVE</span>
+                            <span class="px-2 py-0.5 text-[10px] font-display font-extrabold uppercase border-2 border-[#111111]">COLLABORATIVE TEAM</span>
+                        </div>
+                        <a href="https://caturnawa.unasfest.unas.ac.id/" target="_blank" rel="noopener noreferrer" class="font-display font-extrabold text-xs underline">caturnawa.unasfest.unas.ac.id &nearr;</a>
+                    </div>
+                    <div class="p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div class="space-y-3 max-w-3xl">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 text-xs font-display font-extrabold uppercase bg-[#F2F0EA] text-[#111111] border-2 border-[#FFFFFF]">ROLE: BACKEND DEVELOPER</span>
+                                <span class="px-2.5 py-0.5 text-xs font-display font-extrabold uppercase border-2 border-[#FFFFFF] text-[#FFFFFF]">NEXT.JS</span>
+                                <span class="px-2.5 py-0.5 text-xs font-display font-extrabold uppercase border-2 border-[#FFFFFF] text-[#FFFFFF]">SUPABASE</span>
+                            </div>
+                            <h4 class="font-editorial text-3xl sm:text-4xl md:text-5xl text-[#FFFFFF] leading-none">
+                                Caturnawa 2026 &mdash; UNAS FEST
+                            </h4>
+                            <p class="text-sm md:text-base text-[#E5E5E5] leading-relaxed" data-key="timeline_5">
+                                Milestone terbaru: proyek produksi kolaboratif bersama Tim IT Universitas Nasional untuk sistem manajemen &amp; penilaian kompetisi nasional UNAS FEST. Berkontribusi sebagai Backend Developer menggunakan Next.js dan Supabase (database, autentikasi, API, registrasi, verifikasi, dan scoring/leaderboard).
+                            </p>
+                        </div>
+                        <div class="flex lg:flex-col items-center lg:items-end justify-between gap-4 shrink-0">
+                            <span class="comic-number-stamp text-6xl sm:text-7xl text-[#FFFFFF] opacity-90">05</span>
+                            <button type="button" onclick="openModal('caturnawa', this)" class="px-5 py-2.5 bg-[#FFFFFF] text-[#111111] font-display font-extrabold text-xs sm:text-sm uppercase tracking-wider border-2 border-[#FFFFFF] shadow-[4px_4px_0_rgba(255,255,255,0.35)] hover:-translate-y-0.5 transition-transform cursor-pointer" data-key="tl_caturnawa_cta">
+                                Lihat Case Study &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- PROJECTS — POP-ART IMPACT SHOWCASE -->
+        <section id="projects" class="relative py-16 md:py-24 reveal">
+            <!-- Full-Section Pop-Art Impact Environment + Phase 6 Layered Depth Parallax -->
+            <div class="env-backdrop projects-comic-env" aria-hidden="true">
+                <div class="proj-bg-noir-top" data-parallax="0.14"></div>
+                <div class="proj-bg-halftone-band" data-parallax="-0.12"></div>
+                <div class="proj-bg-screentone-low" data-parallax="0.16"></div>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <p class="font-accent text-2xl text-[var(--muted-ink)] -rotate-1 inline-block"
+                        data-key="proj_kicker">Things I've Built</p>
+                    <h3 class="font-editorial text-4xl md:text-6xl text-[var(--ink)] leading-none"
+                        data-key="proj_title">Featured Projects</h3>
+                    <p class="text-[var(--soft-ink)] font-medium mt-2 text-sm md:text-base" data-key="proj_subtitle">Klik kartu
+                        untuk detail &rarr;</p>
+                </div>
+                <span class="comic-caption-box self-start md:self-auto">09 ISSUES &middot; PRODUCTION &amp; LAB</span>
+            </div>
+
+            <!-- PHASE 5: COMIC ISSUE SHOWCASE (Full-Width Production Band + 60/40 Pair + 3x2 Archive) -->
+            <div class="space-y-6">
+
+                <!-- ISSUE #01 — FULL-WIDTH PRODUCTION CASE STUDY: Caturnawa 2026 (UNAS FEST) -->
+                <button type="button" onclick="openModal('caturnawa', this)" data-sfx="BAM!"
+                    style="--card-tilt: -0.3deg; --stagger-idx: 0; --enter-tilt: -0.5deg;"
+                    class="issue-card comic-stagger group w-full overflow-hidden flex flex-col relative">
+                    <div class="issue-header-bar w-full">
+                        <span>ISSUE #01 &middot; PRODUCTION RELEASE</span>
+                        <span>UNAS FEST 2026 &middot; BACKEND DEV</span>
+                    </div>
+                    <div class="flex flex-col lg:flex-row w-full">
+                        <div
+                            class="lg:w-6/12 min-h-[230px] lg:min-h-[290px] bg-[var(--warm-paper)] border-b-[2.5px] lg:border-b-0 lg:border-r-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-caturnawa.png" alt="Preview Caturnawa 2026 UNAS FEST"
+                                class="w-full h-full object-cover object-top mono-reveal-img" loading="lazy">
+                            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                                <span class="status-pill status-pill-live" data-key="badge_production">Production</span>
+                            </div>
+                            <span
+                                class="card-action-burst absolute bottom-3 right-3 px-2.5 py-0.5 text-[11px] font-sfx tracking-wider bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="lg:w-6/12 p-6 sm:p-8 flex flex-col justify-between gap-5">
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="ink-stamp" data-key="badge_collab">Collaborative</span>
+                                    <span class="ink-stamp bg-[var(--surface)]" data-key="badge_backend">Backend Dev</span>
+                                </div>
+                                <h4
+                                    class="font-editorial text-2xl md:text-4xl text-[var(--ink)] leading-none">
+                                    Caturnawa 2026 (UNAS FEST)</h4>
+                                <p class="text-sm md:text-base text-[var(--soft-ink)] leading-relaxed"
+                                    data-key="card_desc_caturnawa">
+                                    Sistem manajemen &amp; penilaian kompetisi nasional UNAS FEST yang telah live di
+                                    production. Berkontribusi sebagai Backend Developer dalam tim IT Universitas Nasional.
+                                </p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-3 pt-3 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <div class="flex gap-2 flex-wrap">
+                                    <span class="ink-stamp">Next.js</span>
+                                    <span class="ink-stamp">Supabase</span>
+                                </div>
+                                <span
+                                    class="font-display text-xs md:text-sm font-extrabold text-[var(--ink)] shrink-0 group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </div>
+                </button>
+
+                <!-- ROW 2 — 60% / 40% ASYMMETRIC PAIR: TrackerThings + InsightPlus -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- ISSUE #02. TrackerThings (7 cols) -->
+                    <button type="button" onclick="openModal('tracker', this)" data-sfx="BAM!"
+                        style="--card-tilt: 0.45deg; --stagger-idx: 1; --enter-tilt: 0.5deg;"
+                        class="issue-card comic-stagger group lg:col-span-7 overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #02 &middot; MULTI-PLATFORM</span>
+                            <span data-key="badge_live_web">LIVE WEB</span>
+                        </div>
+                        <div
+                            class="h-52 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-tracker.png" alt="Preview TrackerThings"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-3 right-3 px-2.5 py-0.5 text-[11px] font-sfx tracking-wider bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-6 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div class="space-y-2.5">
+                                <h4 class="font-editorial text-2xl md:text-3xl text-[var(--ink)] leading-none">
+                                    TrackerThings</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] leading-relaxed"
+                                    data-key="card_desc_tracker">Platform manajemen akademik lintas platform — live di
+                                    web (Next.js) &amp; ekspansi ke mobile.</p>
+                                <div class="flex flex-wrap gap-1.5 pt-1">
+                                    <span class="status-pill status-pill-live" data-key="tracker_plat_web">Web &middot;
+                                        Next.js</span>
+                                    <span class="status-pill status-pill-dev" data-key="tracker_plat_ios">iOS &middot;
+                                        Swift (Dev)</span>
+                                    <span class="status-pill status-pill-planned"
+                                        data-key="tracker_plat_android">Android (Planned)</span>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2.5 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <span class="font-accent text-base text-[var(--muted-ink)]">multi-platform</span>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
                     </button>
-                </form>
-                <div id="form-status" class="hidden mt-4 text-center p-4 rounded-xl text-sm font-bold animate-pulse"></div>
+
+                    <!-- ISSUE #03. InsightPlus (5 cols) -->
+                    <button type="button" onclick="openModal('iconplus', this)" data-sfx="BAM!"
+                        style="--card-tilt: -0.5deg; --stagger-idx: 2; --enter-tilt: -0.5deg;"
+                        class="issue-card comic-stagger group lg:col-span-5 overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #03 &middot; ENTERPRISE</span>
+                            <span>INTERNAL APP</span>
+                        </div>
+                        <div
+                            class="h-52 w-full halftone-bg bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] p-4 flex flex-col justify-center relative">
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div
+                                    class="p-2.5 bg-[var(--surface)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)] text-[11px] font-display font-extrabold">
+                                    <i class="fas fa-sitemap mr-1.5" aria-hidden="true"></i>Directory
+                                </div>
+                                <div
+                                    class="p-2.5 bg-[var(--surface)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)] text-[11px] font-display font-extrabold">
+                                    <i class="fas fa-user-check mr-1.5" aria-hidden="true"></i>Talent
+                                </div>
+                                <div
+                                    class="p-2.5 bg-[var(--surface)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)] text-[11px] font-display font-extrabold">
+                                    <i class="fas fa-user-tie mr-1.5" aria-hidden="true"></i>PM Gov
+                                </div>
+                                <div
+                                    class="p-2.5 bg-[var(--surface)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)] text-[11px] font-display font-extrabold">
+                                    <i class="fas fa-cubes mr-1.5" aria-hidden="true"></i>Apps
+                                </div>
+                            </div>
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2.5 py-0.5 text-[11px] font-sfx tracking-wider bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-6 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-2xl text-[var(--ink)] leading-none mb-2">IT Support App
+                                    (InsightPlus)</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] leading-relaxed"
+                                    data-key="card_desc_iconplus">App manajemen tiket &amp; talent IT (PKL).</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2.5 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <div class="flex gap-1.5">
+                                    <span class="ink-stamp">Laravel 11</span>
+                                    <span class="ink-stamp">MySQL</span>
+                                </div>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- ROWS 3 & 4 — 3x2 COMIC ISSUE ARCHIVE GRID (ZERO ORPHANS) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- ISSUE #04. KotaKita -->
+                    <button type="button" onclick="openModal('kotakita', this)" data-sfx="BAM!"
+                        style="--card-tilt: 0.5deg; --stagger-idx: 3; --enter-tilt: 0.5deg;"
+                        class="issue-card comic-stagger group overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #04</span>
+                            <span>UI/UX &middot; SMART CITY</span>
+                        </div>
+                        <div
+                            class="h-44 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-kotakita.png" alt="Preview KotaKita Smart City"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2 py-0.5 text-[11px] font-sfx bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-5 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-xl text-[var(--ink)] leading-none mb-2">KotaKita</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] line-clamp-2"
+                                    data-key="card_desc_kotakita">Platform Smart City &amp; Pelaporan Publik.</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <span class="ink-stamp">UI/UX &middot; Figma</span>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- ISSUE #05. Festivo -->
+                    <button type="button" onclick="openModal('festivo', this)" data-sfx="BAM!"
+                        style="--card-tilt: -0.5deg; --stagger-idx: 4; --enter-tilt: -0.5deg;"
+                        class="issue-card comic-stagger group overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #05</span>
+                            <span>WEB &middot; TICKETING</span>
+                        </div>
+                        <div
+                            class="h-44 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-festivo.png" alt="Preview Festivo Ticketing"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2 py-0.5 text-[11px] font-sfx bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-5 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-xl text-[var(--ink)] leading-none mb-2">Festivo</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] line-clamp-2"
+                                    data-key="card_desc_festivo">Layanan web pembelian tiket konser/festival.</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <span class="ink-stamp">Laravel</span>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- ISSUE #06. Warehouse Dashboard -->
+                    <button type="button" onclick="openModal('gudang', this)" data-sfx="BAM!"
+                        style="--card-tilt: 0.5deg; --stagger-idx: 5; --enter-tilt: 0.5deg;"
+                        class="issue-card comic-stagger group overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #06</span>
+                            <span>UI/UX &middot; DASHBOARD</span>
+                        </div>
+                        <div
+                            class="h-44 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-gudang.png" alt="Preview Warehouse Management Dashboard"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2 py-0.5 text-[11px] font-sfx bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-5 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-xl text-[var(--ink)] leading-none mb-2">Warehouse
+                                    Dashboard</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] line-clamp-2"
+                                    data-key="card_desc_gudang">Desain sistem manajemen stok gudang (PKL).</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <span class="ink-stamp">UI/UX</span>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- ISSUE #07. SplitBuddy -->
+                    <button type="button" onclick="openModal('splitbuddy', this)" data-sfx="BAM!"
+                        style="--card-tilt: -0.5deg; --stagger-idx: 6; --enter-tilt: -0.5deg;"
+                        class="issue-card comic-stagger group overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #07</span>
+                            <span>UI/UX &middot; FINTECH</span>
+                        </div>
+                        <div
+                            class="h-44 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-splitbuddy.png" alt="Preview SplitBuddy App"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2 py-0.5 text-[11px] font-sfx bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-5 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-xl text-[var(--ink)] leading-none mb-2">SplitBuddy</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] line-clamp-2"
+                                    data-key="card_desc_splitbuddy">Aplikasi split payment / pembayaran patungan
+                                    bersama.</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <span class="ink-stamp">UI/UX &middot; Mobile</span>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- ISSUE #08. React To-Do Web -->
+                    <button type="button" onclick="openModal('todo', this)" data-sfx="BAM!"
+                        style="--card-tilt: 0.5deg; --stagger-idx: 7; --enter-tilt: 0.5deg;"
+                        class="issue-card comic-stagger group overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #08</span>
+                            <span>LIVE &middot; VERCEL</span>
+                        </div>
+                        <div
+                            class="h-44 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-todo.png" alt="Preview React To-Do Web"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2 py-0.5 text-[11px] font-sfx bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-5 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-xl text-[var(--ink)] leading-none mb-2">React To-Do Web</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] line-clamp-2"
+                                    data-key="card_desc_todo">Aplikasi manajemen tugas interaktif live di Vercel.</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <span class="ink-stamp">React JS</span>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- ISSUE #09. iAnalytics (AI Parser) -->
+                    <button type="button" onclick="openModal('ianalytics', this)" data-sfx="BAM!"
+                        style="--card-tilt: -0.5deg; --stagger-idx: 8; --enter-tilt: -0.5deg;"
+                        class="issue-card comic-stagger group overflow-hidden flex flex-col relative">
+                        <div class="issue-header-bar w-full">
+                            <span>ISSUE #09</span>
+                            <span>PYTHON &middot; GEMINI AI</span>
+                        </div>
+                        <div
+                            class="h-44 w-full bg-[var(--warm-paper)] border-b-[2.5px] border-[var(--border-ink)] overflow-hidden relative">
+                            <img src="img/project-analytics.png" alt="Preview iAnalytics AI Parser"
+                                class="w-full h-full object-cover mono-reveal-img" loading="lazy">
+                            <span
+                                class="card-action-burst absolute bottom-2.5 right-2.5 px-2 py-0.5 text-[11px] font-sfx bg-[var(--paper)] text-[var(--ink)] border-2 border-[var(--border-ink)] shadow-[2px_2px_0_var(--shadow-ink)]">BAM!</span>
+                        </div>
+                        <div class="p-5 flex-1 w-full flex flex-col justify-between gap-4">
+                            <div>
+                                <h4 class="font-editorial text-xl text-[var(--ink)] leading-none mb-2">iAnalytics (AI
+                                    Parser)</h4>
+                                <p class="text-xs md:text-sm text-[var(--soft-ink)] line-clamp-2"
+                                    data-key="card_desc_ianalytics">Python parsing log iPhone terintegrasi Gemini API
+                                    untuk analisis keaslian perangkat, Battery Health, dan diagnosis error hardware
+                                    kritis.</p>
+                            </div>
+                            <div
+                                class="flex items-center justify-between gap-2 pt-2 border-t-2 border-dashed border-[var(--sketch-line)]">
+                                <div class="flex gap-1.5 flex-wrap">
+                                    <span class="ink-stamp">Python</span>
+                                    <span class="ink-stamp">Gemini AI</span>
+                                </div>
+                                <span
+                                    class="font-display text-xs font-extrabold text-[var(--ink)] shrink-0 group-hover:translate-x-1 transition-transform"
+                                    data-key="proj_open_hint">Detail &rarr;</span>
+                            </div>
+                        </div>
+                    </button>
+                </div>
             </div>
         </section>
 
-        <footer id="footer" class="glass-card rounded-t-[2rem] md:rounded-t-[3rem] p-8 md:p-10 mt-10 text-center relative overflow-hidden reveal">
-            <div class="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"></div>
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white mb-6">Let's Connect!</h2>
-            <div class="flex justify-center gap-6">
-                <a href="https://www.instagram.com/bieurs_" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-pink-500 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/riuusix" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-slate-800 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/budinurrahman/" class="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-md text-blue-600 hover:scale-110 transition text-xl md:text-2xl"><i class="fab fa-linkedin-in"></i></a>
+        <!-- BEYOND CODING — PLAYFUL GRAPHIC PLAYGROUND -->
+        <section id="vibe" class="relative py-20 md:py-28 reveal">
+            <!-- Full-Section Graphic Playground Environment + Phase 6 Playful Scrapbook Parallax -->
+            <div class="env-backdrop vibe-comic-env" aria-hidden="true">
+                <div class="vibe-bg-checker-top" data-parallax-x="0.12"></div>
+                <div class="vibe-bg-crosshatch" data-parallax="0.10"></div>
+                <div class="vibe-bg-circle" data-parallax="-0.16" data-parallax-x="-0.08"></div>
+                <div class="vibe-bg-checker-bottom" data-parallax-x="-0.12"></div>
             </div>
-            <p class="text-slate-400 text-xs md:text-sm mt-8 md:mt-12">&copy; 2025 Nara. All rights reserved.</p>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <p class="font-accent text-2xl text-[var(--muted-ink)] -rotate-1 inline-block"
+                        data-key="vibe_kicker">The Human Side</p>
+                    <h3 class="font-editorial text-4xl md:text-6xl text-[var(--ink)] leading-none"
+                        data-key="vibe_title">Beyond Coding</h3>
+                    <p class="text-[var(--soft-ink)] font-medium mt-2 text-sm md:text-base" data-key="vibe_subtitle">Kenali aku
+                        lebih dekat di luar urusan kode.</p>
+                </div>
+                <span class="comic-caption-box self-start md:self-auto">OFF-DUTY &middot; PLAYGROUND</span>
+            </div>
+
+            <!-- PHASE 5: INTERACTIVE COMIC SCRAPBOOK -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+                <!-- Left: Observer Character Note Panel with Comic Dialogue Bubble (7 cols) -->
+                <article
+                    class="lg:col-span-7 bg-[var(--surface)] border-[3px] border-[var(--border-ink)] shadow-[9px_9px_0_var(--shadow-ink)] overflow-hidden flex flex-col">
+                    <div class="c-panel-bar">
+                        <span>SCRAPBOOK // PERSONAL LOG</span>
+                        <span>OFF-DUTY MINDSET</span>
+                    </div>
+                    <div class="p-6 sm:p-8 flex flex-col justify-between gap-6">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="ink-stamp bg-[var(--warm-paper)] mb-2">CHARACTER NOTE</span>
+                                <h4 class="font-editorial text-3xl md:text-4xl text-[var(--ink)] leading-none">The
+                                    Introverted Observer</h4>
+                            </div>
+                            <!-- Custom Monochrome Thought-Spark SVG -->
+                            <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                                stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+                                class="text-[var(--ink)] shrink-0" aria-hidden="true">
+                                <path d="M18 36a14 14 0 1 1 28 0c0 6-4 9-6 13H24c-2-4-6-7-6-13z" fill="var(--warm-paper)" />
+                                <path d="M25 54h14M27 59h10" />
+                                <path d="M32 10v-5M12 22l-4-3M52 22l4-3M27 32c2-3 8-3 10 0" />
+                            </svg>
+                        </div>
+
+                        <div class="dialogue-bubble">
+                            <p class="text-sm md:text-base text-[var(--soft-ink)] leading-relaxed text-justify"
+                                data-key="vibe_desc">
+                                Seorang introvert yang tetap punya energi untuk aktif dan bersosialisasi. Aku mungkin agak
+                                pemilih untuk urusan <i>inner circle</i>, tapi aku sangat terbuka dan berempati dengan siapa
+                                saja karena pada dasarnya aku adalah orang yang perasa. Sebagai seorang <i>overthinker</i>, aku
+                                terbiasa menganalisis sesuatu dari berbagai sudut pandang—sebuah sifat yang nyatanya sangat
+                                membantuku saat harus <i>debugging</i> kode yang rumit atau merancang <i>user flow</i> yang
+                                ramah pengguna!
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-3 border-t-2 border-dashed border-[var(--sketch-line)] pt-3">
+                            <span class="comic-caption-box text-[11px] py-0.5 px-2">TRAIT: EMPATHIC ANALYST</span>
+                            <p class="font-accent text-xl text-[var(--muted-ink)] text-right" data-key="vibe_signoff">&mdash;
+                                overthinking turned into clean UX</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Right: Tilted Taped Scrapbook Folders (5 cols) -->
+                <div class="lg:col-span-5 flex flex-col gap-5">
+                    <!-- GAMING (Clickable Scrapbook Folder -> Opens Folder Drawer) -->
+                    <button type="button" onclick="openFolder('gaming')" style="--folder-tilt: -1.3deg;"
+                        class="scrapbook-folder scrapbook-folder-btn group w-full">
+                        <div class="tape-strip -top-2.5 right-6 rotate-3" aria-hidden="true"></div>
+                        <div class="flex items-center justify-between border-b-2 border-[var(--border-ink)] bg-[var(--warm-paper)] pr-3">
+                            <span class="scrapbook-tab"><i class="fas fa-gamepad" aria-hidden="true"></i> GAMING FOLDER</span>
+                            <span class="font-accent text-base text-[var(--muted-ink)] group-hover:translate-x-0.5 transition-transform"
+                                data-key="vibe_open_folder">buka folder &rarr;</span>
+                        </div>
+                        <div class="p-4 flex items-start gap-3.5">
+                            <div
+                                class="w-11 h-11 bg-[var(--warm-paper)] border-2 border-[var(--border-ink)] flex items-center justify-center shrink-0 group-hover:-rotate-6 transition-transform">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="3" y="8" width="22" height="13" rx="6" fill="var(--paper)" />
+                                    <path d="M9 12v5M6.5 14.5h5" />
+                                    <circle cx="18.5" cy="13.5" r="1" fill="currentColor" />
+                                    <circle cx="21" cy="15.5" r="1" fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-editorial text-lg text-[var(--ink)] leading-tight mb-1">Gamer at Heart</h4>
+                                <p class="text-xs text-[var(--soft-ink)] leading-relaxed" data-key="vibe_game">Cara terbaik
+                                    buat <i>refreshing</i> otak. Entah itu <i>push rank</i>, main RPG, atau membangun rute
+                                    di game simulasi.</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- MUSIC (Clickable Scrapbook Folder -> Opens Folder Drawer) -->
+                    <button type="button" onclick="openFolder('music')" style="--folder-tilt: 1.3deg;"
+                        class="scrapbook-folder scrapbook-folder-btn group w-full">
+                        <div class="tape-strip -top-2.5 right-8 -rotate-2" aria-hidden="true"></div>
+                        <div class="flex items-center justify-between border-b-2 border-[var(--border-ink)] bg-[var(--warm-paper)] pr-3">
+                            <span class="scrapbook-tab"><i class="fas fa-headphones" aria-hidden="true"></i> MUSIC FOLDER</span>
+                            <span class="font-accent text-base text-[var(--muted-ink)] group-hover:translate-x-0.5 transition-transform"
+                                data-key="vibe_open_folder">buka folder &rarr;</span>
+                        </div>
+                        <div class="p-4 flex items-start gap-3.5">
+                            <div
+                                class="w-11 h-11 bg-[var(--warm-paper)] border-2 border-[var(--border-ink)] flex items-center justify-center shrink-0 group-hover:rotate-6 transition-transform">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M5 17v-3a9 9 0 0 1 18 0v3" />
+                                    <rect x="4" y="16" width="4.5" height="7" rx="2" fill="var(--paper)" />
+                                    <rect x="19.5" y="16" width="4.5" height="7" rx="2" fill="var(--paper)" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-editorial text-lg text-[var(--ink)] leading-tight mb-1">Music Enthusiast</h4>
+                                <p class="text-xs text-[var(--soft-ink)] leading-relaxed" data-key="vibe_music">Selalu ada
+                                    <i>soundtrack</i> emosional buat menemani setiap baris kode yang ditulis.
+                                </p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <!-- FANTASY & ANIME (Scrapbook Log Card) -->
+                    <article style="--folder-tilt: -0.9deg;" class="scrapbook-folder w-full">
+                        <div class="tape-strip -top-2.5 right-6 rotate-2" aria-hidden="true"></div>
+                        <div class="flex items-center justify-between border-b-2 border-[var(--border-ink)] bg-[var(--warm-paper)] pr-3">
+                            <span class="scrapbook-tab"><i class="fas fa-book-open" aria-hidden="true"></i> FANTASY LOG</span>
+                            <span class="font-accent text-base text-[var(--muted-ink)]">books &amp; anime</span>
+                        </div>
+                        <div class="p-4 flex items-start gap-3.5">
+                            <div
+                                class="w-11 h-11 bg-[var(--warm-paper)] border-2 border-[var(--border-ink)] flex items-center justify-center shrink-0">
+                                <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path
+                                        d="M4 7c3-1.5 7-1.5 10 1 3-2.5 7-2.5 10-1v14c-3-1.5-7-1.5-10 1-3-2.5-7-2.5-10-1V7z"
+                                        fill="var(--paper)" />
+                                    <path d="M14 8v14" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-editorial text-lg text-[var(--ink)] leading-tight mb-1">Fantasy Seeker</h4>
+                                <p class="text-xs text-[var(--soft-ink)] leading-relaxed" data-key="vibe_fantasy">Suka
+                                    banget tenggelam dalam buku atau anime bergenre fantasi, walau tetap <i>open</i> ke
+                                    genre seru lainnya.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT & FOOTER — COMIC FINALE (Expanding Radial Starburst + Opposing Noir Wedges) -->
+        <div class="relative py-16 md:py-24" data-parallax-host>
+            <div class="env-backdrop contact-comic-env" aria-hidden="true">
+                <div class="contact-bg-burst" data-parallax-scale="0.08"></div>
+                <div class="contact-bg-wedge-tl" data-parallax="0.16" data-parallax-x="-0.10"></div>
+                <div class="contact-bg-wedge-br" data-parallax="-0.16" data-parallax-x="0.10"></div>
+                <!-- Subtle SVG Impact Starburst Outline -->
+                <svg class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[680px] text-[var(--ink)] opacity-[0.06]" data-parallax-scale="0.10" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+                    <polygon points="100,4 116,46 160,18 144,64 194,74 156,106 184,152 136,144 128,194 98,158 64,190 64,142 16,150 42,106 6,72 56,64 42,18 84,46"/>
+                </svg>
+            </div>
+
+        <section id="contact" class="reveal">
+            <div class="max-w-4xl mx-auto bg-[var(--surface)] border-[3px] border-[var(--border-ink)] shadow-[9px_9px_0_var(--shadow-ink)] p-6 sm:p-8 md:p-10 relative overflow-hidden">
+                <!-- Subtle Halftone Corner -->
+                <div class="absolute top-0 right-0 w-36 h-36 halftone-bg opacity-70 pointer-events-none"
+                    aria-hidden="true"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+                    <!-- Left Conversational Header + Cartoon Envelope (5 cols) -->
+                    <div class="md:col-span-5 space-y-4">
+                        <div class="speech-bubble">
+                            <span class="font-editorial text-sm tracking-widest uppercase"
+                                data-key="contact_kicker">Say Hello!</span>
+                        </div>
+                        <h3 class="font-editorial text-4xl md:text-5xl text-[var(--ink)] leading-none pt-1"
+                            data-key="contact_title">Kirimi Aku Pesan</h3>
+                        <p class="text-[var(--soft-ink)] text-sm md:text-base leading-relaxed" data-key="contact_sub">
+                            Tertarik kolaborasi? Yuk diskusi bareng!</p>
+
+                        <!-- Custom Monochrome Cartoon Envelope SVG + Celebratory Comic Burst + Directional Arrow -->
+                        <div class="pt-2 flex items-center gap-4">
+                            <div class="relative inline-block">
+                                <svg id="envelope-burst"
+                                    class="comic-burst -inset-4 w-[calc(100%+2rem)] h-[calc(100%+2rem)] text-[var(--ink)]"
+                                    viewBox="0 0 180 120" fill="none" stroke="currentColor" stroke-width="2.6"
+                                    stroke-linecap="round" aria-hidden="true">
+                                    <path
+                                        d="M90 4v12M20 16l10 10M160 16l-10 10M8 60h12M160 60h12M26 106l10-10M154 106l-10-10" />
+                                </svg>
+                                <svg id="contact-envelope" class="envelope-svg w-36 h-24 text-[var(--ink)] relative z-10"
+                                    viewBox="0 0 150 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="14" y="22" width="116" height="66" rx="2" fill="var(--warm-paper)"
+                                        stroke="currentColor" stroke-width="3" />
+                                    <path d="M16 26L72 62L128 26" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M18 84L54 54M126 84L90 54" stroke="currentColor" stroke-width="2.4"
+                                        stroke-linecap="round" />
+                                    <!-- Ink Stamp Seal -->
+                                    <circle cx="72" cy="58" r="10" fill="var(--ink)" />
+                                    <path d="M68 58l3 3 5-6" stroke="var(--paper)" stroke-width="2.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <!-- Motion Lines -->
+                                    <path d="M2 34h7M0 46h9M3 58h6" stroke="currentColor" stroke-width="2.2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <!-- Hand-drawn directional arrow pointing to the form on md+ -->
+                            <svg class="hidden md:block w-16 h-10 text-[var(--ink)] shrink-0" viewBox="0 0 72 44" fill="none"
+                                stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 30 C22 10, 44 10, 64 22" />
+                                <path d="M55 12 L66 23 L52 28" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Right Accessible Form (7 cols — Sharp Comic Inputs, Preserves Formspree Integration) -->
+                    <div class="md:col-span-7">
+                        <form id="contact-form" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contact-name"
+                                        class="block text-xs font-display font-extrabold uppercase tracking-wider mb-1.5 text-[var(--ink)]"
+                                        data-key="form_label_name">Nama</label>
+                                    <input id="contact-name" type="text" name="name" required placeholder="Nama Kamu"
+                                        data-placeholder-key="form_ph_name"
+                                        class="comic-input placeholder:text-[var(--muted-ink)]">
+                                </div>
+                                <div>
+                                    <label for="contact-email"
+                                        class="block text-xs font-display font-extrabold uppercase tracking-wider mb-1.5 text-[var(--ink)]"
+                                        data-key="form_label_email">Email</label>
+                                    <input id="contact-email" type="email" name="email" required
+                                        placeholder="Email Kamu" data-placeholder-key="form_ph_email"
+                                        class="comic-input placeholder:text-[var(--muted-ink)]">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="contact-message"
+                                    class="block text-xs font-display font-extrabold uppercase tracking-wider mb-1.5 text-[var(--ink)]"
+                                    data-key="form_label_message">Pesan</label>
+                                <textarea id="contact-message" name="message" required placeholder="Tulis pesan..."
+                                    data-placeholder-key="form_ph_message" rows="4"
+                                    class="comic-input placeholder:text-[var(--muted-ink)]"></textarea>
+                            </div>
+                            <button type="submit" id="submit-btn"
+                                class="w-full ink-btn ink-btn-primary !rounded-none py-3.5 text-sm md:text-base uppercase tracking-wider">
+                                <span data-key="btn_send">Kirim Pesan</span>
+                                <i class="fas fa-spinner fa-spin hidden" id="loading-icon" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                        <div id="form-status" role="status" aria-live="polite"
+                            class="hidden mt-4 text-center p-3.5 border-2 border-[var(--border-ink)] text-sm font-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER — BOLD INVERTED COMIC COLOPHON SIGN-OFF -->
+        <footer id="footer"
+            class="max-w-4xl mx-auto mt-10 bg-[#111111] text-[#FFFFFF] border-[3px] border-[var(--border-ink)] shadow-[8px_8px_0_var(--shadow-ink)] p-8 md:p-10 text-center relative overflow-hidden reveal">
+            <div class="flex flex-col items-center gap-5">
+                <a href="#home" class="inline-flex items-center gap-2.5">
+                    <span
+                        class="w-9 h-9 bg-[#FFFFFF] text-[#111111] font-editorial text-xl flex items-center justify-center border-2 border-[#FFFFFF]">N</span>
+                    <span class="font-editorial text-3xl tracking-wider text-[#FFFFFF]">NARA<span
+                            class="font-accent text-3xl leading-none">.</span></span>
+                </a>
+
+                <p class="font-accent text-2xl text-[#E5E5E5]" data-key="footer_connect">Let's Connect &amp;
+                    Draw Something Great!</p>
+
+                <!-- Inked Social Stamps (Preserved Links) -->
+                <div class="flex justify-center gap-4">
+                    <a href="https://www.instagram.com/bieurs_" target="_blank" rel="noopener noreferrer"
+                        aria-label="Instagram Budi Nur Rahman" class="w-12 h-12 flex items-center justify-center bg-[#FFFFFF] text-[#111111] border-2 border-[#FFFFFF] shadow-[3px_3px_0_rgba(255,255,255,0.35)] hover:-translate-y-1 transition-transform text-xl">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://github.com/riuusix" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub Budi Nur Rahman" class="w-12 h-12 flex items-center justify-center bg-[#FFFFFF] text-[#111111] border-2 border-[#FFFFFF] shadow-[3px_3px_0_rgba(255,255,255,0.35)] hover:-translate-y-1 transition-transform text-xl">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/budinurrahman/" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn Budi Nur Rahman" class="w-12 h-12 flex items-center justify-center bg-[#FFFFFF] text-[#111111] border-2 border-[#FFFFFF] shadow-[3px_3px_0_rgba(255,255,255,0.35)] hover:-translate-y-1 transition-transform text-xl">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <!-- Optional Easter Egg: Clickable Hand-Drawn Signature Doodle -->
+                <div class="flex flex-col items-center gap-1 pt-2">
+                    <button type="button" id="footer-doodle"
+                        class="group px-3 py-1 hover:bg-white/10 transition cursor-pointer"
+                        aria-label="Klik tanda tangan doodle Nara" data-aria-key="aria_footer_doodle">
+                        <svg width="132" height="32" viewBox="0 0 132 32" fill="none" stroke="currentColor"
+                            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="text-[#FFFFFF]"
+                            aria-hidden="true">
+                            <path
+                                d="M6 24C14 8 20 8 24 22C28 12 36 10 42 21C48 13 58 12 66 20C74 14 84 16 96 18C106 19 116 14 126 11" />
+                            <path d="M118 22l4-4 4 4" stroke-width="2" />
+                        </svg>
+                    </button>
+                    <span id="footer-doodle-note" role="status" aria-live="polite"
+                        class="font-accent text-base text-[#FFFFFF] opacity-0 transition-opacity duration-200"
+                        data-key="footer_doodle_msg">
+                        Terima kasih sudah mampir!
+                    </span>
+                </div>
+
+                <div class="w-full max-w-md border-t-2 border-dashed border-white/25 my-1" aria-hidden="true"></div>
+                <p class="text-[#B5B5B5] text-xs font-display font-semibold">&copy; 2025–2026 Budi Nur Rahman</p>
+            </div>
         </footer>
+        </div>
     </main>
 
-<div id="project-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4">
-        
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
-        
-        <div id="modal-card" class="relative bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-0 md:p-1 border border-slate-200 dark:border-slate-700">
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition shadow-sm"><i class="fas fa-times dark:text-white"></i></button>
-            <div class="p-6 space-y-6">
-                <h3 id="modal-title" class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white pr-8">Project Title</h3>
-                <div class="w-full h-48 md:h-64 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-inner"><i class="fas fa-image text-4xl text-slate-300"></i><img id="modal-img" src="" class="w-full h-full object-cover hidden" loading="lazy"></div>
-                <div class="space-y-2">
-                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-xs md:text-sm uppercase tracking-wider">Deskripsi Project</h4>
-                    <p id="modal-desc" class="text-slate-600 dark:text-gray-400 text-xs md:text-sm leading-relaxed text-justify">...</p>
+    <div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true"
+        class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+
+        <div class="absolute inset-0 modal-halftone-scrim" onclick="closeModal()"></div>
+
+        <div id="modal-card" class="relative comic-panel w-full max-w-2xl max-h-[90vh] overflow-y-auto p-0">
+            <div class="c-panel-bar">
+                <span>PROJECT CASE FILE // PORTFOLIO</span>
+                <span>ESC TO CLOSE</span>
+            </div>
+            <button type="button" id="modal-close-btn" aria-label="Tutup detail project"
+                data-aria-key="aria_close_modal" onclick="closeModal()"
+                class="absolute top-12 right-4 z-10 ink-btn ink-btn-secondary !rounded-none w-9 h-9"><i class="fas fa-times"
+                    aria-hidden="true"></i></button>
+            <div class="p-6 space-y-5">
+                <div class="space-y-2 pr-10 modal-stagger" data-stagger="1">
+                    <div id="modal-meta-badges" class="flex flex-wrap gap-1.5 empty:hidden"></div>
+                    <h3 id="modal-title" class="font-editorial text-2xl md:text-3xl text-[var(--ink)] leading-tight">
+                        Project Title</h3>
                 </div>
-                <div>
-                    <h4 class="font-bold text-slate-700 dark:text-gray-200 text-xs md:text-sm uppercase tracking-wider mb-2">Tech Stack</h4>
+                <div
+                    class="modal-stagger w-full h-48 md:h-64 bg-[var(--warm-paper)] overflow-hidden flex items-center justify-center border-[2.5px] border-[var(--border-ink)] relative"
+                    data-stagger="2">
+                    <i class="fas fa-image text-4xl text-[var(--muted-ink)]" aria-hidden="true"></i><img id="modal-img"
+                        src="" alt="" class="w-full h-full object-cover object-top hidden" loading="lazy">
+                </div>
+                <div class="space-y-2 modal-stagger" data-stagger="3">
+                    <h4 class="font-display font-bold text-[var(--soft-ink)] text-xs md:text-sm uppercase tracking-wider"
+                        data-key="modal_desc_label">Deskripsi Project</h4>
+                    <p id="modal-desc" class="text-[var(--soft-ink)] text-xs md:text-sm leading-relaxed text-justify">
+                        ...</p>
+                </div>
+                <!-- Dynamic Extra Details (Backend Contributions / Multi-Platform Status) -->
+                <div id="modal-extra-section"
+                    class="hidden space-y-2.5 p-4 bg-[var(--warm-paper)] border-2 border-[var(--border-ink)] modal-stagger"
+                    data-stagger="3">
+                    <h4 id="modal-extra-title"
+                        class="font-display font-extrabold text-[var(--ink)] text-xs md:text-sm uppercase tracking-wider">
+                    </h4>
+                    <div id="modal-extra-body" class="space-y-2 text-xs md:text-sm text-[var(--soft-ink)]"></div>
+                </div>
+                <div class="modal-stagger" data-stagger="4">
+                    <h4 class="font-display font-bold text-[var(--soft-ink)] text-xs md:text-sm uppercase tracking-wider mb-2"
+                        data-key="modal_tech_label">Tech Stack</h4>
                     <div id="modal-tags" class="flex gap-2 flex-wrap"></div>
                 </div>
-                
-                <div id="modal-link-container" class="pt-2 hidden">
-                    <a id="modal-link" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-700 dark:hover:bg-gray-200 transition text-sm">
-                        <i class="fas fa-external-link-alt"></i> Lihat Project
+
+                <div id="modal-link-container" class="pt-2 hidden modal-stagger" data-stagger="4">
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer"
+                        class="ink-btn ink-btn-primary !rounded-none px-6 py-2.5 text-sm">
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> <span
+                            data-key="modal_view_project">Lihat Project</span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-<!-- IOS FOLDER MODAL -->
-    <div id="ios-folder" class="fixed inset-0 z-[70] flex items-center justify-center p-6">
-        <!-- Blur Backdrop -->
-        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-xl" onclick="closeFolder()"></div>
-        
-        <!-- Kotak Folder (Dibikin lebih putih terang: bg-white/95) -->
-        <div id="folder-content" class="relative w-full max-w-sm bg-white/95 dark:bg-slate-800/95 backdrop-blur-3xl rounded-[2.5rem] p-8 shadow-2xl border border-white/50 dark:border-slate-600/50">
-            
-            <div class="flex justify-between items-start mb-6">
-                <div>
-                    <h3 id="folder-title" class="text-2xl font-bold text-slate-800 dark:text-white tracking-wide">Folder</h3>
-                    <!-- Subtitle khusus untuk "Let's connect" -->
-                    <p id="folder-subtitle" class="text-xs text-slate-500 dark:text-gray-400 mt-1 hidden"></p>
+    <!-- DOODLEVERSE SCRAPBOOK FOLDER DRAWER MODAL -->
+    <div id="ios-folder" role="dialog" aria-modal="true" aria-labelledby="folder-title" aria-hidden="true"
+        class="fixed inset-0 z-[70] flex items-center justify-center p-6">
+        <div class="absolute inset-0 modal-halftone-scrim" onclick="closeFolder()"></div>
+
+        <div id="folder-content" class="relative w-full max-w-sm comic-panel p-0 overflow-hidden">
+            <div class="c-panel-bar">
+                <span>SCRAPBOOK FOLDER // PROP</span>
+                <span>ESC TO CLOSE</span>
+            </div>
+            <div class="p-6 sm:p-7">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 id="folder-title" class="font-editorial text-2xl text-[var(--ink)] tracking-wide">
+                            Folder</h3>
+                        <p id="folder-subtitle" class="text-xs text-[var(--muted-ink)] mt-1 hidden"></p>
+                    </div>
+                    <button type="button" id="folder-close-btn" aria-label="Tutup folder" data-aria-key="aria_close_folder"
+                        onclick="closeFolder()" class="ink-btn ink-btn-secondary !rounded-none w-9 h-9"><i class="fas fa-times"
+                            aria-hidden="true"></i></button>
                 </div>
-                <button onclick="closeFolder()" class="w-8 h-8 bg-slate-100 dark:bg-slate-700/60 rounded-full flex items-center justify-center text-slate-600 dark:text-white hover:scale-110 transition"><i class="fas fa-times"></i></button>
-            </div>
 
-            <!-- Tempat Icon Muncul -->
-            <div id="folder-grid" class="grid grid-cols-3 gap-y-6 gap-x-4">
-                <!-- Icon akan di-inject lewat JS -->
+                <div id="folder-grid" class="grid grid-cols-3 gap-y-6 gap-x-4">
+                </div>
             </div>
-
         </div>
     </div>
 
     <script src="index.js" defer></script>
 </body>
+
 </html>
